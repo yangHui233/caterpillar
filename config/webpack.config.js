@@ -1,5 +1,3 @@
-'use strict'
-
 const fs = require('fs')
 const path = require('path')
 const webpack = require('webpack')
@@ -31,6 +29,8 @@ const postcssNormalize = require('postcss-normalize')
 
 const appPackageJson = require(paths.appPackageJson)
 const platformConfig = require('./platformConfig')
+
+const resourcesPath = path.resolve(__dirname, './../src/Theme/global.scss')
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false'
@@ -152,6 +152,13 @@ module.exports = function (webpackEnv) {
           loader: require.resolve(preProcessor),
           options: {
             sourceMap: true,
+          },
+        },
+        {
+          loader: require.resolve('sass-resources-loader'),
+          options: {
+            sourceMap: !isEnvProduction,
+            resources: resourcesPath,
           },
         }
       )
@@ -335,7 +342,7 @@ module.exports = function (webpackEnv) {
           'react-dom$': 'react-dom/profiling',
           'scheduler/tracing': 'scheduler/tracing-profiling',
         }),
-        '@': path.join(__dirname, '../', 'src'),
+        '@': path.resolve(__dirname, '../src'),
         ...(modules.webpackAliases || {}),
         ...platformConfig.rejectAlias(),
       },
@@ -557,6 +564,10 @@ module.exports = function (webpackEnv) {
             {
               test: /\.tsx?$/,
               loaders: ['babel-loader', 'ts-loader'],
+            },
+            {
+              loader: require.resolve('file-loader'),
+              test: /\.(ttf|otf|eot|woff|woff2)$/,
             },
             // ** STOP ** Are you adding a new loader?
             // Make sure to add the new loader(s) before the "file" loader.

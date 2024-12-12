@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom'
 import App from './Router'
 import reportWebVitals from './reportWebVitals'
 import history from '@/Router/history'
+import '@/Theme/lib'
 
 import './index.css'
 
-//此处将平台化配置挂载在React上，项目内用到的时候可以直接获取
 React.platformDef = process.env.platformDef
 
 ReactDOM.render(

@@ -1,0 +1,81 @@
+import React from 'react'
+import styles from './index.module.scss'
+
+export default class Dialog extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      dialogBoth: 'Dialog1',
+    }
+    this.params = {
+      bodyEl: document.body,
+      top: 0,
+    }
+
+    this.noWrapperComArr = []
+  }
+  componentDidMount() {
+    this.stopBodyScroll(true)
+  }
+  componentWillUnmount() {
+    this.stopBodyScroll(false)
+  }
+  stopBodyScroll(isFixed) {
+    if (isFixed) {
+      this.params.top = window.scrollY
+      this.params.bodyEl.style.position = 'fixed'
+      this.params.bodyEl.style.top = -this.params.top + 'px'
+    } else {
+      this.params.bodyEl.style.position = ''
+      this.params.bodyEl.style.top = ''
+      window.scrollTo(0, this.params.top)
+    }
+  }
+  dialogCli(e) {
+    // 阻止事件冒泡
+    e && e.stopPropagation()
+  }
+  render() {
+    let { noWrapperComArr } = this
+    let { opacity = 0.7, dialogName } = this.props
+    let style = {
+      background: `rgba(0,0,0,${opacity})`,
+    }
+    let {
+      onMaskClick = () => {},
+      isNoWrapper,
+      dialogClassName = '',
+      borderRadius,
+      noDefaultBg,
+    } = this.props
+
+    let DialogName = React.lazy(() =>
+      import(`./components/${this.state[dialogName] || dialogName}`)
+    )
+
+    isNoWrapper = noWrapperComArr.includes(dialogName) ? true : isNoWrapper
+    return (
+      <React.Suspense fallback={<div></div>}>
+        <div
+          className={styles['common-dialogmask']}
+          onClick={onMaskClick}
+          style={style}>
+          {isNoWrapper ? (
+            <DialogName {...this.props} />
+          ) : (
+            <div
+              className={`${styles['common-dialog-wrapper']} ${
+                styles[dialogClassName]
+              } ${noDefaultBg ? styles['no-bg-wrapper'] : ''}`}
+              style={{
+                borderRadius: borderRadius ? borderRadius : 'none',
+              }}
+              onClick={this.dialogCli.bind(this)}>
+              <DialogName {...this.props} />
+            </div>
+          )}
+        </div>
+      </React.Suspense>
+    )
+  }
+}

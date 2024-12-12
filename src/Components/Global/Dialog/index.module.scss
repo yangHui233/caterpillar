@@ -1,0 +1,36 @@
+.common-dialogmask{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 98;
+    .common-dialog-wrapper{
+        width: 100vw;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 20px 20px 0px 0px;
+        background: linear-gradient(180deg, #E4F1FF 50%, #FFDCF3 100%);
+        z-index: 99;
+        opacity: 0;
+        transform: translateY(100%);
+        animation: slide-up 0.3s forwards;
+        &.visibily{
+            overflow: visible;
+        }
+
+        &.no-bg-wrapper{
+            background: transparent;
+        }
+        .close_btn{
+            position: absolute;
+            right: 26px;
+            top: 26px;
+            width: 50px;
+            height: 50px;
+            background: $close_yellow;
+        }
+    }
+}

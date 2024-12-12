@@ -1,1 +1,1 @@
-module.exports={"BASE_URL":"https://www.baidu.com/"}
+module.exports={"BASE_URL":"http://94.103.183.150:8011/api/"}

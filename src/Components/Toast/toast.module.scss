@@ -1,0 +1,83 @@
+.toast-notification {
+  position: fixed;
+  top: 18px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 99;
+}
+.info {
+  width: 690px;
+  height: 154px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 2px solid #fff;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 6px 30px 0px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(60px);
+  margin: 0 auto 10px;
+  padding: 38px;
+  position: relative;
+  .copied {
+    flex: 0 0 46px;
+    height: 78px;
+    background: $copied;
+  }
+  .full {
+    background: $full;
+    flex: 0 0 62px;
+    height: 34px;
+  }
+  .lock {
+    background: $ban;
+    flex: 0 0 62px;
+    height: 62px;
+  }
+  .affection {
+    flex: 0 0 62px;
+    height: 62px;
+    background: $affection;
+  }
+  .energy {
+    flex: 0 0 62px;
+    height: 62px;
+    background: $energy;
+  }
+  .speed {
+    flex: 0 0 62px;
+    height: 62px;
+    background: $speed;
+  }
+  .time {
+    flex: 0 0 62px;
+    height: 62px;
+    background: $time;
+  }
+  .increase {
+    flex: 0 0 62px;
+    height: 62px;
+    background: $increase;
+  }
+  .content {
+    color: #142443;
+    font-family: 'SF Pixelate';
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: -2px;
+    padding: 0 40px 0 26px;
+    flex: 1;
+  }
+  .close {
+    background: $close;
+    width: 46px;
+    height: 46px;
+    position: absolute;
+    right: 16px;
+    top: 16px;
+  }
+}

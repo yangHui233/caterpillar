@@ -1,0 +1,47 @@
+.foot-tabs{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    display: flex;
+    background: #fff;
+    border-radius: 20px 20px 0 0;
+    .tab-item{
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 12px;
+        padding-bottom: 30px;
+        .tab-icon{
+            width: 70px;
+            height: 70px;
+            &.Home{
+                background: $Home;
+            }
+            &.Boosters{
+                background: $Boosters;
+            }
+            &.Earn{
+                background: $Earn;
+            }
+            &.Invite{
+                background: $Invite;
+            }
+        }
+
+
+        .tab-title{
+            color: #142443;
+            text-align: center;
+            font-family: "SF Pixelate";
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -4px;
+            padding-top: 6px;
+            font-family: 'SF Pixelate';
+        }
+    }
+}

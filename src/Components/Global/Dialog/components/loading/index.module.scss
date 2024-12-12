@@ -1,0 +1,29 @@
+.loading{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  background: #fff;
+  .loading__spinner{
+    width: 208px;
+    height: 140px;
+    border: 5px solid #fff;
+    background: $runing;
+  }
+  .txt{
+    color: #DB7100;
+    text-align: center;
+    font-family: "SF Pixelate";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-top: 30px;
+  }
+}

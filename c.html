@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Star with Trail</title>
+    <style>
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="200" height="200"></canvas>
+ 
+<script>
+const canvas = document.getElementById('myCanvas');
+const ctx = canvas.getContext('2d');
+let digits = [];
+ 
+function generateRandomDigit(x, y) {
+  return Math.floor(Math.random() * 10); // 生成一个随机数字
+}
+ 
+function updateDigits() {
+  for (let i = 0; i < digits.length; i++) {
+    if (digits[i].y > 0) {
+      ctx.clearRect(digits[i].x - 5, digits[i].y - 20, 10, 20); // 清除之前的数字
+      digits[i].y -= 1; // 数字向上移动
+      ctx.font = '20px Arial';
+      ctx.fillText(digits[i].digit, digits[i].x, digits[i].y); // 重新绘制数字
+    } else {
+      ctx.clearRect(digits[i].x - 5, digits[i].y - 20, 10, 20); // 清除画布上的数字
+      digits.splice(i, 1); // 从数组中移除数字
+    }
+  }
+  requestAnimationFrame(updateDigits); // 继续下一帧更新
+}
+ 
+canvas.onclick = function(e) {
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left; // 计算点击位置
+  const y = e.clientY - rect.top;
+  const digit = generateRandomDigit(x, y);
+  digits.push({ x, y: canvas.height, digit }); // 将数字添加到数组中
+  ctx.font = '20px Arial';
+  ctx.fillText(digit, x, y); // 临时绘制数字
+  ctx.clearRect(x - 5, y - 20, 10, 20); // 清除临时绘制
+  requestAnimationFrame(updateDigits); // 开始更新数字位置
+};
+</script>
+  </body>
+</html>

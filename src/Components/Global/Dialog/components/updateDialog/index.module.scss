@@ -1,0 +1,100 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 52px 80px;
+  .update{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 38px;
+    .update_item{
+      &:nth-child(2){
+        background: $subtract2;
+      }
+      .update_item_icon{
+        width: 210px;
+        height: 210px;
+        background: $subtract1;
+      }
+      .update_item_hit{
+        color: #142443;
+
+        text-align: center;
+        font-family: "SF Pixelate";
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        padding-top: 24px;
+      }
+    }
+    .link{
+      background: $vector;
+      flex: 0 0 50px;
+      height: 34px;
+    }
+  }
+
+  .title {
+    text-align: center;
+    font-family: 'Kemco Pixel';
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 48px;
+    padding: 0 48px 40px;
+    background: linear-gradient(90deg, #d941f1 0%, #2863e4 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding-top: 40px;
+
+  }
+
+  .hit{
+    padding: 0 15px;
+    color: #142443;
+
+    text-align: center;
+    font-family: "SF Pixelate";
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 36.4px; /* 36.4px */
+    letter-spacing: -2px;
+  }
+  .content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFB00;
+    padding: 54px 0 27px;
+
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: #000;
+    font-family: "Kemco Pixel";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    .coin_wrapper {
+      @include coin_wrapper();
+    }
+  }
+
+
+  .btn {
+    margin-top: 40px;
+    @include farm_btn();
+    .loading{
+      width: 35px;
+      height: 35px;
+      background: $loading;
+      animation: rotate 2s linear infinite;
+    }
+  }
+
+}

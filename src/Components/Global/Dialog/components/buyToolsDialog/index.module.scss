@@ -1,0 +1,82 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 46px;
+  .icon {
+    width: 255px;
+    height: 255px;
+    &.affection {
+      background: $affection;
+    }
+    &.energy {
+      background: $energy;
+    }
+    &.increase {
+      background: $increase;
+    }
+    &.time {
+      background: $time;
+    }
+    &.speed {
+      background: $speed;
+    }
+  }
+  .title {
+    text-align: center;
+    font-family: 'Kemco Pixel';
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding: 66px 0 44px;
+    background: linear-gradient(90deg, #D941F1 0%, #2863E4 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .updatedWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fffb00;
+
+    text-align: right;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: #000;
+    font-family: 'Kemco Pixel';
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 6px;
+    padding-bottom: 40px;
+    .up {
+      background: $up;
+      width: 26px;
+      height: 30px;
+      margin-left: 27px;
+    }
+    .next {
+      width: 50px;
+      height: 34px;
+      background: $next;
+      margin: 0 39px;
+    }
+  }
+  .hit {
+    color: #142443;
+    text-align: center;
+    font-family: 'SF Pixelate';
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 130%; /* 36.4px */
+    letter-spacing: -2px;
+  }
+  .coin_wrapper {
+    padding: 40px 0;
+    @include coin_wrapper();
+  }
+}

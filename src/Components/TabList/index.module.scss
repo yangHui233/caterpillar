@@ -1,0 +1,138 @@
+.tab-list {
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px;
+  .title {
+    color: #fffb00;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #000;
+    font-family: 'Kemco Pixel';
+    font-size: 28px;
+    font-weight: 700;
+    padding-bottom: 20px;
+    text-align: left;
+    padding-left: 30px;
+  }
+  .tab-list-wrapper {
+    width: 690px;
+    margin: 0 auto;
+    .tab-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.95);
+      height: 134px;
+      padding: 0 30px;
+      margin: 0 auto 16px;
+      .tab-l {
+        flex: 0 0 94px;
+        height: 94px;
+        &.affection {
+          background: $affection;
+        }
+        &.energy {
+          background: $energy;
+        }
+        &.speed {
+          background: $speed;
+        }
+        &.time {
+          background: $time;
+        }
+        &.increase {
+          background: $increase;
+        }
+        &.youtube{
+          background: $youtube;
+          flex:0 0 82px;
+          height: 54px;
+        }
+        &.tg{
+          background: $tg;
+          flex:0 0 82px;
+          height: 82px;
+        }
+        &.x{
+          background: $x;
+          flex:0 0 82px;
+          height: 82px;
+        }
+        &.fren{
+          background: $fren;
+          flex:0 0 82px;
+          height: 82px;
+        }
+      }
+      .tab-m {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 30px;
+        .tab-title {
+          color: #142443;
+          font-family: 'SF Pixelate';
+          font-size: 28px;
+          font-weight: 700;
+          letter-spacing: -2px;
+          padding-bottom: 18px;
+        }
+        .tab-hit {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          .coin {
+            width: 26px;
+            height: 26px;
+            background: $coin;
+            margin-right: 12px;
+            margin-top: -5px;
+          }
+          .txt {
+            color: #db7100;
+            font-family: 'SF Pixelate';
+            font-size: 24px;
+          }
+          .up {
+            width: 18px;
+            height: 20px;
+            background: $l;
+            margin-left: 14px;
+            margin-right: 14px;
+          }
+        }
+      }
+      .tab-r {
+        flex: 0 0 20px;
+        height: 34px;
+        background: $detail;
+        &.full{
+          background: $full;
+          flex:0 0 78px;
+          height: 42px;
+        }
+        &.lock{
+          background: $lock;
+          flex:0 0 48px;
+          height: 54px;;
+        }
+      }
+    }
+
+    &.tab-list-wrapper2 {
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.95);
+      max-height: 604px;
+      overflow: auto; 
+      padding: 0 30px;      
+      .tab-wrapper {
+        margin: 0 auto;
+        background: rgba($color: #000000, $alpha:0);
+        &:not(:last-child){
+          border-bottom: 1px solid #DFE5EF;;
+        }
+      }
+    }
+  }
+}

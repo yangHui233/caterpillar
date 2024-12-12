@@ -1,0 +1,114 @@
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  background: $homeBg;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  .cloud_wrapper{
+    position: absolute;
+    left: 58px;
+    right: 98px;
+    top: 252px;
+    height: 100px;
+    animation: scrolling 10s linear infinite;
+    .cloud1 {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 178px;
+      height: 79px;
+      background: $cloud1;
+    }
+    .cloud2 {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 128px;
+      height: 60px;
+      background: $cloud2;
+      
+    }
+    &.cloud_wrapper1{
+      transform: translateX(100vw);
+      animation: scrolling 10s linear infinite;
+      animation-delay: 5s;
+    }
+  }
+
+
+  .main_wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 206px;
+    flex: 1;
+    position: relative;
+    .calendar{
+      position: absolute;
+      right: 28px;
+      width: 112px;
+      height: 102px;
+      background: $calendar;
+      top: 220px;
+    }
+    .level_wrapper {
+      .coin {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+        color: #FFFB00;
+        -webkit-text-stroke-width: 4px;
+        -webkit-text-stroke-color: #000;
+        font-family: "Kemco Pixel";
+        font-weight: 700;
+        &::before{
+            display: inline-block;
+            vertical-align: middle;
+            background: $coin;
+            width: 74px;
+            height: 74px;
+            content: '';
+            margin-right: 18px;
+        }
+       
+      }
+      .level {
+        color: #FFE100;
+        text-align: center;
+        -webkit-text-stroke-width:1px;
+        -webkit-text-stroke-color: #000;
+        font-family: "SF Pixelate Bold Italic";
+        font-size: 36px;
+        padding-top: 22px;
+      }
+    }
+    .dog {
+        background: $dog;
+        width: 280px;
+        height: 412px;
+        margin-top: 63px;
+        transition: transform 0.8s ease; /* 添加过渡效果 */
+        transform: scale(1); /* 初始缩放比例 */
+        transform-origin: center bottom;
+        &.dog_ani4{
+          transform: scale(2)
+        }
+        &.dog_ani3{
+          transform: scale(1.5)
+        }
+        &.dog_ani2{
+          transform: scale(1.2)
+        }
+    }
+    .calendar {
+    }
+
+
+  }
+}
+
+

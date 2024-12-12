@@ -1,0 +1,146 @@
+.progress_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 94px auto 0;
+}
+.progress_start {
+  animation: colorCycle 0.7s infinite;
+  background: $farm_1;
+  width: 646px;
+  height: 110px;
+  font-family: 'SF Pixelate';
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.progress_mining {
+  .progress {
+    width: 646px;
+    height: 110px;
+    padding: 0 26px;
+    display: flex;
+    align-items: center;
+    background: $farm_1;
+    flex: 1;
+    position: relative;
+    .progress_bar_wrapper {
+      position: absolute;
+      left: 26px;
+      top: 12px;
+      right: 26px;
+      bottom: 20px;
+      .progress_bar {
+        height: 100%;
+        background: #fff200;
+      }
+    }
+    .progress_full {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      color: #142443;
+      text-align: center;
+      font-family: 'SF Pixelate';
+      font-size: 28px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: -1px;
+      .progress_coin {
+        margin-left: 16px;
+      }
+    }
+    .progress_coin {
+      width: 42px;
+      height: 42px;
+      background: $coin;
+      position: relative;
+      z-index: 1;
+      margin-right: 16px;
+      margin-top: -6px;
+    }
+
+    .progress_current {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 18px;
+      .progress_hit {
+        color: #142443;
+        font-family: 'SF Pixelate';
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: -1px;
+        display: flex;
+        align-items: center;
+        .progress_hit1 {
+          position: relative;
+          z-index: 1;
+        }
+      }
+    }
+    .progress_left {
+      text-align: right;
+      padding-right: 16px;
+      flex: 1;
+      color: #142443;
+      text-align: right;
+      font-family: 'SF Pixelate';
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -4px;
+      text-shadow: 0px 0px 8px #fff200;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      position: relative;
+      z-index: 1;
+    }
+    &.progress1 {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 402px;
+      height: 110px;
+      background: $farm_2;
+      .progress_current {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .progress_coin {
+          width: 26px;
+          height: 26px;
+          background: $coin;
+        }
+        .progress_hit {
+          font-size: 24px;
+        }
+      }
+      .progress_left {
+        flex: none;
+        padding-top: 6px;
+      }
+    }
+  }
+
+  .getbtn {
+    background: $harvestable;
+    width: 290px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 10px;
+    color: #142443;
+    text-align: center;
+    font-family: 'SF Pixelate';
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+}

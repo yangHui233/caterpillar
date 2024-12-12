@@ -1,0 +1,33 @@
+//style.less
+.scroll_wrapper{
+    display: flex;
+    align-items: center;
+}
+.number-wrap{
+    &.empty-wrapper{
+        opacity: 0;
+    }
+}
+.number-animation-wrap {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    .number-animation {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: auto;
+        transform-origin: 0 0;
+        transition: top 0.2s;//过渡属性的名称 过渡动画所需的时间
+    }
+
+    .number,.number-animation-wrap-hidden {
+        text-align: center;
+    }
+
+    .number-animation-wrap-hidden{
+        visibility: hidden;
+    }
+}
+

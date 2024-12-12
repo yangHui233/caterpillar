@@ -1,0 +1,80 @@
+.top-plan {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 24px;
+  & > div {
+    background: $board;
+    width: 336px;
+    height: 208px;
+    padding-top: 40px;
+  }
+
+  .num {
+    text-align: left;
+    color: #142443;
+    font-family: 'SF Pixelate';
+    font-size: 26px;
+    font-weight: 700;
+    .num-current {
+      padding-bottom: 4px;
+    }
+    .num-all {
+    }
+  }
+  .plan-love {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .top-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .love-icon {
+        background: $love;
+        margin-right: 16px;
+        width: 28px;
+        height: 28px;
+      }
+      .num {
+        color: #142443;
+        font-family: 'SF Pixelate';
+        font-size: 26px;
+        font-weight: 700;
+      }
+    }
+    .progress {
+      width: 234px;
+      height: 28px;
+      background: #09152d;
+      border-radius: 14px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 0 4px;
+      margin-top: 18px;
+      .progress-content {
+        height: 20px;
+        background: #ffdd00;
+        border-radius: 10px;
+      }
+    }
+  }
+  .plan-light {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .light {
+      background: $lightning;
+      width: 66px;
+      height: 72px;
+      margin-right: 30px;
+    }
+    .num {
+      font-size: 28px;
+      .num-current {
+        padding-bottom: 10px;
+      }
+    }
+  }
+}

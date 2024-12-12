@@ -1,0 +1,31 @@
+.toast-fade-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.toast-fade-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.3s;
+}
+.toast-fade-enter-done {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.3s;
+}
+
+.toast-fade-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.toast-fade-exit-active {
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.3s;
+}
+.toast-fade-exit-done {
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.3s;
+}

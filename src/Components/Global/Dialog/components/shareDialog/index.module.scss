@@ -1,0 +1,101 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 30px 80px;
+  .icon {
+    width: 130px;
+    height: 130px;
+    &.x {
+      background: $x;
+    }
+    &.tg {
+      background: $tg;
+    }
+  }
+  .title {
+    text-align: center;
+    font-family: 'Kemco Pixel';
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 48px;
+    padding: 0 48px 40px;
+    background: linear-gradient(90deg, #d941f1 0%, #2863e4 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .join {
+    background: $harvestable;
+    width: 290px;
+    height: 110px;
+    color: #142443;
+    text-align: center;
+    font-family: 'SF Pixelate';
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .loading {
+    color: #142443;
+    text-align: center;
+    font-family: 'SF Pixelate';
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28.8px;
+    letter-spacing: -2px;
+    padding: 18px 0 14px;
+  }
+
+  .coin_wrapper {
+    padding: 48px 0 43px;
+    @include coin_wrapper();
+  }
+  .btn {
+    margin-top: 90px!important;
+    &.start {
+      margin-top: 0!important;
+    }
+  }
+
+  .received{
+    margin-top: 40px;
+  }
+
+  .success {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 690px;
+    height: 120px;
+    border-radius: 20px;
+    border: 2px solid #c99700;
+
+    background: #fff;
+    .success_txt {
+      color: #fffb00;
+      -webkit-text-stroke-width: 3px;
+      -webkit-text-stroke-color: #000;
+      font-family: 'Kemco Pixel';
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      padding-right: 30px;
+    }
+    .success_icon {
+      background: $link;
+      flex: 0 0 32px;
+      height: 32px;
+    }
+  }
+}

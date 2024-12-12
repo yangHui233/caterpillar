@@ -1,23 +1,34 @@
 import React from 'react'
-import Index from '@/Pages/Index'
+import Index from '@/Pages/Home'
 function loadable(loader) {
   return React.lazy(loader)
 }
 
 const routers = [
   {
-    path: '/index',
-    //此处如果首页作为大部分情况的入口，就不采用懒加载，如果此项目有很多入口，又没有必要采取多入口模式，则此处用懒加载
+    path: '/Home',
     //component:loadable(() => import ('@/Pages/Index'))
     component: Index,
   },
   {
-    path: '/pagea',
-    component: loadable(() => import('@/Pages/PageA')),
+    path: '/Boosters',
+    component: loadable(() => import('@/Pages/Boosters')),
   },
   {
-    path: '/pageb',
-    component: loadable(() => import('@/Pages/PageB')),
+    path: '/Earn',
+    component: loadable(() => import('@/Pages/Earn')),
+  },
+  {
+    path: '/Invite',
+    component: loadable(() => import('@/Pages/Invite')),
+  },
+  {
+    path: '/Test',
+    component: loadable(() => import('@/Pages/Test')),
+  },
+  {
+    path: '/Test1',
+    component: loadable(() => import('@/Pages/Test1')),
   },
 ]
 export default routers

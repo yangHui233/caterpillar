@@ -1,0 +1,161 @@
+@import './image.scss';
+@import './variables.scss';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #dfe5ef;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+}
+
+
+
+// 隐藏报错时页面上自动出现的iframe模块
+body>iframe[style*="2147483647"]:not([id="webpack-dev-server-client-overlay"]) {
+  display: none;
+}
+.caterpillar_dialog_hide{
+  transition: transform 0.3s;
+  transform: translateY(100%);
+  background: rgba(0,0,0,0)!important;
+}
+
+@font-face {
+  font-family: 'SF Pixelate Italic';
+  src: url('~@/Theme/fonts/SF-Pixelate-Italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SF Pixelate Bold Italic';
+  src: url('~@/Theme/fonts/SF-Pixelate-Bold-Italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'SF Pixelate';
+  src: url('~@/Theme/fonts/SFPixelate.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Kemco Pixel';
+  src: url('~@/Theme/fonts/Kemco_Pixel.ttf') format('truetype');
+}
+
+@keyframes scrolling {
+  from {
+    transform: translateX(-100vw);
+  }
+  to {
+    transform: translateX(100vw);
+  }
+}
+
+@keyframes colorCycle {
+  0% {
+    color: #142443;
+  }
+  50% {
+    color: #142443;
+  }
+  51% {
+    color: #fff;
+  }
+  50% {
+    color: #fff;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes run {
+  0% {
+    left: 30px;
+    transform: scaleX(1)
+  }
+  49% {
+    left: calc(100vw - 130px);
+    transform: scaleX(1)
+  }
+  50% {
+    left: calc(100vw - 130px);
+    transform: scaleX(-1)
+  }
+  99%{
+    left: 30px;
+    transform: scaleX(-1)
+  }
+  100%{
+    left: 30px;
+    transform: scaleX(1)
+  }
+}
+
+@mixin farm_btn($width: 646px, $height: 110px, $position: relative) {
+  width: $width;
+  height: $height;
+  position: $position;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #142443;
+  text-align: center;
+  font-family: 'SF Pixelate';
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -2px;
+  background: $farm_1;
+  z-index: 1;
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 12px;
+    right: 28px;
+    bottom: 20px;
+    left: 26px;
+    background: #fff200;
+    z-index: -1;
+  }
+}
+
+
+@mixin coin_wrapper($width: 40px, $height: 40px,$font-size: 36px) {
+  font-size: $font-size;
+  color: #FFFB00;
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: #000;
+  font-family: "Kemco Pixel";
+  font-weight: 700;
+  &::before{
+    content: '';
+    display: inline-block;
+    width: $width;
+    height: $height;
+    background: $coin;
+    margin-right: 24px;
+    vertical-align: middle;
+  }
+}
+
+@keyframes slide-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

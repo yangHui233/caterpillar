@@ -1,17 +1,29 @@
 import React from 'react'
+import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom'
 import App from './Router'
 import reportWebVitals from './reportWebVitals'
 import history from '@/Router/history'
+import { store } from '@/Store'
+import { ErrorBoundary } from '@/Components/ErrorBoundary'
+import '@/Theme/lib.js'
 
 import './index.css'
 
-//此处将平台化配置挂载在React上，项目内用到的时候可以直接获取
+if (process.env.NODE_ENV !== 'production') {
+  let Vconsole = require('vconsole')
+  new Vconsole()
+}
+
 React.platformDef = process.env.platformDef
 
 ReactDOM.render(
   <React.StrictMode>
-    <App history={history} />
+    <Provider store={store}>
+      <ErrorBoundary>
+        <App history={history} />
+      </ErrorBoundary>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 )

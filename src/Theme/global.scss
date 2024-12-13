@@ -9,15 +9,31 @@
 } 
 
 @font-face {
+    font-family: 'SF Pixelate Italic';
+    src: url('~@/Theme/fonts/SF-Pixelate-Italic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'SF Pixelate Bold Italic';
+    src: url('~@/Theme/fonts/SF-Pixelate-Bold-Italic.ttf') format('truetype');
+}
+
+@font-face {
     font-family: 'SF Pixelate';
     src: url('~@/Theme/fonts/SFPixelate.ttf') format('truetype');
-    font-style: normal;
 }
 
 @font-face {
     font-family: 'Kemco Pixel';
     src: url('~@/Theme/fonts/Kemco_Pixel.ttf') format('truetype');
-    font-style: normal;
 }
   
   
+@keyframes scrolling {
+    from {
+        transform: translateX(-100vw);
+    }
+    to {
+      transform: translateX(100vw);
+    }
+  }

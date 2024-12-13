@@ -27,6 +27,8 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 
 const postcssNormalize = require('postcss-normalize')
 
+const px2rem = require('postcss-px2rem-options')
+
 const appPackageJson = require(paths.appPackageJson)
 const platformConfig = require('./platformConfig')
 
@@ -130,6 +132,12 @@ module.exports = function (webpackEnv) {
               },
               stage: 3,
             }),
+            px2rem([
+              {
+                remUnit: 75,
+                include: /src/i,
+              },
+            ]),
             // Adds PostCSS Normalize as the reset css with default options,
             // so that it honors browserslist config in package.json
             // which in turn let's users customize the target behavior as per their needs.

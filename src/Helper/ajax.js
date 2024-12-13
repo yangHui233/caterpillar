@@ -1,8 +1,8 @@
 import axios from 'axios'
 import $q from 'q'
 import config from '@/Config'
-import Loading from '@/Components/Loading'
 import com from '@/Utils/common'
+import Toast from '@/Components/Toast'
 
 const REQUEST_TYPES = ['post', 'get']
 
@@ -38,7 +38,7 @@ axios.interceptors.response.use(
 function requestHandle(params) {
   const defer = $q.defer()
   if (params.isLoading) {
-    Loading.showLoading()
+    Toast.loading()
   }
   axios(params)
     .then((res) => {
@@ -47,7 +47,7 @@ function requestHandle(params) {
           defer.resolve(res.data.content)
         } else {
           res.data.message &&
-            Loading.showToast(res.data.message, () => {
+            Toast.info(res.data.message, () => {
               defer.reject(res.data)
             })
         }
@@ -58,17 +58,17 @@ function requestHandle(params) {
     .catch((err) => {
       const { isShowErrorPage } = params.data || params.params
 
-      Loading.hideLoading()
+      Toast.hideLoading()
       // jump error page
       if (isShowErrorPage) {
         com.showErrorView()
         return
       }
-      Loading.showToast(err.message)
+      Toast.info(err.message)
     })
     .finally(() => {
       if (params.isLoading) {
-        Loading.hideLoading()
+        Toast.hideLoading()
       }
     })
   return defer.promise

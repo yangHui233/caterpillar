@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import App from './Router'
 import reportWebVitals from './reportWebVitals'
 import history from '@/Router/history'
-import '@/Theme/lib'
+import '@/Theme/lib.js'
 
 import './index.css'
 

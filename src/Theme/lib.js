@@ -8,6 +8,8 @@
   var tid
   var flexible = lib.flexible || (lib.flexible = {})
 
+  console.log('lib.js====')
+
   if (checkSpecialDl()) {
     scale = 1
     dpr = 1

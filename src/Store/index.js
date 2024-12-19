@@ -1,7 +1,8 @@
 import { createStore } from 'redux'
 import reducers from './reducers'
 import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage/session'
+import storage from 'redux-persist/lib/storage'
+import { ENERGYINFO_INIT } from '@/Contanst/storeInit'
 const persistConfig = {
   key: 'root',
   storage,

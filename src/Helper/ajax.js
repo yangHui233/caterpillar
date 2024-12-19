@@ -1,7 +1,7 @@
 import axios from 'axios'
 import $q from 'q'
 import config from '@/Config'
-import com from '@/Utils/common'
+import { showErrorView } from '@/Utils/common'
 import Toast from '@/Components/Toast'
 
 const REQUEST_TYPES = ['post', 'get']
@@ -29,7 +29,7 @@ axios.interceptors.response.use(
         msg: error.message,
         url: error.config.originUrl.replace(/^https\:\/\/([^/]*)/, ''),
       }
-      com.showErrorView(info)
+      showErrorView(info)
     }
     return Promise.reject(error)
   }
@@ -43,12 +43,12 @@ function requestHandle(params) {
   axios(params)
     .then((res) => {
       if (!params.errorSelf) {
-        if (res.data.status === 0) {
-          defer.resolve(res.data.content)
+        if (res.status === 0) {
+          defer.resolve(res.data)
         } else {
-          res.data.message &&
-            Toast.info(res.data.message, () => {
-              defer.reject(res.data)
+          res.msg &&
+            Toast.info(res.msg, () => {
+              defer.reject(res)
             })
         }
       } else {
@@ -61,7 +61,7 @@ function requestHandle(params) {
       Toast.hideLoading()
       // jump error page
       if (isShowErrorPage) {
-        com.showErrorView()
+        showErrorView()
         return
       }
       Toast.info(err.message)

@@ -24,7 +24,7 @@ export default class App extends React.Component {
                           {...route}></Route>
                       )
                     })}
-                    <Redirect path="/" to="/index"></Redirect>
+                    <Redirect path="/" to="/home"></Redirect>
                     <Route component={NoMatch} />
                   </Switch>
                   <Footer history={history} />

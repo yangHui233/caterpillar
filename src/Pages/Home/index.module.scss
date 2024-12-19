@@ -58,14 +58,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        vertical-align: middle;
         color: #FFFB00;
         -webkit-text-stroke-width: 4px;
         -webkit-text-stroke-color: #000;
         font-family: "Kemco Pixel";
-        font-size: 52px;
         font-weight: 700;
-        line-height: 52px;
-        vertical-align: middle;
         &::before{
             display: inline-block;
             vertical-align: middle;
@@ -74,7 +72,6 @@
             height: 74px;
             content: '';
             margin-right: 18px;
-
         }
        
       }
@@ -96,108 +93,7 @@
     }
     .calendar {
     }
-    .progress_wrapper{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto;
-      margin-top: 94px;
-      position: relative;
-      .progress_bar{
-        position: absolute;
-        height: 78px;
-        width: 10px;
-        background: #fff200;
-        left: 26px;
-        top: 12px;
-      }
-      .progress {
-        width: 646px;
-        height: 110px;
-        padding: 0 26px;
-        display: flex;
-        align-items: center;
-        background: $farm_1;
-        flex: 1;
-        .progress_current {
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          padding: 0 18px;
-          .progress_coin {
-            width: 42px;
-            height: 42px;
-            background: $coin;
-          }
-          .progress_hit {
-            color: #142443;
-            font-family: 'SF Pixelate';
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: -4px;
-            padding-left: 16px;
-          }
-        }
-        .progress_left {
-          text-align: right;
-          padding-right: 16px;
-          flex: 1;
-          color: #142443;
-          text-align: right;
-          font-family: 'SF Pixelate';
-          font-size: 28px;
-          font-style: normal;
-          font-weight: 700;
-          line-height: normal;
-          letter-spacing: -4px;
-          text-shadow: 0px 0px 8px #fff200;
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-        }
-        &.progress1{
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          width: 402px;
-          height: 110px;
-          background: $farm_2;
-          .progress_current{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            .progress_coin {
-              width: 26px;
-              height: 26px;
-              background: $coin;
-            }
-          }
-          .progress_left{
-            flex: none;
-            padding-top: 6px;
-          }
-        }
-      }
 
-      .getbtn{
-        background: $harvestable;
-        width: 290px;
-        height: 110px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        margin-left: 10px;
-        color: #142443;
-        text-align: center;
-        font-family: "SF Pixelate";
-        font-size: 24px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        letter-spacing: -1px;
-      }
-    }
 
   }
 }

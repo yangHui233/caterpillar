@@ -1,0 +1,28 @@
+.received {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 690px;
+    height: 154px;
+    border-radius: 20px;
+    border: 2px solid #7ec42e;
+
+    background: #fff;
+    padding: 40px 98px 40px;
+    .copied_icon {
+      flex: 0 0 46px;
+      height: 78px;
+      background: $copied;
+    }
+    .received_txt {
+      flex: 1;
+      color: #142443;
+      font-family: 'SF Pixelate';
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 36px; 
+      letter-spacing: -2px;
+      padding-left: 30px;
+    }
+  }

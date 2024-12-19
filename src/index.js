@@ -1,17 +1,26 @@
 import React from 'react'
+import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom'
 import App from './Router'
 import reportWebVitals from './reportWebVitals'
 import history from '@/Router/history'
+import { store } from '@/Store'
 import '@/Theme/lib.js'
 
 import './index.css'
+
+if (process.env.NODE_ENV !== 'production') {
+  let Vconsole = require('vconsole')
+  new Vconsole()
+}
 
 React.platformDef = process.env.platformDef
 
 ReactDOM.render(
   <React.StrictMode>
-    <App history={history} />
+    <Provider store={store}>
+      <App history={history} />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 )

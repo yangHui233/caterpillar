@@ -22,5 +22,9 @@ const routers = [
     path: '/Invite',
     component: loadable(() => import('@/Pages/Invite')),
   },
+  {
+    path: '/Test',
+    component: loadable(() => import('@/Pages/Test')),
+  },
 ]
 export default routers

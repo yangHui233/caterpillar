@@ -37,17 +37,20 @@ export default class Dialog extends React.Component {
   }
   render() {
     let { noWrapperComArr } = this
-    let { opacity = 0.7, dialogName } = this.props
-    let style = {
-      background: `rgba(0,0,0,${opacity})`,
-    }
     let {
+      opacity = 0.7,
+      dialogName,
       onMaskClick = () => {},
       isNoWrapper,
       dialogClassName = '',
       borderRadius,
       noDefaultBg,
+      isCloseBtn = true,
+      handleCancel = () => {},
     } = this.props
+    let style = {
+      background: `rgba(0,0,0,${opacity})`,
+    }
 
     let DialogName = React.lazy(() =>
       import(`./components/${this.state[dialogName] || dialogName}`)
@@ -71,6 +74,11 @@ export default class Dialog extends React.Component {
                 borderRadius: borderRadius ? borderRadius : 'none',
               }}
               onClick={this.dialogCli.bind(this)}>
+              {isCloseBtn ? (
+                <div className={styles.close_btn} onClick={handleCancel}></div>
+              ) : (
+                ''
+              )}
               <DialogName {...this.props} />
             </div>
           )}

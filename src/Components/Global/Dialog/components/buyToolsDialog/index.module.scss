@@ -1,0 +1,58 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 46px;
+  .icon {
+    width: 255px;
+    height: 255px;
+    &.affection{
+        background: $affection;
+    }
+    &.energy{
+        background: $energy;
+    }
+    &.increase{
+        background: $increase;
+    }
+    &.time{
+        background: $time;
+    }
+    &.speed{
+        background: $speed;
+    }
+  }
+  .title {
+    text-align: center;
+    font-family: 'Kemco Pixel';
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding: 79px 0 30px;
+  }
+  .hit {
+    color: #142443;
+    text-align: center;
+    font-family: 'SF Pixelate';
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 130%; /* 36.4px */
+    letter-spacing: -2px;
+  }
+  .coin_wrapper {
+    padding: 40px 0;
+    @include coin_wrapper();
+  }
+  .btn {
+    @include farm_btn();
+    .loading{
+      width: 35px;
+      height: 35px;
+      background: $loading;
+      animation: rotate 2s linear infinite;
+    }
+  }
+}

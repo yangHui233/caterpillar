@@ -288,6 +288,7 @@ module.exports = function (webpackEnv) {
               ascii_only: true,
             },
           },
+          extractComments: false,
           sourceMap: shouldUseSourceMap,
         }),
         // This is only used in production mode

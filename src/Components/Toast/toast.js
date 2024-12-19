@@ -1,26 +1,17 @@
 import notificationDOM from './notification'
 
 let notification
-const notice = (type, content, duration = 2000, onClose) => {
+const notice = (type, content, duration = 2000, onClose, icon = '') => {
   if (!notification) notification = notificationDOM
   if (type === 'hideLoading') {
     return notification.destroy()
   }
-  return notification.addNotice({ type, content, duration, onClose })
+  return notification.addNotice({ type, content, duration, onClose, icon })
 }
 
 const Toast = {
-  info(content, duration, onClose) {
-    return notice('info', content, duration, onClose)
-  },
-  success(content, duration, onClose) {
-    return notice('success', content, duration, onClose)
-  },
-  warning(content, duration, onClose) {
-    return notice('warning', content, duration, onClose)
-  },
-  error(content, duration, onClose) {
-    return notice('error', content, duration, onClose)
+  info(icon, content, duration, onClose) {
+    return notice('info', content, duration, onClose, icon)
   },
   loading(content, duration = 0, onClose) {
     return notice('loading', content, duration, onClose)

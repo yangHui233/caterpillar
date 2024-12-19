@@ -1,1 +1,1 @@
-module.exports={"BASE_URL":"https://www.baidu.com/"}
+module.exports = { BASE_URL: 'https://www.baidu.com/' }

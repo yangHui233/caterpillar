@@ -68,7 +68,7 @@ const SignDialog = (props = {}) => {
               <div className={style.item_text}>Day {index + 1}</div>
               <div className={style.item_icon}></div>
               <div className={style.coin}>
-                {numSymbol((signinConf.rewards || {})[index] || 0)}
+                {numSymbol((signinConf.rewards || {})[index + 1] || 0)}
               </div>
             </div>
           )

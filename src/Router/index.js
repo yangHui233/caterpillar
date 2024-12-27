@@ -5,10 +5,12 @@ import routers from './routers'
 import Footer from '@/Components/Footer'
 
 const NoMatch = () => <div>router not found</div>
+const PUBLIC_URL = process.env.PUBLIC_URL
+
 export default class App extends React.Component {
   render() {
     return (
-      <Router history={history}>
+      <Router basename={'/' + PUBLIC_URL + '/'} history={history}>
         <Route
           render={({ location }) => {
             return (

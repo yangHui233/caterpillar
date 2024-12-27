@@ -25,7 +25,7 @@ const TabList = (props) => {
             return (
               <div
                 className={style['tab-wrapper']}
-                key={item.title}
+                key={item.id}
                 onClick={() => handleItemCli(item)}>
                 <div className={`${style['tab-l']} ${style[item.icon]}`}></div>
                 <div className={style['tab-m']}>

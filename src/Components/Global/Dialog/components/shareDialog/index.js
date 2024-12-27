@@ -6,6 +6,7 @@ import storeUtil from '@/Utils/store'
 import UseInterval from '@/CommonUse/interVal'
 import Button from '@/Components/Button'
 import { completeTask, getTaskList } from '@/Helper/apis/earn'
+import { jumpUrl } from '@/Utils/common'
 
 const CONFIG = {
   x: {
@@ -20,6 +21,7 @@ const ShareDialog = (props = {}) => {
   const { rewardCoins, shareType = 'tg', icon, id } = props
   const [completed, setCompleted] = useState(props.completed)
   const [isLoading, setIsLoading] = useState(false)
+  const [isShowSuccess, setIsShowSuccess] = useState(false)
 
   const { isFinished, startFlag } = UseInterval({
     changeArr: [props.shareClickTime[shareType]],
@@ -44,6 +46,7 @@ const ShareDialog = (props = {}) => {
         taskId: id,
       })
       setCompleted(true)
+      setIsShowSuccess(true)
       // 更新分享页面数据
       getTaskList()
     } catch (err) {}
@@ -55,6 +58,8 @@ const ShareDialog = (props = {}) => {
       ...storeUtil.getShareClickTime(),
       [shareType + id]: new Date().getTime(),
     })
+
+    jumpUrl(props.link)
   }
 
   return (
@@ -80,10 +85,12 @@ const ShareDialog = (props = {}) => {
             txt="CHECK THE TASK"
           />
         </>
-      ) : (
+      ) : isShowSuccess ? (
         <div className={style.received}>
           <Received />
         </div>
+      ) : (
+        ''
       )}
     </div>
   )

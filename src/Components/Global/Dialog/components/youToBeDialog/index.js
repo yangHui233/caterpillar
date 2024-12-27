@@ -6,13 +6,14 @@ import storeUtil from '@/Utils/store'
 import UseInterval from '@/CommonUse/interVal'
 import Button from '@/Components/Button'
 import { completeTask, getTaskList } from '@/Helper/apis/earn'
+import { jumpUrl } from '@/Utils/common'
 
 const CODEERROR_MSG = "You've written an incorrect code"
 
 const KEY = 'youtobe'
 
 const YouToBeDialog = (props = {}) => {
-  const { rewardCoins, id } = props
+  const { rewardCoins, id, link } = props
   const [completed, setCompleted] = useState(props.completed)
   const [isLoading, setIsLoading] = useState(false)
   const [isShowSuccess, setIsShowSuccess] = useState(false)
@@ -54,6 +55,7 @@ const YouToBeDialog = (props = {}) => {
       ...storeUtil.getShareClickTime(),
       [KEY + id]: new Date().getTime(),
     })
+    jumpUrl(link)
   }
 
   const { isFinished, startFlag } = UseInterval({

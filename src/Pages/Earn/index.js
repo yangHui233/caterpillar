@@ -69,8 +69,9 @@ const Earn = (props) => {
                 ...item,
                 title: item.description,
                 icon: handleGetType(item.group.name),
-                type: '1',
+                // type: '1',
                 shareType: handleGetType(item.group.name),
+                val: item.rewardCoins,
               }
             })}
             title={item.description}

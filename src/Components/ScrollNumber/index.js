@@ -6,9 +6,6 @@ import styles from './index.module.scss'
 const ScrollNumber = ({ number, defaultSize }) => {
   if (isEmpty(number)) return ''
 
-  if ((number + '').includes('h')) {
-    console.log('number', number)
-  }
   return (
     <div className={styles.scroll_wrapper}>
       {number

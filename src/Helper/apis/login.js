@@ -6,6 +6,7 @@ export const login = (params, isLoading) => {
     const { initDataRaw } = retrieveLaunchParams()
     params = initDataRaw
   } catch (err) {
+    params.debug = true
     console.log(err, 'err')
   }
 

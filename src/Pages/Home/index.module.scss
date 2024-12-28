@@ -91,17 +91,19 @@
         width: 280px;
         height: 412px;
         margin-top: 63px;
-        transition: transform 0.8s ease; /* 添加过渡效果 */
+        transition: all 0.8s ease; /* 添加过渡效果 */
         transform: scale(1); /* 初始缩放比例 */
         transform-origin: center bottom;
         &.dog_ani4{
-          transform: scale(2)
+          transform: scale(1.4);
+          margin-top: 180px;
         }
         &.dog_ani3{
-          transform: scale(1.5)
+          transform: scale(1.2);
+          margin-top: 130px;
         }
         &.dog_ani2{
-          transform: scale(1.2)
+          transform: scale(1.1);
         }
     }
     .calendar {

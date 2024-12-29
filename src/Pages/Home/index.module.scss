@@ -61,10 +61,9 @@
         justify-content: center;
         vertical-align: middle;
         color: #FFFB00;
-        -webkit-text-stroke-width: 4px;
-        -webkit-text-stroke-color: #000;
         font-family: "Kemco Pixel";
         font-weight: 700;
+        @include fontBorder(4px);
         &::before{
             display: inline-block;
             vertical-align: middle;
@@ -79,11 +78,11 @@
       .level {
         color: #FFE100;
         text-align: center;
-        -webkit-text-stroke-width:1px;
-        -webkit-text-stroke-color: #000;
         font-family: "SF Pixelate Bold Italic";
+        font-style: italic;
         font-size: 36px;
         padding-top: 22px;
+        @include fontBorder();
       }
     }
     .dog {

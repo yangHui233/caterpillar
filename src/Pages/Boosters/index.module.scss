@@ -26,11 +26,10 @@
     .card_title {
       color: #fff;
       text-align: center;
-      -webkit-text-stroke-width: 2px;
-      -webkit-text-stroke-color: #142443;
       font-family: 'SF Pixelate';
       font-size: 28px;
       font-weight: 700;
+      @include fontBorder(2px);
     }
     .card_info {
       display: flex;
@@ -43,13 +42,11 @@
       }
       .num {
         color: #fffb00;
-
-        -webkit-text-stroke-width: 4px;
-        -webkit-text-stroke-color: #000;
         font-family: 'Kemco Pixel';
         font-size: 44px;
         font-weight: 700;
         padding-left: 20px;
+        @include fontBorder(4px);
       }
     }
   }

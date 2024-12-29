@@ -134,14 +134,19 @@ body>iframe[style*="2147483647"]:not([id="webpack-dev-server-client-overlay"]) {
   }
 }
 
+@mixin fontBorder($width: 3px, $color: #000) {
+        paint-order: stroke;
+        -webkit-text-stroke-width: $width;
+         -webkit-text-stroke-color: $color;
+}
+
 
 @mixin coin_wrapper($width: 40px, $height: 40px,$font-size: 36px) {
   font-size: $font-size;
   color: #FFFB00;
-  -webkit-text-stroke-width: 3px;
-  -webkit-text-stroke-color: #000;
   font-family: "Kemco Pixel";
   font-weight: 700;
+  @include fontBorder(3px);
   &::before{
     content: '';
     display: inline-block;

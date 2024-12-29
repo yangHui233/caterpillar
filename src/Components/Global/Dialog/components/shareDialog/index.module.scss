@@ -83,14 +83,13 @@
     background: #fff;
     .success_txt {
       color: #fffb00;
-      -webkit-text-stroke-width: 3px;
-      -webkit-text-stroke-color: #000;
       font-family: 'Kemco Pixel';
       font-size: 32px;
       font-style: normal;
       font-weight: 700;
       line-height: normal;
       padding-right: 30px;
+      @include fontBorder();
     }
     .success_icon {
       background: $link;

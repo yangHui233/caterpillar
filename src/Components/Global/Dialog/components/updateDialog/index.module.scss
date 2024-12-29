@@ -72,14 +72,12 @@
     justify-content: center;
     color: #FFFB00;
     padding: 54px 0 27px;
-
-    -webkit-text-stroke-width: 3px;
-    -webkit-text-stroke-color: #000;
     font-family: "Kemco Pixel";
     font-size: 36px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    @include fontBorder();
     .coin_wrapper {
       @include coin_wrapper();
     }

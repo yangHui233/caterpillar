@@ -68,11 +68,10 @@ export const BOOSTERS_CONFIG = {
       type: '2',
       hit: 'Purchase a favor potion to increase your favor level.',
       updatedTxt:
-        'You have successfully purchased a favor potion, and now your favor level has increased by 30%.',
+        'You have successfully purchased a favor potion, and now your favor level has increased by XXX',
       upDateTemplete: 'X',
       fieldConfig: {
-        next: 'nextFavor',
-        current: 'increaseFavor',
+        next: 'increaseFavor',
       },
       upGradePort: 'upgrade/favor',
     },

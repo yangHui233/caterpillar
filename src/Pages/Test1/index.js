@@ -4,7 +4,7 @@ import Toast from '@/Components/Toast'
 import ScrollNumber from '@/Components/ScrollNumber'
 import { div } from '@/Utils/math'
 import style from './index.module.scss'
-import { toPercent } from '@/Utils/util'
+import { toPercent, numSymbol } from '@/Utils/util'
 
 const Confetti = () => {
   const aniRef = useRef(null)
@@ -49,7 +49,7 @@ const Confetti = () => {
     })
   }
   useEffect(() => {
-    setTimeout(shoot, 0)
+    // setTimeout(shoot, 0)
     // setTimeout(shoot, 100)
     // setTimeout(shoot, 200)
   }, [])
@@ -89,7 +89,7 @@ const Confetti = () => {
   }
   return (
     <>
-      <div
+      {/* <div
         onClick={handleCli}
         style={{
           width: '300px',
@@ -97,7 +97,10 @@ const Confetti = () => {
           background: 'red',
           margin: '10px auto',
         }}></div>
-      <canvas width={200} height={50} ref={aniRef}></canvas>
+      <canvas width={200} height={50} ref={aniRef}></canvas> */}
+      <div className={style.coin}>
+        <ScrollNumber defaultSize={52} number={numSymbol(1258960574)} />
+      </div>
     </>
   )
 }

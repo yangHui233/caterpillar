@@ -6,7 +6,7 @@ import storeUtil from '@/Utils/store'
 import UseInterval from '@/CommonUse/interVal'
 import Button from '@/Components/Button'
 import { completeTask, getTaskList } from '@/Helper/apis/earn'
-import { jumpUrl } from '@/Utils/common'
+import { openTelegramLink, shareURL } from '@telegram-apps/sdk'
 
 const CONFIG = {
   x: {
@@ -59,7 +59,11 @@ const ShareDialog = (props = {}) => {
       [shareType + id]: new Date().getTime(),
     })
 
-    jumpUrl(props.link)
+    if (shareType === 'tg') {
+      openTelegramLink(props.link)
+      return
+    }
+    shareURL(props.link, 'CHECK THE TASK')
   }
 
   return (

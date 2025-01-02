@@ -29,7 +29,7 @@ export default class App extends React.Component {
                     <Redirect path="/" to="/home"></Redirect>
                     <Route component={NoMatch} />
                   </Switch>
-                  <Footer history={history} />
+                  {/* <Footer history={history} /> */}
                 </React.Suspense>
               </div>
             )

@@ -4,18 +4,24 @@
     align-items: center;
 }
 .number-wrap{
+    letter-spacing: 1px;
     &.empty-wrapper{
         opacity: 0;
     }
 }
 .number-animation-wrap {
     position: relative;
-    overflow: hidden;
+    overflow-y: hidden;
     display: flex;
     align-items: center;
+    &.number-animation-wrap-52{
+        padding: 0 4px 0 0;
+        letter-spacing: -4px;
+    }
     .number-animation {
         position: absolute;
-        left: 0;
+        left: 50%;
+        transform: translateX(-50%);
         top: 0;
         height: auto;
         transform-origin: 0 0;

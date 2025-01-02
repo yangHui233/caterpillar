@@ -9,6 +9,7 @@ import {
   setUpgradeInfo,
   setShareClickTime,
   setEarnInfo,
+  setInviteInfo,
 } from '@/Store/action'
 const storeUtil = {
   setToken(val) {
@@ -64,6 +65,12 @@ const storeUtil = {
   },
   getEarnInfo() {
     return store.getState().user.earnInfo || {}
+  },
+  setInviteInfo(val) {
+    store.dispatch(setInviteInfo(val))
+  },
+  getInviteInfo() {
+    return store.getState().user.inviteInfo || {}
   },
 }
 

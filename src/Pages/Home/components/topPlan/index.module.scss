@@ -12,14 +12,8 @@
   .num {
     text-align: left;
     color: #142443;
-    font-family: 'SF Pixelate';
-    font-size: 26px;
-    font-weight: 700;
-    .num-current {
-      padding-bottom: 4px;
-    }
-    .num-all {
-    }
+    font-family: 'Pixel';
+    font-size: 28px;
   }
   .plan-love {
     display: flex;
@@ -35,12 +29,6 @@
         margin-right: 16px;
         width: 28px;
         height: 28px;
-      }
-      .num {
-        color: #142443;
-        font-family: 'SF Pixelate';
-        font-size: 26px;
-        font-weight: 700;
       }
     }
     .progress {
@@ -71,10 +59,7 @@
       margin-right: 30px;
     }
     .num {
-      font-size: 28px;
-      .num-current {
-        padding-bottom: 10px;
-      }
+      font-size: 30px;
     }
   }
 }

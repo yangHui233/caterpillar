@@ -11,6 +11,8 @@ const TopPlan = (props) => {
   let { favorBonus, energyCost } = energyBonusLevelConf || {}
   const { currentEnergy, energyCap } = energyInfo
 
+  console.log('userInfo', currentEnergy, energyCost, energyCap, clickNum)
+
   return (
     <div className={style['top-plan']}>
       <div className={style['plan-love']}>
@@ -19,8 +21,7 @@ const TopPlan = (props) => {
           <div className={style['num']}>
             <div className={style['num-current']}>
               <ScrollNumber
-                className={style['num-current-style']}
-                defaultSize={26}
+                defaultSize={28}
                 number={numSymbol(add(currentFavor, mul(clickNum, favorBonus)))}
               />
             </div>
@@ -47,7 +48,7 @@ const TopPlan = (props) => {
         <div className={style['num']}>
           <div className={style['num-current']}>
             <ScrollNumber
-              defaultSize={28}
+              defaultSize={30}
               number={numSymbol(
                 sub(currentEnergy, mul(energyCost, clickNum)) > 0
                   ? sub(currentEnergy, mul(energyCost, clickNum))

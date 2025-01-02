@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import styles from './index.module.scss'
-import { numSymbol } from '@/Utils/util'
+import { numSymbol, toPercent } from '@/Utils/util'
 import TabList from '@/Components/TabList'
 import { BOOSTERS_CONFIG } from '@/Contanst/list'
 import {
@@ -14,9 +14,10 @@ import Toast from '@/Components/Toast'
 import storeUtil from '@/Utils/store'
 import { UNUPDATE_CONFIG } from '@/Contanst/update'
 import { getUpgradeList, handleUpgrade } from '@/Helper/apis/boosters'
+import CommonWrapper from '@/Components/CommonWrapper'
 
 const Boosters = (props) => {
-  let { isBuying, upgradeInfo } = props
+  let { upgradeInfo } = props
 
   useEffect(() => {
     getUpgradeList()
@@ -46,12 +47,51 @@ const Boosters = (props) => {
         // 请求接口购买升级
         storeUtil.setIsBuying(true)
         try {
-          await handleUpgrade(item.upGradePort)
+          let res = await handleUpgrade(item.upGradePort)
           // 更新数据
           getUpgradeList()
           storeUtil.setIsBuying(false)
           $.hide('dialog')
-          Toast.info(item.icon, item.updatedTxt)
+          let updatedTxt = item.updatedTxt
+
+          if (item.type === '2') {
+            updatedTxt = updatedTxt.replace('XXX', toPercent(item.nextVal))
+          }
+          Toast.info(item.icon, updatedTxt)
+          // 更新用户当前数据
+          const { coins, energyCap, recoveryRate, bonusMultiplier } = res
+          storeUtil.setUserInfo({
+            ...storeUtil.getUserInfo(),
+            coins,
+          })
+
+          // 能量总值更新
+          if (energyCap) {
+            storeUtil.setEnergyInfo({
+              ...storeUtil.getEnergyInfo(),
+              energyCap,
+            })
+          }
+
+          // 能量恢复速度更新
+          if (recoveryRate) {
+            storeUtil.setEnergyInfo({
+              ...storeUtil.getEnergyInfo(),
+              rate: recoveryRate,
+            })
+          }
+          // todo 确认bonusMultiplier字段含义
+          if (bonusMultiplier) {
+            storeUtil.setEnergyInfo({
+              ...storeUtil.getEnergyInfo(),
+              energyCost: bonusMultiplier,
+            })
+            storeUtil.setEnergyInfo({
+              ...storeUtil.getEnergyInfo(),
+              favorBonus: bonusMultiplier,
+              coinBonus: bonusMultiplier,
+            })
+          }
         } catch (err) {
           storeUtil.setIsBuying(false)
         }
@@ -63,40 +103,42 @@ const Boosters = (props) => {
     })
   }
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.ani}></div>
-      <div className={styles.card}>
-        <div className={styles.card_title}>Your Coins Balance</div>
-        <div className={styles.card_info}>
-          <div className={styles.icon}></div>
-          <div className={styles.num}>{numSymbol(upgradeInfo.coins)} </div>
+    <CommonWrapper type="boosters">
+      <div className={styles.wrapper}>
+        <div className={styles.ani}></div>
+        <div className={styles.card}>
+          <div className={styles.card_title}>Your Coins Balance</div>
+          <div className={styles.card_info}>
+            <div className={styles.icon}></div>
+            <div className={styles.num}>{numSymbol(upgradeInfo.coins)} </div>
+          </div>
         </div>
+        <TabList
+          list={BOOSTERS_CONFIG.list
+            .map((item) => {
+              let { fieldConfig = {} } = item
+              let currentData = upgradeInfo[item.field]
+              if (!currentData) return null
+              let { isMax, currentLevel, upgradeCost } = currentData
+              return {
+                ...item,
+                val: currentLevel,
+                coins: upgradeCost,
+                status: isMax
+                  ? 'full'
+                  : upgradeInfo.coins < upgradeCost
+                  ? 'lock'
+                  : '',
+                currentVal: currentData[fieldConfig.current],
+                nextVal: currentData[fieldConfig.next],
+              }
+            })
+            .filter(Boolean)}
+          title={BOOSTERS_CONFIG.title}
+          styleType={1}
+          handleItemCli={handleItemCli}></TabList>
       </div>
-      <TabList
-        list={BOOSTERS_CONFIG.list
-          .map((item) => {
-            let { fieldConfig = {} } = item
-            let currentData = upgradeInfo[item.field]
-            if (!currentData) return null
-            let { isMax, currentLevel, upgradeCost } = currentData
-            return {
-              ...item,
-              val: currentLevel,
-              coins: upgradeCost,
-              status: isMax
-                ? 'full'
-                : upgradeInfo.coins < upgradeCost
-                ? 'lock'
-                : '',
-              currentVal: currentData[fieldConfig.current],
-              nextVal: currentData[fieldConfig.next],
-            }
-          })
-          .filter(Boolean)}
-        title={BOOSTERS_CONFIG.title}
-        styleType={1}
-        handleItemCli={handleItemCli}></TabList>
-    </div>
+    </CommonWrapper>
   )
 }
 

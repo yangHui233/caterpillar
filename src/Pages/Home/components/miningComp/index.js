@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react'
 import { connect } from 'react-redux'
 import styles from './index.module.scss'
-import { secondsToHoursMinutes } from '@/Utils/util'
+import { numSymbol, secondsToHoursMinutes } from '@/Utils/util'
 import { add, div, mul, sub } from '@/Utils/math'
 import storeUtil from '@/Utils/store'
 import { getMining, getMiningReward, startMining } from '@/Helper/apis/home'
@@ -136,6 +136,7 @@ const MiningComp = (props) => {
   }
 
   const isSplit = availableReward && maxStorageLevel > 1
+  const isMining = sub(totalMiningEndTime, now) > 0
 
   return isShowStartBtn ? (
     <div
@@ -151,7 +152,7 @@ const MiningComp = (props) => {
             className={styles.progress_bar}
             style={{
               width: `${
-                sub(totalMiningEndTime, now) < 0
+                !isMining
                   ? 100
                   : (sub(now, startTime) / sub(totalMiningEndTime, startTime)) *
                     100
@@ -172,6 +173,7 @@ const MiningComp = (props) => {
                   defaultSize={isSplit ? 24 : 28}
                   number={currentCoin}
                 />
+
                 <div className={styles.progress_hit1}>/{totalReward}</div>
               </div>
             </div>

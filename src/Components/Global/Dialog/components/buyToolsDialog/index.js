@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import style from './index.module.scss'
-import { toPercent } from '@/Utils/util'
+import { numSymbol, toPercent } from '@/Utils/util'
 import Button from '@/Components/Button'
 
 const buyToolsDialog = (props = {}) => {
@@ -35,7 +35,7 @@ const buyToolsDialog = (props = {}) => {
       )}
 
       <div className={style.hit}>{hit}</div>
-      <div className={style.coin_wrapper}>{coins}</div>
+      <div className={style.coin_wrapper}>{numSymbol(coins)}</div>
       <Button onClick={handleConfirm} isLoading={isBuying} txt="UPGRADE" />
     </div>
   )

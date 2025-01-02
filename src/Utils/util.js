@@ -39,7 +39,7 @@ export const secondsToHoursMinutes = (seconds) => {
 }
 
 // 小数转百分数
-export const toPercent = (num, fixed = 2) => {
+export const toPercent = (num, fixed = 0) => {
   if (num) {
     return (num * 100).toFixed(fixed) + '%'
   }

@@ -11,7 +11,7 @@ export const getUserInfo = async (params, isLoading = false) => {
     ...storeUtil.getEnergyInfo(),
     rate: res.energyRecoveryLevelConf.rate,
     energyCap: res.energyCap,
-    currentEnergy: 50000 || res.currentEnergy,
+    currentEnergy: res.currentEnergy,
     energyCost: res.energyBonusLevelConf.energyCost,
   })
   return res

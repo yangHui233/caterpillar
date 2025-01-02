@@ -42,6 +42,11 @@ const user = (
         ...state,
         earnInfo: action.earnInfo,
       }
+    case 'SET_INVITEINFO':
+      return {
+        ...state,
+        inviteInfo: action.inviteInfo,
+      }
     default:
       return state
   }

@@ -77,3 +77,10 @@ export const setEarnInfo = (earnInfo = {}) => {
     earnInfo,
   }
 }
+
+export const setInviteInfo = (inviteInfo = {}) => {
+  return {
+    type: 'SET_INVITEINFO',
+    inviteInfo,
+  }
+}

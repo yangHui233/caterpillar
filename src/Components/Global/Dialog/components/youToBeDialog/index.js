@@ -6,7 +6,7 @@ import storeUtil from '@/Utils/store'
 import UseInterval from '@/CommonUse/interVal'
 import Button from '@/Components/Button'
 import { completeTask, getTaskList } from '@/Helper/apis/earn'
-import { jumpUrl } from '@/Utils/common'
+import { openLink } from '@telegram-apps/sdk'
 
 const CODEERROR_MSG = "You've written an incorrect code"
 
@@ -55,7 +55,8 @@ const YouToBeDialog = (props = {}) => {
       ...storeUtil.getShareClickTime(),
       [KEY + id]: new Date().getTime(),
     })
-    jumpUrl(link)
+
+    openLink(link)
   }
 
   const { isFinished, startFlag } = UseInterval({

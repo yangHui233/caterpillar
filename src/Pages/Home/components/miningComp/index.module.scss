@@ -77,6 +77,8 @@
         letter-spacing: -1px;
         display: flex;
         align-items: center;
+        position: relative;
+        z-index: 1;
         .progress_hit1 {
           position: relative;
           z-index: 1;

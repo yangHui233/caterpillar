@@ -17,6 +17,7 @@ import { getMining, getUserInfo, upDateClick } from '@/Helper/apis/home'
 import { add, div, mul, sub } from '@/Utils/math'
 import { MAX_CLICK } from '@/Contanst/baseConfig'
 import confetti from 'canvas-confetti'
+import CommonWrapper from '@/Components/CommonWrapper'
 
 const Index = (props) => {
   const interVal = useRef(null)
@@ -58,11 +59,6 @@ const Index = (props) => {
     if (isUnClick) return
 
     handleClickAni(event)
-
-    storeUtil.setEnergyInfo({
-      ...storeUtil.getEnergyInfo(),
-      currentEnergy: sub(currentEnergy, energyCost),
-    })
 
     storeUtil.setClickNum(storeUtil.getClickNum() + 1)
 
@@ -180,9 +176,6 @@ const Index = (props) => {
 
   // 能量自动增长逻辑
   const handleInterval = () => {
-    // if (interVal.current) {
-    //   return
-    // }
     handleClearInterval()
     interVal.current = setInterval(() => {
       let {
@@ -195,21 +188,17 @@ const Index = (props) => {
       let clickNum = storeUtil.getClickNum()
       let clickConsume = mul(clickNum, energyCost)
       let currentEnergyCap = add(energyCap, clickConsume)
-
       if (isEmpty(currentEnergy) || isEmpty(rate)) {
         handleClearInterval()
         return
       }
-      console.log('currentEnergy', currentEnergy, rate, currentEnergyCap)
       let addNum = add(currentEnergy, rate)
       let currentEnergyAfter =
         addNum >= currentEnergyCap ? currentEnergyCap : addNum
-
       storeUtil.setEnergyInfo({
         ...storeUtil.getEnergyInfo(),
         currentEnergy: currentEnergyAfter,
       })
-
       if (currentEnergyAfter === currentEnergyCap) {
         handleClearInterval()
       }
@@ -255,7 +244,9 @@ const Index = (props) => {
     }
 
     isUpDating.current = true
+
     let postNum = storeUtil.getClickNum()
+
     if (postNum <= 0) {
       if (type === 'init') {
         handleDateInit(type)
@@ -265,53 +256,49 @@ const Index = (props) => {
     }
 
     // 接口请求点击，更新页面数据
-    const res = await upDateClick({
-      clicks: postNum,
-    })
+    try {
+      const res = await upDateClick({
+        clicks: postNum,
+      })
 
-    let currentClickNum = sub(props.clickNum, postNum)
+      let currentClickNum = sub(storeUtil.getClickNum(), postNum)
 
-    storeUtil.setClickNum(currentClickNum)
+      storeUtil.setClickNum(currentClickNum)
+      clearInterval(interVal.current)
 
-    clearInterval(interVal.current)
+      let { currentEnergy, energyCap, coins, currentFavor, isNewLevel } = res
 
-    const {
-      currentEnergy,
-      energyCap,
-      coins,
-      currentFavor,
-      isNewLevel,
-      coinsGained, // todo
-    } = res
+      if (isNewLevel) {
+        updateDialog()
+        // 更新页面数据 重新开启定时器
+        handleDateInit(type)
+        return
+      }
 
-    if (isNewLevel) {
-      storeUtil.setUpDateReward(coinsGained)
-      updateDialog()
-      // 更新页面数据 重新开启定时器
+      if (type === 'init') {
+        handleDateInit(type)
+        return
+      }
+
+      storeUtil.setUserInfo({
+        ...storeUtil.getUserInfo(),
+        coins,
+        currentFavor,
+      })
+
+      storeUtil.setEnergyInfo({
+        ...storeUtil.getEnergyInfo(),
+        // currentEnergy: currentEnergy,
+        energyCap,
+      })
+
+      isUpDating.current = false
+
+      handleInterval()
+    } catch (err) {
+      isUpDating.current = false
       handleDateInit(type)
-      return
     }
-
-    if (type === 'init') {
-      handleDateInit(type)
-      return
-    }
-
-    storeUtil.setUserInfo({
-      ...storeUtil.getUserInfo(),
-      coins,
-      currentFavor,
-    })
-
-    storeUtil.setEnergyInfo({
-      ...storeUtil.getEnergyInfo(),
-      currentEnergy: currentEnergy,
-      energyCap,
-    })
-
-    isUpDating.current = false
-
-    handleInterval()
   }
 
   // 清除能量增长定时器
@@ -323,48 +310,53 @@ const Index = (props) => {
   return isShowLoading ? (
     ''
   ) : (
-    <div className={styles.wrapper}>
-      <TopPlan></TopPlan>
+    <CommonWrapper type="home">
+      <div className={styles.wrapper}>
+        <TopPlan></TopPlan>
 
-      <div className={styles.cloud_wrapper}>
-        <div className={styles.cloud1}></div>
-        <div className={styles.cloud2}></div>
-      </div>
-
-      <div className={`${styles.cloud_wrapper} ${styles.cloud_wrapper1}`}>
-        <div className={styles.cloud1}></div>
-        <div className={styles.cloud2}></div>
-      </div>
-
-      <div className={styles.main_wrapper}>
-        <div className={styles.level_wrapper}>
-          <div className={styles.coin}>
-            <ScrollNumber
-              defaultSize={52}
-              number={numSymbol(add(coins, mul(coinBonus, clickNum)))}
-            />
-          </div>
-          <div className={styles.level}>
-            level {level || 0}/{maxLevel}
-          </div>
+        <div className={styles.cloud_wrapper}>
+          <div className={styles.cloud1}></div>
+          <div className={styles.cloud2}></div>
         </div>
 
-        <div
-          className={`${
-            aniClickNum > 8
-              ? styles.dog_ani4
-              : aniClickNum > 5
-              ? styles.dog_ani3
-              : aniClickNum > 3
-              ? styles.dog_ani2
-              : ''
-          } ${styles.dog}`}
-          onTouchStart={handleCLi}></div>
-        <div className={styles.calendar} onClick={signInDialog}></div>
+        <div className={`${styles.cloud_wrapper} ${styles.cloud_wrapper1}`}>
+          <div className={styles.cloud1}></div>
+          <div className={styles.cloud2}></div>
+        </div>
 
-        <MiningComp />
+        <div className={styles.main_wrapper}>
+          <div className={styles.level_wrapper}>
+            <div className={styles.coin}>
+              <ScrollNumber
+                defaultSize={52}
+                number={numSymbol(add(coins, mul(coinBonus, clickNum)))}
+              />
+            </div>
+            <div className={styles.level}>
+              level {level || 0}/{maxLevel}
+            </div>
+          </div>
+
+          <div
+            className={`${styles.dog_wrapper} ${
+              aniClickNum > 8
+                ? styles.dog_ani4
+                : aniClickNum > 5
+                ? styles.dog_ani3
+                : aniClickNum > 3
+                ? styles.dog_ani2
+                : ''
+            }`}
+            onTouchStart={handleCLi}>
+            <div className={`${styles.dog}`}></div>
+          </div>
+
+          <div className={styles.calendar} onClick={signInDialog}></div>
+
+          <MiningComp />
+        </div>
       </div>
-    </div>
+    </CommonWrapper>
   )
 }
 

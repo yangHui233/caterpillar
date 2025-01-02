@@ -93,6 +93,13 @@
             font-family: 'SF Pixelate';
             font-style: italic;
             font-size: 24px;
+            font-weight: 700;
+            &.num{
+              font-family: 'Pixel';
+              font-style: normal;
+              font-size: 26px;
+              font-weight: 400;
+            }
           }
           .up {
             width: 18px;
@@ -120,6 +127,27 @@
       }
     }
 
+    /* 屏幕高度小于500px的样式 */
+    @media (max-height: 499px) {
+      &.tab-list-wrapper2 {
+        max-height: 304px!important;
+      }
+    }
+
+    /* 屏幕高度在500px到700px之间的样式 */
+    @media (min-height: 500px) and (max-height: 699px) {
+      &.tab-list-wrapper2 {
+        max-height: 480px!important;
+      }
+    }
+
+    /* 屏幕高度大于700px的样式 */
+    @media (min-height: 700px) {
+      &.tab-list-wrapper2 {
+        max-height: 584px!important;
+      }
+    }
+    
     &.tab-list-wrapper2 {
       border-radius: 10px;
       background: rgba(255, 255, 255, 0.95);
@@ -133,6 +161,9 @@
           border-bottom: 1px solid #DFE5EF;;
         }
       }
+        .tab-r{
+          display: none;
+        }
     }
   }
 }

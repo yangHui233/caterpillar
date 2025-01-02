@@ -12,6 +12,7 @@ import {
 import styles from './index.module.scss'
 import { getTaskList } from '@/Helper/apis/earn'
 import storeUtil from '@/Utils/store'
+import CommonWrapper from '@/Components/CommonWrapper'
 
 const Earn = (props) => {
   let { earnInfo = [] } = props
@@ -58,28 +59,30 @@ const Earn = (props) => {
     return config[name] || name
   }
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.top_wrapper}></div>
-      {(earnInfo || []).map((item) => {
-        return (
-          <TabList
-            key={item.id}
-            list={(item.tasks || []).map((item) => {
-              return {
-                ...item,
-                title: item.description,
-                icon: handleGetType(item.group.name),
-                // type: '1',
-                shareType: handleGetType(item.group.name),
-                val: item.rewardCoins,
-              }
-            })}
-            title={item.description}
-            styleType={2}
-            handleItemCli={handleItemCli}></TabList>
-        )
-      })}
-    </div>
+    <CommonWrapper type="earn">
+      <div className={styles.wrapper}>
+        <div className={styles.top_wrapper}></div>
+        {(earnInfo || []).map((item) => {
+          return (
+            <TabList
+              key={item.id}
+              list={(item.tasks || []).map((item) => {
+                return {
+                  ...item,
+                  title: item.description,
+                  icon: handleGetType(item.group.name),
+                  // type: '1',
+                  shareType: handleGetType(item.group.name),
+                  val: item.rewardCoins,
+                }
+              })}
+              title={item.description}
+              styleType={2}
+              handleItemCli={handleItemCli}></TabList>
+          )
+        })}
+      </div>
+    </CommonWrapper>
   )
 }
 

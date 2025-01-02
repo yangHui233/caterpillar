@@ -11,7 +11,7 @@ const TabList = (props) => {
   } = props
 
   return (
-    <div className={style['tab-list']}>
+    <div className={`${style['tab-list']}`}>
       {title ? <div className={style['title']}>{title}</div> : ''}
 
       {props.children ? props.children : ''}
@@ -32,22 +32,31 @@ const TabList = (props) => {
                   <div className={style['tab-title']}>{item.title}</div>
 
                   <div className={style['tab-hit']}>
-                    <div className={style['coin']}></div>
-                    {['1', '2'].includes(item.type) ? (
-                      <>
-                        <div className={style['txt']}>
-                          {numSymbol(item.coins)}
-                        </div>
-                        <div className={style['up']}></div>
-                        <div className={style['txt']}>
-                          {item.type === '2'
-                            ? toPercent(item.currentVal)
-                            : 'level ' + item.val}
-                        </div>
-                      </>
+                    {item.status === 'full' ? (
+                      <div className={style['txt']}>Max.Upgrade</div>
                     ) : (
                       <>
-                        <div className={style['txt']}>+{item.val}</div>
+                        {' '}
+                        <div className={style['coin']}></div>
+                        {['1', '2'].includes(item.type) ? (
+                          <>
+                            <div className={`${style['txt']} ${style['num']}`}>
+                              {numSymbol(item.coins)}
+                            </div>
+                            <div className={style['up']}></div>
+                            <div className={style['txt']}>
+                              {item.type === '2'
+                                ? toPercent(item.nextVal)
+                                : 'level ' + item.nextVal}
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className={`${style['txt']} ${style['num']}`}>
+                              +{item.val}
+                            </div>
+                          </>
+                        )}
                       </>
                     )}
                   </div>

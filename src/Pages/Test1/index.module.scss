@@ -1,3 +1,14 @@
 .txt{
     font-size: 20px;
 }
+.coin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    color: #fffb00;
+    font-family: 'Kemco Pixel';
+    font-weight: 700;
+    font-size: 152px;
+    @include fontBorder(10px);
+}

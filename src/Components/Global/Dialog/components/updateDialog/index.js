@@ -1,10 +1,16 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import $ from '@/Components/Global'
 import style from './index.module.scss'
 import { numSymbol } from '@/Utils/util'
 
 const SignDialog = (props = {}) => {
-  const { handleConfirm = () => {}, userInfo = {} } = props
+  const {
+    handleConfirm = () => {
+      $.hide('dialog')
+    },
+    userInfo = {},
+  } = props
   const { nextLevel } = userInfo
 
   return (

@@ -28,14 +28,17 @@ const NumberAnimation = (props) => {
   }
 
   return (
-    <div className={`${styles['number-animation-wrap']}`}>
+    <div
+      className={`${styles['number-animation-wrap']} ${
+        styles[`number-animation-wrap-${defaultSize}`]
+      }`}>
       <div
         className={`${styles['number-animation-wrap-hidden']}`}
         style={style}>
         0
       </div>
       <div
-        className={`${styles[`number-animation`]}`}
+        className={`${styles[`number-animation`]} `}
         style={{
           top: '-' + value * 100 + '%',
         }}>

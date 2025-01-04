@@ -12,6 +12,12 @@
   font-family: 'SF Pixelate';
   font-size: 28px;
   font-weight: 700;
+  .loading{
+    width: 35px;
+    height: 35px;
+    background: $loading;
+    animation: rotate 2s linear infinite;
+  }
 }
 
 .progress_mining {
@@ -144,5 +150,11 @@
     font-size: 24px;
     font-weight: 700;
     letter-spacing: -1px;
+    .loading{
+      width: 35px;
+      height: 35px;
+      background: $loading;
+      animation: rotate 2s linear infinite;
+    }
   }
 }

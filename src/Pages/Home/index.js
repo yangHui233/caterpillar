@@ -18,6 +18,7 @@ import { add, div, mul, sub } from '@/Utils/math'
 import { MAX_CLICK } from '@/Contanst/baseConfig'
 import confetti from 'canvas-confetti'
 import CommonWrapper from '@/Components/CommonWrapper'
+import { invitePort } from '@/Helper/apis/invite'
 
 const Index = (props) => {
   const interVal = useRef(null)
@@ -83,10 +84,22 @@ const Index = (props) => {
       const res = await login({
         initData: '',
       })
+
       const { token } = res
       if (token) {
         storeUtil.setToken(token)
         handleUpdateClick('init')
+
+        console.log(window.location.hash, 'hash==')
+        // 上报邀请
+        const hash = window.location.hash.slice(1)
+        console.log('hash', hash)
+        const params = new URLSearchParams(hash)
+        console.log('params', params)
+        const id = params.get('id')
+        if (id) {
+          invitePort({ inviterTgId: id })
+        }
       }
     } catch (err) {}
   }
@@ -194,12 +207,13 @@ const Index = (props) => {
       }
       let addNum = add(currentEnergy, rate)
       let currentEnergyAfter =
-        addNum >= currentEnergyCap ? currentEnergyCap : addNum
+        addNum >= currentEnergyCap ? sub(energyCap, clickConsume) : addNum
+
       storeUtil.setEnergyInfo({
         ...storeUtil.getEnergyInfo(),
         currentEnergy: currentEnergyAfter,
       })
-      if (currentEnergyAfter === currentEnergyCap) {
+      if (currentEnergyAfter === sub(energyCap, clickConsume)) {
         handleClearInterval()
       }
     }, 1000)
@@ -286,9 +300,13 @@ const Index = (props) => {
         currentFavor,
       })
 
+      let { rate } = storeUtil.getEnergyInfo()
       storeUtil.setEnergyInfo({
         ...storeUtil.getEnergyInfo(),
-        // currentEnergy: currentEnergy,
+        currentEnergy:
+          add(rate, currentEnergy) >= energyCap
+            ? energyCap
+            : add(rate, currentEnergy),
         energyCap,
       })
 

@@ -4,14 +4,15 @@ import style from './index.module.scss'
 import { numSymbol } from '@/Utils/util'
 import ScrollNumber from '@/Components/ScrollNumber'
 import { add, mul, sub } from '@/Utils/math'
+import storeUtil from '@/Utils/store'
 
 const TopPlan = (props) => {
-  const { userInfo, energyInfo, clickNum } = props
+  const { userInfo, energyInfo } = props
   const { nextLevel = {}, currentFavor, energyBonusLevelConf = {} } = userInfo
   let { favorBonus, energyCost } = energyBonusLevelConf || {}
   const { currentEnergy, energyCap } = energyInfo
 
-  console.log('userInfo', currentEnergy, energyCost, energyCap, clickNum)
+  const clickNum = storeUtil.getClickNum()
 
   return (
     <div className={style['top-plan']}>

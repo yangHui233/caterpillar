@@ -7,15 +7,22 @@ import history from '@/Router/history'
 import { store } from '@/Store'
 import { ErrorBoundary } from '@/Components/ErrorBoundary'
 import '@/Theme/lib.js'
+import { init } from '@telegram-apps/sdk'
+import { disableVerticalSwipes } from '@telegram-apps/sdk'
 
 import './index.css'
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production' || true) {
   let Vconsole = require('vconsole')
   new Vconsole()
 }
 
 React.platformDef = process.env.platformDef
+
+try {
+  init()
+  disableVerticalSwipes()
+} catch (e) {}
 
 ReactDOM.render(
   <React.StrictMode>

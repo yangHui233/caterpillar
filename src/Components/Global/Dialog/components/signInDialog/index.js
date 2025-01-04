@@ -17,11 +17,12 @@ const SignDialog = (props = {}) => {
 
   const handleSign = async () => {
     if (!hasSignedToday) {
-      await signin()
+      const res = await signin()
       storeUtil.setUserInfo({
         ...storeUtil.getUserInfo(),
         hasSignedToday: true,
         signinDays: storeUtil.getUserInfo().signinDays + 1,
+        coins: res.coins,
       })
       setAni(true)
       setTimeout(() => {

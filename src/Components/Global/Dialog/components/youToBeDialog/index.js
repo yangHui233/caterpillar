@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import style from './index.module.scss'
 import Received from '@/Components/Received'
@@ -19,6 +19,7 @@ const YouToBeDialog = (props = {}) => {
   const [isShowSuccess, setIsShowSuccess] = useState(false)
   const [value, setValue] = useState('')
   const [errorMsg, setErrorMsg] = useState('')
+  const inputRef = useRef(null)
 
   const handleConfirm = async () => {
     if (!value) {
@@ -51,10 +52,12 @@ const YouToBeDialog = (props = {}) => {
     setIsLoading(false)
   }
   const handleToJump = () => {
-    storeUtil.setShareClickTime({
-      ...storeUtil.getShareClickTime(),
-      [KEY + id]: new Date().getTime(),
-    })
+    if (!storeUtil.getShareClickTime()[KEY + id]) {
+      storeUtil.setShareClickTime({
+        ...storeUtil.getShareClickTime(),
+        [KEY + id]: new Date().getTime(),
+      })
+    }
 
     openLink(link)
   }
@@ -70,6 +73,26 @@ const YouToBeDialog = (props = {}) => {
       return !!time
     },
   })
+
+  useEffect(() => {
+    const inputElement = inputRef.current
+
+    if (inputElement) {
+      const handleFocus = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth', // 使滚动平滑
+        })
+      }
+
+      inputElement.addEventListener('focus', handleFocus)
+
+      // 清除事件监听器，防止内存泄漏
+      return () => {
+        inputElement.removeEventListener('focus', handleFocus)
+      }
+    }
+  }, [])
 
   return (
     <div className={style.wrapper}>
@@ -106,6 +129,7 @@ const YouToBeDialog = (props = {}) => {
             value={value}
             onChange={(e) => setValue(e.target.value)}
             placeholder="Enter the code"
+            ref={inputRef}
           />
 
           {errorMsg ? <div className={style.tip}>{errorMsg}</div> : ''}
@@ -121,7 +145,9 @@ const YouToBeDialog = (props = {}) => {
         <Received />
       ) : (
         <div className={style.success}>
-          <div className={style.success_txt}>YOUTUBE SUBSCRIBE</div>
+          <div className={style.success_txt} onClick={handleToJump}>
+            YOUTUBE SUBSCRIBE
+          </div>
           <div className={style.success_icon}></div>
         </div>
       )}

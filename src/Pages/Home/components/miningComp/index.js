@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import styles from './index.module.scss'
-import { numSymbol, secondsToHoursMinutes } from '@/Utils/util'
+import { secondsToHoursMinutes } from '@/Utils/util'
 import { add, div, mul, sub } from '@/Utils/math'
 import storeUtil from '@/Utils/store'
 import { getMining, getMiningReward, startMining } from '@/Helper/apis/home'
@@ -19,49 +19,56 @@ const MiningComp = (props) => {
 
   const [currentCoin, setCurrentCoin] = React.useState(0)
   const [subTime, setSubTime] = React.useState('')
+  const [isLoading, setIsLoading] = React.useState(false)
   const interVal = React.useRef(null)
-
-  // 计算获取当前每个周期的时长
-  const stepNum = useMemo(() => {
-    return div(sub(totalMiningEndTime, startTime), maxStorageLevel)
-  }, [totalMiningEndTime, startTime, maxStorageLevel])
-
-  // 当前是否展示开始挖矿按钮
-  const isShowStartBtn = useMemo(() => {
-    let { totalMiningEndTime, now, availableReward } = storeUtil.getMiningInfo()
-    return !(sub(totalMiningEndTime, now) > 0) && !availableReward
-  }, [availableReward, totalMiningEndTime, now])
 
   useEffect(() => {
     handleMining()
     return () => {
       handleClearInterval()
     }
-  }, [isShowStartBtn])
+  }, [props.miningInfo.totalMiningEndTime])
+
+  const getIsShowStartBtn = () => {
+    let { now, totalMiningEndTime, availableReward } =
+      storeUtil.getMiningInfo() || {}
+    return !(sub(totalMiningEndTime, now) > 0) && !availableReward
+  }
 
   // 开始挖矿
-  const hanleStartMining = async () => {
-    await startMining()
-    await getMining()
-    handleMining()
+  const hanleStartMining = async (type = '') => {
+    if (type === 'click' && isLoading) return
+    if (type === 'click') {
+      setIsLoading(true)
+    }
+
+    try {
+      await startMining()
+      await getMining()
+      handleMining()
+    } catch (err) {}
+
+    setIsLoading(false)
   }
 
   const handleMining = () => {
     // 当前为展示开始挖矿按钮界面
-    if (isShowStartBtn) {
+    if (getIsShowStartBtn()) {
       handleClearInterval()
       return
     }
 
     // 当前为挖矿界面
     handleData()
-    let { now, totalMiningEndTime } = storeUtil.getMiningInfo()
+    let { now, totalMiningEndTime, maxStorageLevel } = storeUtil.getMiningInfo()
     if (sub(totalMiningEndTime, now) > 0) {
       handleClearInterval()
 
       interVal.current = setInterval(async () => {
         let { now } = storeUtil.getMiningInfo()
         let currentMiningTimeAfter = add(now, 1000)
+
+        let stepNum = div(sub(totalMiningEndTime, startTime), maxStorageLevel)
 
         // 到达小周期节点，请求接口更新数据
         if (
@@ -88,15 +95,21 @@ const MiningComp = (props) => {
 
   // 领取奖励
   const handleGetReward = async () => {
-    const res = await getMiningReward()
-    let { coins } = res
+    if (isLoading) return
+    setIsLoading(true)
+    try {
+      const res = await getMiningReward()
+      let { coins } = res
 
-    storeUtil.setUserInfo({
-      ...storeUtil.getUserInfo(),
-      coins: coins,
-    })
-    // 重新进行挖矿
-    hanleStartMining()
+      storeUtil.setUserInfo({
+        ...storeUtil.getUserInfo(),
+        coins: coins,
+      })
+      // 重新进行挖矿
+      hanleStartMining()
+    } catch (err) {
+      setIsLoading(false)
+    }
   }
 
   const handleClearInterval = () => {
@@ -138,11 +151,11 @@ const MiningComp = (props) => {
   const isSplit = availableReward && maxStorageLevel > 1
   const isMining = sub(totalMiningEndTime, now) > 0
 
-  return isShowStartBtn ? (
+  return getIsShowStartBtn() ? (
     <div
       className={`${styles.progress_wrapper} ${styles.progress_start}`}
-      onClick={hanleStartMining}>
-      Start Farming
+      onClick={hanleStartMining.bind(null, 'click')}>
+      {isLoading ? <div className={styles.loading}></div> : 'Start Farming'}
     </div>
   ) : (
     <div className={`${styles.progress_wrapper} ${styles.progress_mining}`}>
@@ -192,8 +205,14 @@ const MiningComp = (props) => {
       </div>
       {isSplit ? (
         <div className={styles.getbtn} onClick={handleGetReward}>
-          <div>Harvestable</div>
-          <div>{availableReward}</div>
+          {isLoading ? (
+            <div className={styles.loading}></div>
+          ) : (
+            <>
+              <div>Harvestable</div>
+              <div>{availableReward}</div>
+            </>
+          )}
         </div>
       ) : (
         ''

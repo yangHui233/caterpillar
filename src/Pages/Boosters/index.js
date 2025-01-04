@@ -59,7 +59,7 @@ const Boosters = (props) => {
           }
           Toast.info(item.icon, updatedTxt)
           // 更新用户当前数据
-          const { coins, energyCap, recoveryRate, bonusMultiplier } = res
+          const { coins, energyCap, recoveryRate, bonus } = res
           storeUtil.setUserInfo({
             ...storeUtil.getUserInfo(),
             coins,
@@ -80,16 +80,16 @@ const Boosters = (props) => {
               rate: recoveryRate,
             })
           }
-          // todo 确认bonusMultiplier字段含义
-          if (bonusMultiplier) {
+          // 更新点击相关数据
+          if (bonus) {
             storeUtil.setEnergyInfo({
               ...storeUtil.getEnergyInfo(),
-              energyCost: bonusMultiplier,
+              energyCost: bonus.energyCost,
             })
             storeUtil.setEnergyInfo({
               ...storeUtil.getEnergyInfo(),
-              favorBonus: bonusMultiplier,
-              coinBonus: bonusMultiplier,
+              favorBonus: bonus.favorBonus,
+              coinBonus: bonus.coinBonus,
             })
           }
         } catch (err) {

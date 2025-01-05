@@ -13,7 +13,7 @@ export const inviteList = async (
 }
 
 export const invitePort = async (params, isLoading) => {
-  const res = await ajax.get('invite/report', params, isLoading)
+  const res = await ajax.post('invite/report', params, isLoading)
 
   return res
 }

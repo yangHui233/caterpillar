@@ -90,15 +90,9 @@ const Index = (props) => {
         storeUtil.setToken(token)
         handleUpdateClick('init')
 
-        console.log(window.location.hash, 'hash==')
         // 上报邀请
-        const hash = window.location.hash.slice(1)
-        console.log('hash', hash)
-        const params = new URLSearchParams(hash)
-        console.log('params', params)
-        const id = params.get('id')
-        if (id) {
-          invitePort({ inviterTgId: id })
+        if (storeUtil.getUserInfo().startParam) {
+          invitePort({ inviterTgId: storeUtil.getUserInfo().startParam })
         }
       }
     } catch (err) {}

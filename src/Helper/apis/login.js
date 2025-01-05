@@ -5,7 +5,7 @@ import { retrieveLaunchParams, initDataStartParam } from '@telegram-apps/sdk'
 export const login = (params, isLoading) => {
   try {
     const initialDataRaw = retrieveLaunchParams()
-    const { initDataRaw, initData } = initialDataRaw
+    const { initDataRaw, initData, startParam } = initialDataRaw
     console.log(
       initialDataRaw,
       initDataStartParam(),
@@ -14,6 +14,7 @@ export const login = (params, isLoading) => {
     storeUtil.setUserInfo({
       ...(storeUtil.getUserInfo() || {}),
       userId: initData.user.id,
+      startParam: startParam,
     })
 
     params = {

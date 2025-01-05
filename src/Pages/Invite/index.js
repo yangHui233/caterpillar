@@ -50,7 +50,8 @@ const Invite = (props = {}) => {
             }
           })}
           title={`Friend list(${list ? list.length : 0})`}
-          styleType={2}>
+          styleType={2}
+          isHideRight={true}>
           <div className={styles.invite_coin}>
             Received:<div className={styles.coin}>{numSymbol(totalCoins)}</div>
           </div>

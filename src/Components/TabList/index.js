@@ -8,6 +8,7 @@ const TabList = (props) => {
     title = '',
     styleType = 1,
     handleItemCli = () => {},
+    isHideRight = false,
   } = props
 
   return (
@@ -61,8 +62,12 @@ const TabList = (props) => {
                     )}
                   </div>
                 </div>
-                <div
-                  className={`${style['tab-r']} ${style[item.status]}`}></div>
+                {isHideRight ? (
+                  ''
+                ) : (
+                  <div
+                    className={`${style['tab-r']} ${style[item.status]}`}></div>
+                )}
               </div>
             )
           })}

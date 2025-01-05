@@ -14,24 +14,22 @@ export default class App extends React.Component {
         <Route
           render={({ location }) => {
             return (
-              <div>
-                <React.Suspense fallback={<div></div>}>
-                  <Switch>
-                    {routers.map((route, i) => {
-                      return (
-                        <Route
-                          key={i}
-                          exact
-                          location={location}
-                          {...route}></Route>
-                      )
-                    })}
-                    <Redirect path="/" to="/home"></Redirect>
-                    <Route component={NoMatch} />
-                  </Switch>
-                  {/* <Footer history={history} /> */}
-                </React.Suspense>
-              </div>
+              <React.Suspense fallback={<div></div>}>
+                <Switch>
+                  {routers.map((route, i) => {
+                    return (
+                      <Route
+                        key={i}
+                        exact
+                        location={location}
+                        {...route}></Route>
+                    )
+                  })}
+                  <Redirect path="/" to="/home"></Redirect>
+                  <Route component={NoMatch} />
+                </Switch>
+                {/* <Footer history={history} /> */}
+              </React.Suspense>
             )
           }}></Route>
       </Router>

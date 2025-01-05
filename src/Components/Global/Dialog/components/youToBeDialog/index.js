@@ -80,7 +80,7 @@ const YouToBeDialog = (props = {}) => {
     if (inputElement) {
       const handleFocus = () => {
         setTimeout(() => {
-          inputElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+          inputElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
         }, 300)
       }
 

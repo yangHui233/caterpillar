@@ -45,7 +45,6 @@ const MiningComp = (props) => {
     try {
       await startMining()
       await getMining()
-      handleMining()
     } catch (err) {}
 
     setIsLoading(false)

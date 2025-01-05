@@ -91,7 +91,8 @@ const Index = (props) => {
         handleUpdateClick('init')
 
         // 上报邀请
-        if (storeUtil.getUserInfo().startParam) {
+        let { startParam, userId } = storeUtil.getUserInfo()
+        if (startParam && startParam != userId) {
           invitePort({ inviterTgId: storeUtil.getUserInfo().startParam })
         }
       }

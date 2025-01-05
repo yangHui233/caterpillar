@@ -79,10 +79,9 @@ const YouToBeDialog = (props = {}) => {
 
     if (inputElement) {
       const handleFocus = () => {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth', // 使滚动平滑
-        })
+        setTimeout(() => {
+          inputElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        }, 300)
       }
 
       inputElement.addEventListener('focus', handleFocus)

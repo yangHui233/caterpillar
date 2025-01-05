@@ -63,7 +63,7 @@ const YouToBeDialog = (props = {}) => {
   }
 
   const { isFinished, startFlag } = UseInterval({
-    changeArr: [props.shareClickTime],
+    changeArr: [props.shareClickTime[KEY + id]],
     isStop: () => {
       let time = storeUtil.getShareClickTime()[KEY + id]
       return time && new Date().getTime() - time > 30000

@@ -24,16 +24,19 @@ const ShareDialog = (props = {}) => {
   const [isShowSuccess, setIsShowSuccess] = useState(false)
 
   const { isFinished, startFlag } = UseInterval({
-    changeArr: [props.shareClickTime[shareType]],
+    changeArr: [props.shareClickTime[shareType + id]],
     isStop: () => {
       let time = storeUtil.getShareClickTime()[shareType + id]
+      console.log(time, new Date().getTime() - time > 60000, 'time isStop')
       return time && new Date().getTime() - time > 60000
     },
     isStart: () => {
       let time = storeUtil.getShareClickTime()[shareType + id]
+      console.log(time, 'time isStart')
       return !!time
     },
   })
+  console.log(isFinished, 'isFinished', startFlag)
 
   const handleConfirm = async () => {
     if (!isFinished) {

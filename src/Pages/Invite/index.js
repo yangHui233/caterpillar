@@ -11,7 +11,7 @@ import storeUtil from '@/Utils/store'
 
 const Invite = (props = {}) => {
   let { inviteInfo = {} } = props
-  const { list, totalCoins = 0 } = inviteInfo
+  let { list, totalCoins = 0 } = inviteInfo
 
   useEffect(() => {
     handleGetList()
@@ -29,6 +29,7 @@ const Invite = (props = {}) => {
     let userId = storeUtil.getUserInfo().userId
     copy('t.me/mat_dog_test_bot/dogtest2?startapp=' + userId)
   }
+
   return (
     <CommonWrapper type="invite">
       <div className={styles.wrapper}>
@@ -36,7 +37,7 @@ const Invite = (props = {}) => {
           <div className={styles.title}>lnvite frens!</div>
           <div className={styles.nums}>FRENS</div>
           <div className={styles.hit}>
-            You'll get {numSymbol(totalCoins)} Coins for every invite,
+            You'll get {totalCoins} Coins for every invite,
           </div>
         </div>
         <TabList
@@ -46,7 +47,7 @@ const Invite = (props = {}) => {
               title: item.username,
               icon: 'fren',
               type: 3,
-              val: item.coins,
+              val: numSymbol(item.coins),
             }
           })}
           title={`Friend list(${list ? list.length : 0})`}

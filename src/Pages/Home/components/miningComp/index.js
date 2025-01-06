@@ -43,7 +43,14 @@ const MiningComp = (props) => {
     }
 
     try {
-      await startMining()
+      let { totalMiningEndTime, now } = storeUtil.getMiningInfo()
+
+      if (sub(now, totalMiningEndTime) >= 0 || type === 'click') {
+        await startMining()
+      }
+    } catch (err) {}
+
+    try {
       await getMining()
     } catch (err) {}
 

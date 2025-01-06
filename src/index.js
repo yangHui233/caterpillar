@@ -37,11 +37,7 @@ try {
   bindViewportCssVars()
 
   // 禁止向下滑动应用程序来隐藏应用程序
-  console.log(
-    'isVerticalEnabled----',
-    bindViewportCssVars(),
-    isVerticalSwipesEnabled()
-  )
+  console.log('isVerticalEnabled----', isVerticalSwipesEnabled())
 } catch (e) {}
 
 ReactDOM.render(

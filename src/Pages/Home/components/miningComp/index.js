@@ -20,6 +20,7 @@ const MiningComp = (props) => {
   const [currentCoin, setCurrentCoin] = React.useState(0)
   const [subTime, setSubTime] = React.useState('')
   const [isLoading, setIsLoading] = React.useState(false)
+  const [isSplit, setIsSplit] = React.useState(false)
   const interVal = React.useRef(null)
 
   useEffect(() => {
@@ -28,6 +29,11 @@ const MiningComp = (props) => {
       handleClearInterval()
     }
   }, [props.miningInfo.totalMiningEndTime])
+
+  useEffect(() => {
+    let { availableReward, maxStorageLevel } = storeUtil.getMiningInfo()
+    setIsSplit(availableReward && maxStorageLevel > 1)
+  }, [props.miningInfo.availableReward, props.miningInfo.maxStorageLevel])
 
   const getIsShowStartBtn = () => {
     let { now, totalMiningEndTime, availableReward } =
@@ -88,7 +94,7 @@ const MiningComp = (props) => {
           } catch (err) {}
         }
         storeUtil.setMiningInfo({
-          ...props.miningInfo,
+          ...storeUtil.getMiningInfo(),
           now: currentMiningTimeAfter,
         })
         handleData()
@@ -154,7 +160,6 @@ const MiningComp = (props) => {
     )
   }
 
-  const isSplit = availableReward && maxStorageLevel > 1
   const isMining = sub(totalMiningEndTime, now) > 0
 
   return getIsShowStartBtn() ? (

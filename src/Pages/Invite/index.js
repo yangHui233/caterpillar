@@ -47,7 +47,7 @@ const Invite = (props = {}) => {
               title: item.username,
               icon: 'fren',
               type: 3,
-              val: numSymbol(item.coins),
+              val: item.coins,
             }
           })}
           title={`Friend list(${list ? list.length : 0})`}

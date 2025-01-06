@@ -9,16 +9,16 @@ const SignDialog = (props = {}) => {
     handleConfirm = () => {
       $.hide('dialog')
     },
-    userInfo = {},
+    level,
+    nextLevel = {},
   } = props
-  const { nextLevel } = userInfo
 
   return (
     <div className={style.wrapper}>
       <div className={style.update}>
         <div className={style.update_item}>
           <div className={style.update_item_icon}></div>
-          <div className={style.update_item_hit}>LVL {userInfo.level}</div>
+          <div className={style.update_item_hit}>LVL {level}</div>
         </div>
         <div className={style.link}></div>
         <div className={style.update_item}>
@@ -47,9 +47,7 @@ const SignDialog = (props = {}) => {
   )
 }
 const mapStateToProps = (state) => {
-  return {
-    userInfo: state.user.userInfo,
-  }
+  return {}
 }
 
 export default connect(mapStateToProps)(SignDialog)

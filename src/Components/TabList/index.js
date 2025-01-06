@@ -48,13 +48,13 @@ const TabList = (props) => {
                             <div className={style['txt']}>
                               {item.type === '2'
                                 ? toPercent(item.nextVal)
-                                : 'level ' + item.nextVal}
+                                : 'level ' + (item.val * 1 + 1)}
                             </div>
                           </>
                         ) : (
                           <>
                             <div className={`${style['txt']} ${style['num']}`}>
-                              +{item.val}
+                              +{numSymbol(item.val)}
                             </div>
                           </>
                         )}

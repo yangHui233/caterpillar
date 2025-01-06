@@ -11,6 +11,7 @@ import { openLink } from '@telegram-apps/sdk'
 const CODEERROR_MSG = "You've written an incorrect code"
 
 const KEY = 'youtobe'
+const DELAYTIME = 30
 
 const YouToBeDialog = (props = {}) => {
   const { rewardCoins, id, link } = props
@@ -23,6 +24,7 @@ const YouToBeDialog = (props = {}) => {
 
   const handleConfirm = async () => {
     if (!value) {
+      setErrorMsg(CODEERROR_MSG)
       return
     }
     if (!isFinished) {
@@ -62,11 +64,13 @@ const YouToBeDialog = (props = {}) => {
     openLink(link)
   }
 
-  const { isFinished, startFlag } = UseInterval({
+  const { isFinished, startFlag, leftTime } = UseInterval({
     changeArr: [(props.shareClickTime || {})[KEY + id]],
+    clickTime: (props.shareClickTime || {})[KEY + id],
+    delayTime: DELAYTIME,
     isStop: () => {
       let time = (storeUtil.getShareClickTime() || {})[KEY + id]
-      return time && new Date().getTime() - time > 30000
+      return time && new Date().getTime() - time > DELAYTIME * 1000
     },
     isStart: () => {
       let time = (storeUtil.getShareClickTime() || {})[KEY + id]
@@ -124,7 +128,6 @@ const YouToBeDialog = (props = {}) => {
 
           <input
             className={`${style.inputs}`}
-            disabled={!isFinished}
             value={value}
             onChange={(e) => setValue(e.target.value)}
             placeholder="Enter the code"
@@ -137,7 +140,7 @@ const YouToBeDialog = (props = {}) => {
             onClick={handleConfirm}
             isLoading={isLoading}
             disabled={!isFinished}
-            txt="CHECK THE TASK"
+            txt={isFinished || !startFlag ? 'CHECK THE TASK' : leftTime}
           />
         </>
       ) : isShowSuccess ? (

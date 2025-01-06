@@ -17,26 +17,27 @@ const CONFIG = {
   },
 }
 
+const DELAYTIME = 60
+
 const ShareDialog = (props = {}) => {
   const { rewardCoins, shareType = 'tg', icon, id } = props
   const [completed, setCompleted] = useState(props.completed)
   const [isLoading, setIsLoading] = useState(false)
   const [isShowSuccess, setIsShowSuccess] = useState(false)
 
-  const { isFinished, startFlag } = UseInterval({
+  const { isFinished, startFlag, leftTime } = UseInterval({
     changeArr: [(props.shareClickTime || {})[shareType + id]],
+    clickTime: (props.shareClickTime || {})[shareType + id],
+    delayTime: DELAYTIME,
     isStop: () => {
       let time = (storeUtil.getShareClickTime() || {})[shareType + id]
-      console.log(time, new Date().getTime() - time > 60000, 'time isStop')
-      return time && new Date().getTime() - time > 60000
+      return time && new Date().getTime() - time > DELAYTIME * 1000
     },
     isStart: () => {
       let time = (storeUtil.getShareClickTime() || {})[shareType + id]
-      console.log(time, 'time isStart')
       return !!time
     },
   })
-  console.log(isFinished, 'isFinished', startFlag)
 
   const handleConfirm = async () => {
     if (!isFinished) {
@@ -91,7 +92,7 @@ const ShareDialog = (props = {}) => {
             onClick={handleConfirm}
             isLoading={isLoading}
             disabled={!isFinished}
-            txt="CHECK THE TASK"
+            txt={isFinished || !startFlag ? 'CHECK THE TASK' : leftTime}
           />
         </>
       ) : isShowSuccess ? (

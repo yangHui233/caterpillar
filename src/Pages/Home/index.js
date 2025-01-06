@@ -270,15 +270,26 @@ const Index = (props) => {
         clicks: postNum,
       })
 
-      let currentClickNum = sub(storeUtil.getClickNum(), postNum)
+      let currentClickNum =
+        sub(storeUtil.getClickNum(), postNum) > 0
+          ? sub(storeUtil.getClickNum(), postNum)
+          : 0
 
       storeUtil.setClickNum(currentClickNum)
+
       clearInterval(interVal.current)
 
       let { currentEnergy, energyCap, coins, currentFavor, isNewLevel } = res
 
+      // 需要升级
       if (isNewLevel) {
-        updateDialog()
+        const { level, nextLevel } = storeUtil.getUserInfo()
+        updateDialog({
+          level,
+          nextLevel,
+        })
+        // 清除本地点击
+        storeUtil.setClickNum(0)
         // 更新页面数据 重新开启定时器
         handleDateInit(type)
         return

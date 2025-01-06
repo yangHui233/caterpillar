@@ -1,3 +1,4 @@
+import { div, sub } from '@/Utils/math'
 import React, { useState, useEffect, useRef } from 'react'
 
 const UseInterval = (props) => {
@@ -9,11 +10,14 @@ const UseInterval = (props) => {
     isStart = () => {
       return false
     },
+    clickTime = '',
+    delayTime = 30,
   } = props
 
   const interVal = useRef(null)
   const [isFinished, setIsFinished] = useState(false)
   const [startFlag, setStartFlag] = useState(false)
+  const [leftTime, setLeftTime] = useState(0)
 
   useEffect(() => {
     if (interVal.current) {
@@ -29,6 +33,12 @@ const UseInterval = (props) => {
       if (isFinished) {
         setStartFlag(false)
         clearInterval(interVal.current)
+        setLeftTime(0)
+      } else {
+        let subTime = Math.ceil(
+          sub(delayTime, div(sub(new Date().getTime(), clickTime), 1000))
+        )
+        setLeftTime(`00:${subTime < 10 ? `0${subTime}` : subTime}`)
       }
       setIsFinished(isFinished)
     }, 1000)
@@ -38,7 +48,7 @@ const UseInterval = (props) => {
     }
   }, [...changeArr])
 
-  return { isFinished, startFlag }
+  return { isFinished, startFlag, leftTime }
 }
 
 export default UseInterval

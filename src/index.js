@@ -12,6 +12,8 @@ import {
   mountSwipeBehavior,
   disableVerticalSwipes,
   isVerticalSwipesEnabled,
+  mountViewport,
+  bindViewportCssVars,
 } from '@telegram-apps/sdk'
 
 import './index.css'
@@ -30,8 +32,16 @@ try {
 
   disableVerticalSwipes()
 
+  mountViewport()
+
+  bindViewportCssVars()
+
   // 禁止向下滑动应用程序来隐藏应用程序
-  console.log('isVerticalEnabled----', isVerticalSwipesEnabled())
+  console.log(
+    'isVerticalEnabled----',
+    bindViewportCssVars(),
+    isVerticalSwipesEnabled()
+  )
 } catch (e) {}
 
 ReactDOM.render(

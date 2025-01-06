@@ -8,13 +8,7 @@ import { store } from '@/Store'
 import { ErrorBoundary } from '@/Components/ErrorBoundary'
 import '@/Theme/lib.js'
 import { init } from '@telegram-apps/sdk'
-import {
-  mountSwipeBehavior,
-  disableVerticalSwipes,
-  isVerticalSwipesEnabled,
-  mountViewport,
-  bindViewportCssVars,
-} from '@telegram-apps/sdk'
+import { mountSwipeBehavior, disableVerticalSwipes } from '@telegram-apps/sdk'
 
 import './index.css'
 
@@ -28,16 +22,9 @@ React.platformDef = process.env.platformDef
 try {
   init()
 
-  mountSwipeBehavior()
-
-  disableVerticalSwipes()
-
-  mountViewport()
-
-  bindViewportCssVars()
-
   // 禁止向下滑动应用程序来隐藏应用程序
-  console.log('isVerticalEnabled----', isVerticalSwipesEnabled())
+  mountSwipeBehavior()
+  disableVerticalSwipes()
 } catch (e) {}
 
 ReactDOM.render(

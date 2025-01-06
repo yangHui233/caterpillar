@@ -104,7 +104,7 @@ const Boosters = (props) => {
   }
   return (
     <CommonWrapper type="boosters">
-      <div className={styles.wrapper}>
+      <div className={`${styles.wrapper}`}>
         <div className={styles.ani}></div>
         <div className={styles.card}>
           <div className={styles.card_title}>Your Coins Balance</div>

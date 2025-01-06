@@ -70,11 +70,6 @@
     }
   }
 
-  function setViewportHeight() {
-    const vh = window.innerHeight * 0.01
-    document.documentElement.style.setProperty('--vh', `${vh}px`)
-  }
-
   function refreshRem() {
     var width = docEl.getBoundingClientRect().width
     if (width / dpr > 540) {
@@ -83,8 +78,6 @@
     var rem = width / 10
     docEl.style.fontSize = rem + 'px'
     flexible.rem = win.rem = rem
-
-    setViewportHeight()
   }
 
   win.addEventListener(

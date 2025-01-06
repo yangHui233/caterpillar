@@ -60,7 +60,7 @@ const Earn = (props) => {
   }
   return (
     <CommonWrapper type="earn">
-      <div className={`${styles.wrapper} scrollable`}>
+      <div className={`${styles.wrapper}`}>
         <div className={styles.top_wrapper}></div>
         {(earnInfo || []).map((item) => {
           return (

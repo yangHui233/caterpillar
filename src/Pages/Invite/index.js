@@ -8,6 +8,7 @@ import { inviteList } from '@/Helper/apis/invite'
 import { numSymbol } from '@/Utils/util'
 import CommonWrapper from '@/Components/CommonWrapper'
 import storeUtil from '@/Utils/store'
+import { jumpUrl } from '@/Utils/common'
 
 const Invite = (props = {}) => {
   let { inviteInfo = {} } = props
@@ -52,7 +53,8 @@ const Invite = (props = {}) => {
           })}
           title={`Friend list(${list ? list.length : 0})`}
           styleType={2}
-          isHideRight={true}>
+          isHideRight={true}
+          handleItemCli={() => jumpUrl('/Test1')}>
           <div className={styles.invite_coin}>
             Received:<div className={styles.coin}>{numSymbol(totalCoins)}</div>
           </div>

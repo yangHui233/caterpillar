@@ -25,6 +25,7 @@ try {
 
   // 禁止向下滑动应用程序来隐藏应用程序
   swipeBehavior.disableVertical()
+  console.log('isVerticalEnabled----', swipeBehavior.isVerticalEnabled)
 } catch (e) {}
 
 ReactDOM.render(

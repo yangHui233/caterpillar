@@ -19,6 +19,7 @@ import { MAX_CLICK } from '@/Contanst/baseConfig'
 import confetti from '@/Utils/confetti'
 import CommonWrapper from '@/Components/CommonWrapper'
 import { invitePort } from '@/Helper/apis/invite'
+import { hapticFeedbackImpactOccurred } from '@telegram-apps/sdk'
 
 const ANI_MAX = 8
 
@@ -53,14 +54,8 @@ const Index = (props) => {
 
   // 震动效果
   const handleVibrate = () => {
-    let vibrate =
-      window.navigator.vibrate ||
-      window.navigator.webkitVibrate ||
-      window.navigator.mozVibrate ||
-      window.navigator.msVibrate
-    console.log('用户点击', vibrate)
     try {
-      vibrate(200)
+      hapticFeedbackImpactOccurred('medium')
     } catch (err) {
       console.log('Vibration API not supported')
     }

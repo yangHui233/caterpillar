@@ -56,8 +56,8 @@ export const BOOSTERS_CONFIG = {
         'Purchased "Storage Time Boost". Now your storage time has increased.',
       upDateTemplete: 'XH',
       fieldConfig: {
-        current: 'currentPeriods',
-        next: 'nextPeriods',
+        current: 'currentPeriodsHour',
+        next: 'nextPeriodsHour',
       },
       upGradePort: 'upgrade/mining-storage',
     },

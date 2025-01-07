@@ -124,7 +124,7 @@ const Index = (props) => {
       color: '#fff',
       scalar,
       strokeStyle: '#FF4D00',
-      lineWidth: 2,
+      lineWidth: 3,
     })
     let { clientX, clientY } = event.changedTouches[0] || {}
 

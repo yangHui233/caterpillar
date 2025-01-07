@@ -935,12 +935,12 @@
 
     ctx.strokeText(text, x, y)
 
-    // ctx.fillRect(
-    //   x - ctx.lineWidth / 2,
-    //   y - ctx.lineWidth / 2,
-    //   ctx.measureText(text).width + ctx.lineWidth,
-    //   ctx.lineWidth
-    // )
+    ctx.fillRect(
+      x - ctx.lineWidth / 2,
+      y + ctx.lineWidth * 2 - ctx.lineWidth / 2,
+      ctx.measureText(text).width + ctx.lineWidth,
+      ctx.lineWidth
+    )
 
     ctx.fillText(text, x, y)
 

@@ -94,28 +94,55 @@
         padding-top: 190px;
         .dog{
           transform: scale(1.4);
+          position: relative;
+          animation: none;
+          .dog_heart{
+            position: absolute;
+            left: 40px;
+            transform: translateX(-50%);
+            top: -40px;
+            width: 750px;
+            height: 838px;
+            background: $heartAni;
+          }
         }
       }
       &.dog_ani3 {
         padding-top: 150px;
         .dog{
           transform: scale(1.2);
+          animation: none;
         }
       }
       &.dog_ani2 {
         padding-top: 100px;
         .dog{
           transform: scale(1.1);
+          animation: none;
         }
       }
       .dog {
         background: $dog;
         width: 280px;
         height: 412px;
-        transition: all 0.8s ease; /* 添加过渡效果 */
         transform: scale(1); /* 初始缩放比例 */
         transform-origin: center bottom;
+        transition: all 0.8s ease; /* 添加过渡效果 */
+        animation: scaleAni 1s infinite;
+        animation-delay: 0.5s;
       }
     }
   }
+}
+
+.a{
+  color: #FFF;
+
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: #FF4D00;
+  font-family: "Kemco Pixel";
+  font-size: 42px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }

@@ -23,7 +23,12 @@ const TopPlan = (props) => {
             <div className={style['num-current']}>
               <ScrollNumber
                 defaultSize={28}
-                number={numSymbol(add(currentFavor, mul(clickNum, favorBonus)))}
+                number={numSymbol(
+                  add(currentFavor, mul(clickNum, favorBonus)) >
+                    nextLevel.requiredFavor
+                    ? nextLevel.requiredFavor
+                    : add(currentFavor, mul(clickNum, favorBonus))
+                )}
               />
             </div>
             <div className={style['num-all']}>

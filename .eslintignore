@@ -1,3 +1,4 @@
 build/**
 src/lib.js
+src/Utils/confetti.js
 src/Config/index.js

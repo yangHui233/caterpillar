@@ -132,6 +132,21 @@ body>iframe[style*="2147483647"]:not([id="webpack-dev-server-client-overlay"]) {
   }
 }
 
+@keyframes scaleAni {
+  0% {
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(1);
+  }
+  51%{
+    transform: scale(0.97);
+  }
+  100% {
+    transform: scale(0.97);
+  }
+}
+
 @mixin farm_btn($width: 646px, $height: 110px, $position: relative) {
   width: $width;
   height: $height;

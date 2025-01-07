@@ -16,9 +16,11 @@ import { login } from '@/Helper/apis/login'
 import { getMining, getUserInfo, upDateClick } from '@/Helper/apis/home'
 import { add, div, mul, sub } from '@/Utils/math'
 import { MAX_CLICK } from '@/Contanst/baseConfig'
-import confetti from 'canvas-confetti'
+import confetti from '@/Utils/confetti'
 import CommonWrapper from '@/Components/CommonWrapper'
 import { invitePort } from '@/Helper/apis/invite'
+
+const ANI_MAX = 8
 
 const Index = (props) => {
   const interVal = useRef(null)
@@ -30,6 +32,8 @@ const Index = (props) => {
   const lastTouchTime = useRef(0)
 
   const [isShowLoading, setIsShowLoading] = React.useState(false)
+
+  const [isShowBotAni, setIsShowBotAni] = React.useState(false)
 
   // 是否正在请求更新数据，防止重复触发更新点击
   const isUpDating = useRef(false)
@@ -47,6 +51,21 @@ const Index = (props) => {
 
   let { requiredFavor } = nextLevel
 
+  // 震动效果
+  const handleVibrate = () => {
+    let vibrate =
+      window.navigator.vibrate ||
+      window.navigator.webkitVibrate ||
+      window.navigator.mozVibrate ||
+      window.navigator.msVibrate
+    console.log('用户点击', vibrate)
+    try {
+      vibrate(200)
+    } catch (err) {
+      console.log('Vibration API not supported')
+    }
+  }
+
   // 用户点击，生成的能量 金币 和好感度相关变化
   const handleCLi = (event) => {
     let { energyBonusLevelConf } = storeUtil.getUserInfo()
@@ -58,6 +77,8 @@ const Index = (props) => {
       currentFavor + favorBonus * clickNum >= requiredFavor
 
     if (isUnClick) return
+
+    handleVibrate()
 
     handleClickAni(event)
 
@@ -101,13 +122,14 @@ const Index = (props) => {
 
   // 处理点击动画
   const handleClickAni = async (event) => {
-    let scalar = 4
+    let scalar = 2.5
     var pineapple = confetti.shapeFromText({
       text: '+' + coinBonus,
-      fontFamily: 'SF Pixelate',
-      color: '#ffdd00',
-      fontStyle: 'bold',
+      fontFamily: `Kemco Pixel`,
+      color: '#fff',
       scalar,
+      strokeStyle: '#FF4D00',
+      lineWidth: 2,
     })
     let { clientX, clientY } = event.changedTouches[0] || {}
 
@@ -145,6 +167,21 @@ const Index = (props) => {
 
     lastTouchTime.current = currentTime
   }
+
+  // 设置最后爆炸动效逻辑
+  useEffect(() => {
+    if (aniClickNum > ANI_MAX && !isShowBotAni) {
+      setIsShowBotAni(ANI_MAX)
+      setTimeout(() => {
+        setIsShowBotAni(-1)
+      }, 760)
+    }
+
+    if (aniClickNum === 0) {
+      setIsShowBotAni(0)
+    }
+  }, [aniClickNum])
+
   // 页面加载，需要先获取用户信息，如果没有用户信息，需要登陆完成在进行页面展示
   useEffect(() => {
     handleLogin()
@@ -357,13 +394,15 @@ const Index = (props) => {
               />
             </div>
             <div className={styles.level}>
-              level {level || 0}/{maxLevel}
+              {level >= maxLevel && currentFavor >= nextLevel.requiredFavor
+                ? 'Max.Upgrade'
+                : `level ${level || 0}/${maxLevel}`}
             </div>
           </div>
 
           <div
             className={`${styles.dog_wrapper} ${
-              aniClickNum > 8
+              aniClickNum > ANI_MAX
                 ? styles.dog_ani4
                 : aniClickNum > 5
                 ? styles.dog_ani3
@@ -372,7 +411,13 @@ const Index = (props) => {
                 : ''
             }`}
             onTouchStart={handleCLi}>
-            <div className={`${styles.dog}`}></div>
+            <div className={`${styles.dog}`}>
+              {isShowBotAni === ANI_MAX ? (
+                <div className={styles.dog_heart}></div>
+              ) : (
+                ''
+              )}
+            </div>
           </div>
 
           <div className={styles.calendar} onClick={signInDialog}></div>

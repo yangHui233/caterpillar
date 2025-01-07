@@ -32,7 +32,7 @@ const SignDialog = (props = {}) => {
             canvas.confetti || confetti.create(canvas, { resize: true })
 
           canvas.confetti({
-            particleCount: 300,
+            particleCount: 500,
             angle: 90,
             spread: 180,
             origin: { y: 1.5, x: 0.5 },
@@ -59,7 +59,13 @@ const SignDialog = (props = {}) => {
                 index < signinDays ? style.active : ''
               } ${index == signinDays - 1 && ani ? style.ani : ''}`}
               key={index}>
-              {index < signinDays ? <div className={style.label}></div> : ''}
+              {index < signinDays ? (
+                <div className={style.label}>
+                  <div className={style.icon}></div>
+                </div>
+              ) : (
+                ''
+              )}
               {index == signinDays - 1 && ani ? (
                 <canvas width={'100%'} height={'100%'} ref={aniRef}></canvas>
               ) : (

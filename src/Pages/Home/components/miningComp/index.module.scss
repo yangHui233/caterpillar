@@ -59,6 +59,12 @@
       .progress_coin {
         margin-left: 16px;
       }
+      .loading{
+        width: 35px;
+        height: 35px;
+        background: $loading;
+        animation: rotate 2s linear infinite;
+      }
     }
     .progress_coin {
       width: 42px;

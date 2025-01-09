@@ -407,7 +407,7 @@ const Index = (props) => {
             }`}
             onTouchStart={handleCLi}>
             <div className={`${styles.dog}`}>
-              {isShowBotAni === ANI_MAX ? (
+              {aniClickNum > ANI_MAX ? (
                 <div className={styles.dog_heart}></div>
               ) : (
                 ''

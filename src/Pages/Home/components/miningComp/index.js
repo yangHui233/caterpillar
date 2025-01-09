@@ -8,14 +8,8 @@ import { getMining, getMiningReward, startMining } from '@/Helper/apis/home'
 import ScrollNumber from '@/Components/ScrollNumber'
 
 const MiningComp = (props) => {
-  const {
-    totalMiningEndTime,
-    startTime,
-    now,
-    totalReward,
-    availableReward,
-    maxStorageLevel,
-  } = props.miningInfo || {}
+  const { totalMiningEndTime, startTime, now, totalReward, availableReward } =
+    props.miningInfo || {}
 
   const [currentCoin, setCurrentCoin] = React.useState(0)
   const [subTime, setSubTime] = React.useState('')
@@ -31,14 +25,22 @@ const MiningComp = (props) => {
   }, [props.miningInfo.totalMiningEndTime])
 
   useEffect(() => {
-    let { availableReward, maxStorageLevel } = storeUtil.getMiningInfo()
-    setIsSplit(availableReward && maxStorageLevel > 1)
-  }, [props.miningInfo.availableReward, props.miningInfo.maxStorageLevel])
+    let { availableReward, totalMiningEndTime, now } = storeUtil.getMiningInfo()
+    setIsSplit(availableReward && sub(totalMiningEndTime, now) > 0)
+  }, [
+    props.miningInfo.availableReward,
+    props.miningInfo.totalMiningEndTime,
+    props.miningInfo.now,
+  ])
 
+  // 是否展示开始挖矿按钮
   const getIsShowStartBtn = () => {
     let { now, totalMiningEndTime, availableReward } =
       storeUtil.getMiningInfo() || {}
-    return !(sub(totalMiningEndTime, now) > 0) && !availableReward
+    return (
+      (sub(now, totalMiningEndTime) > 0 || !totalMiningEndTime) &&
+      !availableReward
+    )
   }
 
   // 开始挖矿
@@ -183,10 +185,16 @@ const MiningComp = (props) => {
               }%`,
             }}></div>
         </div>
-        {totalReward === availableReward && maxStorageLevel === 1 ? (
+        {!isMining && availableReward ? (
           <div className={styles.progress_full} onClick={handleGetReward}>
-            Harvestable <div className={styles.progress_coin}></div>{' '}
-            {availableReward}/{totalReward}
+            {isLoading ? (
+              <div className={styles.loading}></div>
+            ) : (
+              <>
+                Harvestable <div className={styles.progress_coin}></div>{' '}
+                {availableReward}/{availableReward}
+              </>
+            )}
           </div>
         ) : (
           <>

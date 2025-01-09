@@ -15,50 +15,41 @@ const MiningComp = (props) => {
   const [subTime, setSubTime] = React.useState('')
   const [isLoading, setIsLoading] = React.useState(false)
   const [isSplit, setIsSplit] = React.useState(false)
+  // 是否展示开始挖矿按钮
+  const [isShowStartBtn, setIsShowStartBtn] = React.useState(false)
   const interVal = React.useRef(null)
 
   useEffect(() => {
     handleMining()
+
     return () => {
       handleClearInterval()
     }
-  }, [props.miningInfo.totalMiningEndTime])
+  }, [props.miningInfo.totalMiningEndTime, isShowStartBtn])
 
   useEffect(() => {
     let { availableReward, totalMiningEndTime, now } = storeUtil.getMiningInfo()
+
     setIsSplit(availableReward && sub(totalMiningEndTime, now) > 0)
+
+    setIsShowStartBtn(
+      (sub(now, totalMiningEndTime) > 0 || !totalMiningEndTime) &&
+        !availableReward
+    )
   }, [
     props.miningInfo.availableReward,
     props.miningInfo.totalMiningEndTime,
     props.miningInfo.now,
   ])
 
-  // 是否展示开始挖矿按钮
-  const getIsShowStartBtn = () => {
-    let { now, totalMiningEndTime, availableReward } =
-      storeUtil.getMiningInfo() || {}
-    return (
-      (sub(now, totalMiningEndTime) > 0 || !totalMiningEndTime) &&
-      !availableReward
-    )
-  }
-
   // 开始挖矿
-  const hanleStartMining = async (type = '') => {
-    if (type === 'click' && isLoading) return
-    if (type === 'click') {
-      setIsLoading(true)
-    }
+  const hanleStartMining = async () => {
+    if (isLoading) return
+
+    setIsLoading(true)
 
     try {
-      let { totalMiningEndTime, now } = storeUtil.getMiningInfo()
-
-      if (sub(now, totalMiningEndTime) >= 0 || type === 'click') {
-        await startMining()
-      }
-    } catch (err) {}
-
-    try {
+      await startMining()
       await getMining()
     } catch (err) {}
 
@@ -67,7 +58,7 @@ const MiningComp = (props) => {
 
   const handleMining = () => {
     // 当前为展示开始挖矿按钮界面
-    if (getIsShowStartBtn()) {
+    if (isShowStartBtn) {
       handleClearInterval()
       return
     }
@@ -119,11 +110,11 @@ const MiningComp = (props) => {
         ...storeUtil.getUserInfo(),
         coins: coins,
       })
-      // 重新进行挖矿
-      hanleStartMining()
-    } catch (err) {
-      setIsLoading(false)
-    }
+      // 重新请求获取挖矿数据
+      await getMining()
+    } catch (err) {}
+
+    setIsLoading(false)
   }
 
   const handleClearInterval = () => {
@@ -164,7 +155,7 @@ const MiningComp = (props) => {
 
   const isMining = sub(totalMiningEndTime, now) > 0
 
-  return getIsShowStartBtn() ? (
+  return isShowStartBtn ? (
     <div
       className={`${styles.progress_wrapper} ${styles.progress_start}`}
       onClick={hanleStartMining.bind(null, 'click')}>

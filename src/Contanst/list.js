@@ -11,8 +11,8 @@ export const BOOSTERS_CONFIG = {
         'Purchased "Favorability Boost". Now your earnings per click limit has been increased.',
       upDateTemplete: '+X',
       fieldConfig: {
-        current: 'currentBonus',
-        next: 'nextBonus',
+        current: 'currentBonus.coinBonus',
+        next: 'nextBonus.coinBonus',
       },
       upGradePort: 'upgrade/energy-bonus',
     },

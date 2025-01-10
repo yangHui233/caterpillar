@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import styles from './index.module.scss'
-import { numSymbol, toPercent } from '@/Utils/util'
+import { getNestedProperty, numSymbol, toPercent } from '@/Utils/util'
 import TabList from '@/Components/TabList'
 import { BOOSTERS_CONFIG } from '@/Contanst/list'
 import {
@@ -129,8 +129,8 @@ const Boosters = (props) => {
                   : upgradeInfo.coins < upgradeCost
                   ? 'lock'
                   : '',
-                currentVal: currentData[fieldConfig.current],
-                nextVal: currentData[fieldConfig.next],
+                currentVal: getNestedProperty(currentData, fieldConfig.current),
+                nextVal: getNestedProperty(currentData, fieldConfig.next),
               }
             })
             .filter(Boolean)}

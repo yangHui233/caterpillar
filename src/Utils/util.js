@@ -45,3 +45,28 @@ export const toPercent = (num, fixed = 0) => {
   }
   return '0%'
 }
+
+// 获取对象中的属性
+export function getNestedProperty(obj, keys) {
+  if (!obj || !keys) return ''
+
+  // 初始化当前对象为传入的对象
+  let currentObj = obj
+
+  if (typeof keys === 'string') {
+    keys = keys.split('.')
+  }
+  // 遍历所有的键名
+  for (let key of keys) {
+    // 如果当前对象中有这个键名，则更新当前对象
+    if (currentObj[key] !== undefined) {
+      currentObj = currentObj[key]
+    } else {
+      // 如果某一层级不存在，返回 undefined
+      return undefined
+    }
+  }
+
+  // 返回最终访问到的值
+  return currentObj
+}

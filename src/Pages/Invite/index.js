@@ -38,7 +38,8 @@ const Invite = (props = {}) => {
           <div className={styles.title}>lnvite frens!</div>
           <div className={styles.nums}>FRENS</div>
           <div className={styles.hit}>
-            You'll get {inviteRewardCoins} Coins for every invite,
+            You'll get <span>{numSymbol(inviteRewardCoins)}</span> Coins for
+            every invite,
           </div>
         </div>
         <TabList

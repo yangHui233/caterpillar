@@ -38,6 +38,8 @@ const Index = (props) => {
 
   const [isShowBotAni, setIsShowBotAni] = React.useState(false)
 
+  const [isIntervaling, setIsIntervaling] = React.useState(false)
+
   // 是否正在请求更新数据，防止重复触发更新点击
   const isUpDating = useRef(false)
 
@@ -224,8 +226,13 @@ const Index = (props) => {
 
   // 能量自动增长逻辑
   const handleInterval = () => {
+    if (isIntervaling) {
+      return
+    }
+    setIsIntervaling(true)
     handleClearInterval()
     interVal.current = setInterval(() => {
+      setIsIntervaling(false)
       let {
         currentEnergy = 0,
         rate,

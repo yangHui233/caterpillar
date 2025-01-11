@@ -7,6 +7,7 @@ import UseInterval from '@/CommonUse/interVal'
 import Button from '@/Components/Button'
 import { completeTask, getTaskList } from '@/Helper/apis/earn'
 import { openTelegramLink, openLink } from '@telegram-apps/sdk'
+import { numSymbol } from '@/Utils/util'
 
 const CONFIG = {
   x: {
@@ -75,7 +76,7 @@ const ShareDialog = (props = {}) => {
   return (
     <div className={style.wrapper}>
       <div className={`${style.icon} ${style[icon]}`}></div>
-      <div className={style.coin_wrapper}>{rewardCoins}</div>
+      <div className={style.coin_wrapper}>{numSymbol(rewardCoins)}</div>
       <div className={style.title}>{CONFIG[shareType].title}</div>
       <div className={style.join} onClick={handleJoin}>
         JOIN

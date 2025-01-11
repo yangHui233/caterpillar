@@ -185,6 +185,8 @@ const Index = (props) => {
 
   // 页面加载，需要先获取用户信息，如果没有用户信息，需要登陆完成在进行页面展示
   useEffect(() => {
+    handleClearInterval()
+
     handleLogin()
 
     return () => {
@@ -223,33 +225,35 @@ const Index = (props) => {
   // 能量自动增长逻辑
   const handleInterval = () => {
     handleClearInterval()
-    interVal.current = setInterval(() => {
-      let {
-        currentEnergy = 0,
-        rate,
-        energyCost,
-        energyCap,
-      } = storeUtil.getEnergyInfo()
-      currentEnergy = currentEnergy || 0
-      let clickNum = storeUtil.getClickNum()
-      let clickConsume = mul(clickNum, energyCost)
-      let currentEnergyCap = add(energyCap, clickConsume)
-      if (isEmpty(currentEnergy) || isEmpty(rate)) {
-        handleClearInterval()
-        return
-      }
-      let addNum = add(currentEnergy, rate)
-      let currentEnergyAfter =
-        addNum >= currentEnergyCap ? sub(energyCap, clickConsume) : addNum
+    setTimeout(() => {
+      interVal.current = setInterval(() => {
+        let {
+          currentEnergy = 0,
+          rate,
+          energyCost,
+          energyCap,
+        } = storeUtil.getEnergyInfo()
+        currentEnergy = currentEnergy || 0
+        let clickNum = storeUtil.getClickNum()
+        let clickConsume = mul(clickNum, energyCost)
+        let currentEnergyCap = add(energyCap, clickConsume)
+        if (isEmpty(currentEnergy) || isEmpty(rate)) {
+          handleClearInterval()
+          return
+        }
+        let addNum = add(currentEnergy, rate)
+        let currentEnergyAfter =
+          addNum >= currentEnergyCap ? sub(energyCap, clickConsume) : addNum
 
-      storeUtil.setEnergyInfo({
-        ...storeUtil.getEnergyInfo(),
-        currentEnergy: currentEnergyAfter,
-      })
-      if (currentEnergyAfter === sub(energyCap, clickConsume)) {
-        handleClearInterval()
-      }
-    }, 1000)
+        storeUtil.setEnergyInfo({
+          ...storeUtil.getEnergyInfo(),
+          currentEnergy: currentEnergyAfter,
+        })
+        if (currentEnergyAfter === sub(energyCap, clickConsume)) {
+          handleClearInterval()
+        }
+      }, 1000)
+    })
   }
 
   const handleDateInit = (type, callback = () => {}) => {

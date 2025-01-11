@@ -50,7 +50,9 @@ const Boosters = (props) => {
         // 请求接口购买升级
         storeUtil.setIsBuying(true)
 
-        const handleUpDate = (res) => {
+        try {
+          let res = await handleUpgrade(item.upGradePort)
+
           // 更新数据
           getUpgradeList()
           storeUtil.setIsBuying(false)
@@ -95,9 +97,7 @@ const Boosters = (props) => {
               coinBonus: bonus.coinBonus,
             })
           }
-        }
-        try {
-          let res = await handleUpgrade(item.upGradePort)
+
           if (res.levelUp && res.levelUp.coins) {
             let { coins, oldLevel, newLevel } = res.levelUp || {}
             updateDialog({
@@ -109,8 +109,6 @@ const Boosters = (props) => {
               handleClose: async () => {
                 storeUtil.setIsUpdateLoading(true)
                 try {
-                  // 更新数据
-                  handleUpDate(res)
                   // 更新首页相关数据
                   await getUserInfo()
                 } catch (err) {}
@@ -120,7 +118,6 @@ const Boosters = (props) => {
             })
             return
           }
-          handleUpDate(res)
         } catch (err) {
           storeUtil.setIsBuying(false)
         }

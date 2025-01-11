@@ -43,8 +43,8 @@ export const signInDialog = (params = {}) => {
 export const updateDialog = (params = {}) => {
   $.dialog({
     dialogName: 'updateDialog',
-    handleCancel: () => {
-      $.hide('dialog')
+    onMaskClick: () => {
+      params.handleClose && params.handleClose()
     },
     ...params,
   })

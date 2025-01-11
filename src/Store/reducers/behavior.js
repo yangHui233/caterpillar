@@ -25,6 +25,11 @@ const behavior = (
         ...state,
         shareClickTime: action.shareClickTime,
       }
+    case 'SET_ISUPDATELOADING':
+      return {
+        ...state,
+        isUpdateLoading: action.isUpdateLoading,
+      }
     case 'SET_BEHAVIOR_PROPS':
       return {
         ...state,

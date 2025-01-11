@@ -36,6 +36,7 @@ const YouToBeDialog = (props = {}) => {
       await completeTask(
         {
           taskId: id,
+          code: value,
         },
         {
           isHideErrorToast: true,
@@ -127,11 +128,17 @@ const YouToBeDialog = (props = {}) => {
           </div>
 
           <input
+            // disabled={!startFlag}
             className={`${style.inputs}`}
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            placeholder="Enter the code"
+            placeholder={startFlag ? 'Enter the code' : 'Get the code'}
             ref={inputRef}
+            onClick={() => {
+              if (!startFlag) {
+                handleToJump()
+              }
+            }}
           />
 
           {errorMsg ? <div className={style.tip}>{errorMsg}</div> : ''}

@@ -11,6 +11,7 @@ import {
   showLoading,
   updateDialog,
   signInDialog,
+  showErrorDialog,
 } from '@/Components/Global/export'
 import { login } from '@/Helper/apis/login'
 import { getMining, getUserInfo, upDateClick } from '@/Helper/apis/home'
@@ -20,6 +21,7 @@ import confetti from '@/Utils/confetti'
 import CommonWrapper from '@/Components/CommonWrapper'
 import { invitePort } from '@/Helper/apis/invite'
 import { hapticFeedbackImpactOccurred } from '@telegram-apps/sdk'
+import $ from '@/Components/Global'
 
 const ANI_MAX = 8
 
@@ -67,9 +69,13 @@ const Index = (props) => {
     let { currentEnergy } = storeUtil.getEnergyInfo()
     let { favorBonus, energyCost } = energyBonusLevelConf || {}
     // 能量消耗完或者好感度到最大值，均不可再点击
+    let isEnegyNotEnough = currentEnergy - energyCost * clickNum < energyCost
     let isUnClick =
-      currentEnergy - energyCost * clickNum <= 0 ||
-      currentFavor + favorBonus * clickNum >= requiredFavor
+      isEnegyNotEnough || currentFavor + favorBonus * clickNum >= requiredFavor
+
+    if (isEnegyNotEnough) {
+      showErrorDialog('Energy not enough')
+    }
 
     if (isUnClick) return
 
@@ -246,7 +252,7 @@ const Index = (props) => {
     }, 1000)
   }
 
-  const handleDateInit = (type) => {
+  const handleDateInit = (type, callback = () => {}) => {
     Promise.all([getUserInfo(), getMining()])
       .then(() => {
         setIsShowLoading(false)
@@ -260,6 +266,9 @@ const Index = (props) => {
       })
       .catch(() => {
         isUpDating.current = false
+      })
+      .finally(() => {
+        callback && callback()
       })
   }
 
@@ -302,13 +311,6 @@ const Index = (props) => {
         clicks: postNum,
       })
 
-      let currentClickNum =
-        sub(storeUtil.getClickNum(), postNum) > 0
-          ? sub(storeUtil.getClickNum(), postNum)
-          : 0
-
-      storeUtil.setClickNum(currentClickNum)
-
       clearInterval(interVal.current)
 
       let { currentEnergy, energyCap, coins, currentFavor, isNewLevel } = res
@@ -319,13 +321,26 @@ const Index = (props) => {
         updateDialog({
           level,
           nextLevel,
+          handleClose: () => {
+            storeUtil.setIsUpdateLoading(true)
+            // 清除本地点击 清除能量定時器
+            storeUtil.setClickNum(0)
+            // 更新页面数据 重新开启定时器
+            handleDateInit(type, () => {
+              storeUtil.setIsUpdateLoading(false)
+              $.hide('dialog')
+            })
+          },
         })
-        // 清除本地点击
-        storeUtil.setClickNum(0)
-        // 更新页面数据 重新开启定时器
-        handleDateInit(type)
         return
       }
+
+      let currentClickNum =
+        sub(storeUtil.getClickNum(), postNum) > 0
+          ? sub(storeUtil.getClickNum(), postNum)
+          : 0
+
+      storeUtil.setClickNum(currentClickNum)
 
       if (type === 'init') {
         handleDateInit(type)

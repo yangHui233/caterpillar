@@ -84,3 +84,10 @@ export const setInviteInfo = (inviteInfo = {}) => {
     inviteInfo,
   }
 }
+
+export const setIsUpdateLoading = (isUpdateLoading = false) => {
+  return {
+    type: 'SET_ISUPDATELOADING',
+    isUpdateLoading,
+  }
+}

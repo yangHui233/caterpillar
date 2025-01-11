@@ -3,15 +3,24 @@ import { connect } from 'react-redux'
 import $ from '@/Components/Global'
 import style from './index.module.scss'
 import { numSymbol } from '@/Utils/util'
+import storeUtil from '@/Utils/store'
 
 const SignDialog = (props = {}) => {
   const {
     handleConfirm = () => {
-      $.hide('dialog')
+      props.handleClose && props.handleClose()
     },
     level,
     nextLevel = {},
+    isUpdateLoading,
   } = props
+
+  useEffect(() => {
+    storeUtil.setIsUpdateLoading(false)
+    return () => {
+      storeUtil.setIsUpdateLoading(false)
+    }
+  }, [])
 
   return (
     <div className={style.wrapper}>
@@ -41,13 +50,19 @@ const SignDialog = (props = {}) => {
       </div>
 
       <div className={style.btn} onClick={handleConfirm}>
-        CONTINUE PLAYING
+        {isUpdateLoading ? (
+          <div className={style.loading}></div>
+        ) : (
+          'CONTINUE PLAYING'
+        )}
       </div>
     </div>
   )
 }
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    isUpdateLoading: state.behavior.isUpdateLoading,
+  }
 }
 
 export default connect(mapStateToProps)(SignDialog)

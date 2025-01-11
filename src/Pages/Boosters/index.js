@@ -8,6 +8,7 @@ import {
   buyToolsDialog,
   hideLoading,
   showLoading,
+  updateDialog,
 } from '@/Components/Global/export'
 import $ from '@/Components/Global'
 import Toast from '@/Components/Toast'
@@ -15,11 +16,13 @@ import storeUtil from '@/Utils/store'
 import { UNUPDATE_CONFIG } from '@/Contanst/update'
 import { getUpgradeList, handleUpgrade } from '@/Helper/apis/boosters'
 import CommonWrapper from '@/Components/CommonWrapper'
+import { getUserInfo } from '@/Helper/apis/home'
 
 const Boosters = (props) => {
   let { upgradeInfo } = props
 
   useEffect(() => {
+    storeUtil.setIsBuying(false)
     getUpgradeList()
   }, [])
 
@@ -46,8 +49,8 @@ const Boosters = (props) => {
         if (storeUtil.getIsBuying()) return
         // 请求接口购买升级
         storeUtil.setIsBuying(true)
-        try {
-          let res = await handleUpgrade(item.upGradePort)
+
+        const handleUpDate = (res) => {
           // 更新数据
           getUpgradeList()
           storeUtil.setIsBuying(false)
@@ -92,6 +95,32 @@ const Boosters = (props) => {
               coinBonus: bonus.coinBonus,
             })
           }
+        }
+        try {
+          let res = await handleUpgrade(item.upGradePort)
+          if (res.levelUp && res.levelUp.coins) {
+            let { coins, oldLevel, newLevel } = res.levelUp || {}
+            updateDialog({
+              level: oldLevel,
+              nextLevel: {
+                level: newLevel,
+                levelUpCoins: coins,
+              },
+              handleClose: async () => {
+                storeUtil.setIsUpdateLoading(true)
+                try {
+                  // 更新数据
+                  handleUpDate(res)
+                  // 更新首页相关数据
+                  await getUserInfo()
+                } catch (err) {}
+                storeUtil.setIsUpdateLoading(false)
+                $.hide('dialog')
+              },
+            })
+            return
+          }
+          handleUpDate(res)
         } catch (err) {
           storeUtil.setIsBuying(false)
         }

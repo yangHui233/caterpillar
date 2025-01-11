@@ -10,6 +10,7 @@ import {
   setShareClickTime,
   setEarnInfo,
   setInviteInfo,
+  setIsUpdateLoading,
 } from '@/Store/action'
 const storeUtil = {
   setToken(val) {
@@ -71,6 +72,12 @@ const storeUtil = {
   },
   getInviteInfo() {
     return store.getState().user.inviteInfo || {}
+  },
+  setIsUpdateLoading(val) {
+    store.dispatch(setIsUpdateLoading(val))
+  },
+  getIsUpdateLoading() {
+    return store.getState().behavior.isUpdateLoading
   },
 }
 

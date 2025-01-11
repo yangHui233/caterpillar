@@ -19,28 +19,33 @@ const UseInterval = (props) => {
   const [startFlag, setStartFlag] = useState(false)
   const [leftTime, setLeftTime] = useState(0)
 
+  const intervalFun = () => {
+    let startFlag = isStart()
+    setStartFlag(startFlag)
+    if (!startFlag) {
+      return clearInterval(interVal.current)
+    }
+    let isFinished = isStop()
+    if (isFinished) {
+      clearInterval(interVal.current)
+      setLeftTime(0)
+    } else {
+      let subTime = Math.ceil(
+        sub(delayTime, div(sub(new Date().getTime(), clickTime), 1000))
+      )
+      setLeftTime(`00:${subTime < 10 ? `0${subTime}` : subTime}`)
+    }
+    setIsFinished(isFinished)
+  }
+
   useEffect(() => {
     if (interVal.current) {
       clearInterval(interVal.current)
     }
+
+    intervalFun()
     interVal.current = setInterval(() => {
-      let startFlag = isStart()
-      setStartFlag(startFlag)
-      if (!startFlag) {
-        return clearInterval(interVal.current)
-      }
-      let isFinished = isStop()
-      if (isFinished) {
-        setStartFlag(false)
-        clearInterval(interVal.current)
-        setLeftTime(0)
-      } else {
-        let subTime = Math.ceil(
-          sub(delayTime, div(sub(new Date().getTime(), clickTime), 1000))
-        )
-        setLeftTime(`00:${subTime < 10 ? `0${subTime}` : subTime}`)
-      }
-      setIsFinished(isFinished)
+      intervalFun()
     }, 1000)
 
     return () => {

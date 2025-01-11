@@ -66,7 +66,9 @@ const TabList = (props) => {
                   ''
                 ) : (
                   <div
-                    className={`${style['tab-r']} ${style[item.status]}`}></div>
+                    className={`${style['tab-r']} ${style[item.status]} ${
+                      item.completed ? style['tab-r-finish'] : ''
+                    }`}></div>
                 )}
               </div>
             )

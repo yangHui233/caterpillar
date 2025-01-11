@@ -121,27 +121,39 @@
     }
   }
 
-  .inputs {
-    border-radius: 20px;
-    border: 2px solid #f19bff;
-    background: #fff;
-    width: 690px;
-    height: 100px;
+  .input-wrapper{
+    position: relative;
     margin: 10px auto 80px;
-    padding: 34px;
-    color: #142443;
-    font-family: 'SF Pixelate';
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: -2px;
-    &::placeholder {
-      color: rgba(20, 36, 67, 0.3);
+    .inputs {
+      border-radius: 20px;
+      border: 2px solid #f19bff;
+      background: #fff;
+      width: 690px;
+      height: 100px;
+      padding: 34px;
+      color: #142443;
       font-family: 'SF Pixelate';
       font-size: 28px;
       font-weight: 700;
       letter-spacing: -2px;
+      &::placeholder {
+        color: rgba(20, 36, 67, 0.3);
+        font-family: 'SF Pixelate';
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: -2px;
+      }
+    }
+    .input-wrapper-cover{
+      opacity: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      position: absolute;
     }
   }
+
 
   .coin_wrapper {
     padding: 48px 0 43px;

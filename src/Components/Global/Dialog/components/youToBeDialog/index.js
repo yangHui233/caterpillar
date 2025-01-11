@@ -127,19 +127,27 @@ const YouToBeDialog = (props = {}) => {
             </div>
           </div>
 
-          <input
-            // disabled={!startFlag}
-            className={`${style.inputs}`}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            placeholder={startFlag ? 'Enter the code' : 'Get the code'}
-            ref={inputRef}
-            onClick={() => {
-              if (!startFlag) {
-                handleToJump()
-              }
-            }}
-          />
+          <div className={style['input-wrapper']}>
+            {!startFlag ? (
+              <div
+                className={style['input-wrapper-cover']}
+                onClick={() => {
+                  if (!startFlag) {
+                    handleToJump()
+                  }
+                }}></div>
+            ) : (
+              ''
+            )}
+            <input
+              disabled={!startFlag}
+              className={`${style.inputs}`}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              placeholder={startFlag ? 'Enter the code' : 'Get the code'}
+              ref={inputRef}
+            />
+          </div>
 
           {errorMsg ? <div className={style.tip}>{errorMsg}</div> : ''}
 

@@ -11,8 +11,8 @@ import {
   showLoading,
   updateDialog,
   signInDialog,
-  showErrorDialog,
 } from '@/Components/Global/export'
+import Toast from '@/Components/Toast'
 import { login } from '@/Helper/apis/login'
 import { getMining, getUserInfo, upDateClick } from '@/Helper/apis/home'
 import { add, div, mul, sub } from '@/Utils/math'
@@ -74,7 +74,7 @@ const Index = (props) => {
       isEnegyNotEnough || currentFavor + favorBonus * clickNum >= requiredFavor
 
     if (isEnegyNotEnough) {
-      showErrorDialog('Energy not enough')
+      Toast.info('', 'Energy not enough')
     }
 
     if (isUnClick) return

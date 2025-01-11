@@ -132,9 +132,7 @@ const YouToBeDialog = (props = {}) => {
               <div
                 className={style['input-wrapper-cover']}
                 onClick={() => {
-                  if (!startFlag) {
-                    handleToJump()
-                  }
+                  handleToJump()
                 }}></div>
             ) : (
               ''

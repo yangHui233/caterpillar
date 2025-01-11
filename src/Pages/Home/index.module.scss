@@ -123,9 +123,12 @@
         }
       }
       .dog {
-        background: $dog;
-        width: 280px;
-        height: 412px;
+        // background: $dog;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 415px;
+        height: 454px;
         transform: scale(1); /* 初始缩放比例 */
         transform-origin: center bottom;
         transition: all 0.8s ease; /* 添加过渡效果 */

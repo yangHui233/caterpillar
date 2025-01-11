@@ -421,7 +421,16 @@ const Index = (props) => {
                 : ''
             }`}
             onTouchStart={handleCLi}>
-            <div className={`${styles.dog}`}>
+            <div
+              className={`${styles.dog}`}
+              style={{
+                backgroundImage:
+                  level > 0 && level <= maxLevel
+                    ? 'url(' +
+                      require('@/Theme/assets/' + level + '.png').default +
+                      ')'
+                    : 'none',
+              }}>
               {aniClickNum > ANI_MAX ? (
                 <div className={styles.dog_heart}></div>
               ) : (

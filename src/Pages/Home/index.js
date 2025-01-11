@@ -225,35 +225,33 @@ const Index = (props) => {
   // 能量自动增长逻辑
   const handleInterval = () => {
     handleClearInterval()
-    setTimeout(() => {
-      interVal.current = setInterval(() => {
-        let {
-          currentEnergy = 0,
-          rate,
-          energyCost,
-          energyCap,
-        } = storeUtil.getEnergyInfo()
-        currentEnergy = currentEnergy || 0
-        let clickNum = storeUtil.getClickNum()
-        let clickConsume = mul(clickNum, energyCost)
-        let currentEnergyCap = add(energyCap, clickConsume)
-        if (isEmpty(currentEnergy) || isEmpty(rate)) {
-          handleClearInterval()
-          return
-        }
-        let addNum = add(currentEnergy, rate)
-        let currentEnergyAfter =
-          addNum >= currentEnergyCap ? sub(energyCap, clickConsume) : addNum
+    interVal.current = setInterval(() => {
+      let {
+        currentEnergy = 0,
+        rate,
+        energyCost,
+        energyCap,
+      } = storeUtil.getEnergyInfo()
+      currentEnergy = currentEnergy || 0
+      let clickNum = storeUtil.getClickNum()
+      let clickConsume = mul(clickNum, energyCost)
+      let currentEnergyCap = add(energyCap, clickConsume)
+      if (isEmpty(currentEnergy) || isEmpty(rate)) {
+        handleClearInterval()
+        return
+      }
+      let addNum = add(currentEnergy, rate)
+      let currentEnergyAfter =
+        addNum >= currentEnergyCap ? sub(energyCap, clickConsume) : addNum
 
-        storeUtil.setEnergyInfo({
-          ...storeUtil.getEnergyInfo(),
-          currentEnergy: currentEnergyAfter,
-        })
-        if (currentEnergyAfter === sub(energyCap, clickConsume)) {
-          handleClearInterval()
-        }
-      }, 1000)
-    })
+      storeUtil.setEnergyInfo({
+        ...storeUtil.getEnergyInfo(),
+        currentEnergy: currentEnergyAfter,
+      })
+      if (currentEnergyAfter === sub(energyCap, clickConsume)) {
+        handleClearInterval()
+      }
+    }, 1000)
   }
 
   const handleDateInit = (type, callback = () => {}) => {
@@ -326,11 +324,13 @@ const Index = (props) => {
           nextLevel,
           handleClose: () => {
             storeUtil.setIsUpdateLoading(true)
-            // 清除本地点击 清除能量定時器
-            storeUtil.setClickNum(0)
             // 更新页面数据 重新开启定时器
-
             handleDateInit(type, () => {
+              // 清除本地点击
+              setTimeout(() => {
+                storeUtil.setClickNum(0)
+              })
+
               storeUtil.setIsUpdateLoading(false)
               $.hide('dialog')
             })

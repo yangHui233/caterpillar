@@ -261,6 +261,7 @@ const Index = (props) => {
       .then(() => {
         setIsShowLoading(false)
         isUpDating.current = false
+
         handleInterval()
 
         // 进入页面的情况下，若未签到，则弹出签到弹窗
@@ -315,8 +316,6 @@ const Index = (props) => {
         clicks: postNum,
       })
 
-      clearInterval(interVal.current)
-
       let { currentEnergy, energyCap, coins, currentFavor, isNewLevel } = res
 
       // 需要升级
@@ -330,6 +329,7 @@ const Index = (props) => {
             // 清除本地点击 清除能量定時器
             storeUtil.setClickNum(0)
             // 更新页面数据 重新开启定时器
+
             handleDateInit(type, () => {
               storeUtil.setIsUpdateLoading(false)
               $.hide('dialog')
@@ -368,8 +368,6 @@ const Index = (props) => {
       })
 
       isUpDating.current = false
-
-      handleInterval()
     } catch (err) {
       isUpDating.current = false
       handleDateInit(type)

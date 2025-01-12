@@ -43,6 +43,9 @@ export const signInDialog = (params = {}) => {
 export const updateDialog = (params = {}) => {
   $.dialog({
     dialogName: 'updateDialog',
+    handleCancel: () => {
+      params.handleClose && params.handleClose()
+    },
     ...params,
   })
 }

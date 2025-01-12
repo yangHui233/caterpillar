@@ -26,12 +26,32 @@ const SignDialog = (props = {}) => {
     <div className={style.wrapper}>
       <div className={style.update}>
         <div className={style.update_item}>
-          <div className={style.update_item_icon}></div>
+          <div
+            className={style.update_item_icon}
+            style={{
+              backgroundImage:
+                level > 0 && level <= 30
+                  ? 'url(' +
+                    require('@/Theme/assets/update/before/' + level + '.png')
+                      .default +
+                    ')'
+                  : 'none',
+            }}></div>
           <div className={style.update_item_hit}>LVL {level}</div>
         </div>
         <div className={style.link}></div>
         <div className={style.update_item}>
-          <div className={style.update_item_icon}></div>
+          <div
+            className={style.update_item_icon}
+            style={{
+              backgroundImage:
+                level > 0 && level <= 30
+                  ? 'url(' +
+                    require('@/Theme/assets/update/after/' + level + '.png')
+                      .default +
+                    ')'
+                  : 'none',
+            }}></div>
           <div className={style.update_item_hit}>LVL {nextLevel.level}</div>
         </div>
       </div>

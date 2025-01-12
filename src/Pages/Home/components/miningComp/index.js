@@ -50,6 +50,9 @@ const MiningComp = (props) => {
 
     try {
       await startMining()
+    } catch (err) {}
+
+    try {
       await getMining()
     } catch (err) {}
 

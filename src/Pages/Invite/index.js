@@ -12,7 +12,7 @@ import { jumpUrl } from '@/Utils/common'
 
 const Invite = (props = {}) => {
   let { inviteInfo = {} } = props
-  let { list, totalCoins = 0, inviteRewardCoins = '' } = inviteInfo
+  let { list, totalCoins = 0, inviteRewardCoins = '', total = 0 } = inviteInfo
 
   useEffect(() => {
     handleGetList()
@@ -36,7 +36,7 @@ const Invite = (props = {}) => {
       <div className={styles.wrapper}>
         <div className={styles.top_wrapper}>
           <div className={styles.title}>lnvite frens!</div>
-          <div className={styles.nums}>FRENS</div>
+          <div className={styles.nums}>{total} FRENS</div>
           <div className={styles.hit}>
             You'll get <span>{numSymbol(inviteRewardCoins)}</span> Coins for
             every invite,

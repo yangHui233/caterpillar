@@ -8,8 +8,14 @@ import { getMining, getMiningReward, startMining } from '@/Helper/apis/home'
 import ScrollNumber from '@/Components/ScrollNumber'
 
 const MiningComp = (props) => {
-  const { totalMiningEndTime, startTime, now, totalReward, availableReward } =
-    props.miningInfo || {}
+  const {
+    totalMiningEndTime,
+    startTime,
+    now,
+    totalReward,
+    availableReward,
+    claimedReward,
+  } = props.miningInfo || {}
 
   const [currentCoin, setCurrentCoin] = React.useState(0)
   const [subTime, setSubTime] = React.useState('')
@@ -197,10 +203,12 @@ const MiningComp = (props) => {
               <div className={styles.progress_hit}>
                 <ScrollNumber
                   defaultSize={isSplit ? 24 : 28}
-                  number={currentCoin}
+                  number={sub(currentCoin, claimedReward)}
                 />
 
-                <div className={styles.progress_hit1}>/{totalReward}</div>
+                <div className={styles.progress_hit1}>
+                  /{sub(totalReward, claimedReward)}
+                </div>
               </div>
             </div>
             {subTime ? (

@@ -180,7 +180,8 @@ const MiningComp = (props) => {
               width: `${
                 !isMining
                   ? 100
-                  : (sub(now, startTime) / sub(totalMiningEndTime, startTime)) *
+                  : (sub(currentCoin, claimedReward) /
+                      sub(totalReward, claimedReward)) *
                     100
               }%`,
             }}></div>

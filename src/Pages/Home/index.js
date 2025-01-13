@@ -414,6 +414,7 @@ const Index = (props) => {
                 number={numSymbol(add(coins, mul(coinBonus, clickNum)))}
               />
             </div>
+
             <div className={styles.level}>
               {level >= maxLevel && currentFavor >= nextLevel.requiredFavor
                 ? 'Max.Upgrade'

@@ -98,8 +98,31 @@ const Confetti = () => {
           margin: '10px auto',
         }}></div>
       <canvas width={200} height={50} ref={aniRef}></canvas> */}
-      <div className={style.coin}>
-        <ScrollNumber defaultSize={52} number={numSymbol(1258960574)} />
+      {/* <div className={style.coin1} data-content={'1234344'}>
+        1234344
+      </div> */}
+
+      <div class={style.text_content}>
+        <svg class={style.text_wrapper}>
+          <text
+            class={style.coin}
+            x="0"
+            y="4"
+            alignment-baseline="text-before-edge"
+            text-anchor="start">
+            19234
+          </text>
+        </svg>
+        <svg class={style.text_wrapper}>
+          <text
+            class={style.coin}
+            x="0"
+            y="4"
+            alignment-baseline="text-before-edge"
+            text-anchor="start">
+            19234
+          </text>
+        </svg>
       </div>
     </>
   )

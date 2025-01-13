@@ -2,13 +2,52 @@
     font-size: 20px;
 }
 .coin{
+    fill: #fffb00;
+    font-family: 'Kemco Pixel';
+    font-weight: 700;
+    font-size: 52px;
+    stroke:#000;
+    stroke-width: 8px;
+    paint-order: stroke;
+    stroke-linejoin: round;
+    // @include fontBorder(10px);
+}
+.text_content{
     display: flex;
     align-items: center;
     justify-content: center;
-    vertical-align: middle;
-    color: #fffb00;
-    font-family: 'Kemco Pixel';
-    font-weight: 700;
-    font-size: 152px;
-    @include fontBorder(10px);
 }
+.text_wrapper{
+    // height: 54px;
+    // width: fit-content;
+    // display: inline-block;
+}
+
+.coin1{
+    color: transparent;
+    background: black;
+    -webkit-background-clip: text;
+    font-family: 'SF Pixelate';
+    background-clip: text;
+    font-weight: 700;
+    font-style: italic;
+    position: relative;
+    font-size: 36px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    &::before {
+        content: attr(data-content);
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 36px;
+        font-weight: 700;
+        color: #fffb00;
+        z-index: 1;
+        -webkit-text-stroke: 2px black;
+    }
+}
+

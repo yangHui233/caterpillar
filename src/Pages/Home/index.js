@@ -67,6 +67,7 @@ const Index = (props) => {
 
   // 用户点击，生成的能量 金币 和好感度相关变化
   const handleCLi = (event) => {
+    console.log('event', event)
     let { energyBonusLevelConf } = storeUtil.getUserInfo()
     let { currentEnergy } = storeUtil.getEnergyInfo()
     let { favorBonus, energyCost } = energyBonusLevelConf || {}
@@ -134,7 +135,8 @@ const Index = (props) => {
       strokeStyle: '#FF4D00',
       lineWidth: 3,
     })
-    let { clientX, clientY } = event.changedTouches[0] || {}
+    let { clientX, clientY } = event || {}
+    //  event.changedTouches[0] ||
 
     var screenFullWidth = window.screen.width
     var screenFullHeight = window.screen.height
@@ -429,7 +431,7 @@ const Index = (props) => {
                 ? styles.dog_ani2
                 : ''
             }`}
-            onTouchStart={handleCLi}>
+            onPointerDown={handleCLi}>
             <div
               className={`${styles.dog}`}
               style={{

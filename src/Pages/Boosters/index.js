@@ -142,7 +142,7 @@ const Boosters = (props) => {
         <TabList
           list={BOOSTERS_CONFIG.list
             .map((item) => {
-              let { fieldConfig = {} } = item
+              let { fieldConfig = {} } = item || {}
               let currentData = upgradeInfo[item.field]
               if (!currentData) return null
               let { isMax, currentLevel, upgradeCost } = currentData

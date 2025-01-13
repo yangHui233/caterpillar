@@ -45,10 +45,11 @@ const SignDialog = (props = {}) => {
             className={style.update_item_icon}
             style={{
               backgroundImage:
-                level > 0 && level <= 30
+                nextLevel.level > 0 && nextLevel.level <= 30
                   ? 'url(' +
-                    require('@/Theme/assets/update/after/' + level + '.png')
-                      .default +
+                    require('@/Theme/assets/update/after/' +
+                      nextLevel.level +
+                      '.png').default +
                     ')'
                   : 'none',
             }}></div>

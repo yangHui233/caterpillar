@@ -12,6 +12,7 @@ import {
   mountSwipeBehavior,
   disableVerticalSwipes,
   expandViewport,
+  mountViewport,
 } from '@telegram-apps/sdk'
 
 import './index.css'
@@ -29,6 +30,8 @@ try {
   // 禁止向下滑动应用程序来隐藏应用程序
   mountSwipeBehavior()
   disableVerticalSwipes()
+
+  mountViewport()
 
   expandViewport()
 } catch (e) {}

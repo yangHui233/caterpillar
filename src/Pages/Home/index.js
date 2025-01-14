@@ -127,7 +127,7 @@ const Index = (props) => {
   // 处理点击动画
   const handleClickAni = async (event) => {
     let scalar = 2.5
-    var pineapple = confetti.shapeFromText({
+    var pineapple = await confetti.shapeFromText({
       text: '+' + coinBonus,
       fontFamily: `Kemco Pixel`,
       color: '#fff',

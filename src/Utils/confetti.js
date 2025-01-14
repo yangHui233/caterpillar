@@ -28,23 +28,24 @@
     }
   }
 
-  function transferToImageBitmap(canvas) {
-    if (canvas.transferToImageBitmap) {
+ function transferToImageBitmap(canvas) {
+    return new Promise((resolve, reject) => {
+      if (canvas.transferToImageBitmap) {
         // 如果 transferToImageBitmap 方法存在，使用它
-        return canvas.transferToImageBitmap();
+        resolve(canvas.transferToImageBitmap());
     } else {
         // 如果不存在，回退到使用 toDataURL 和 Image 对象
-        return new Promise((resolve, reject) => {
-            try {
-                const image = new Image();
-                image.src = canvas.toDataURL();
-                image.onload = () => resolve(image);
-                image.onerror = reject;
-            } catch (error) {
-                reject(error);
-            }
-        });
+        try {
+          const image = new Image();
+          image.src = canvas.toDataURL();
+          image.onload = () => resolve(image);
+          image.onerror = reject;
+      } catch (error) {
+          reject(error);
+      }
     }
+
+  });
 }
 
   var canUsePaths =
@@ -52,6 +53,7 @@
 
   var canDrawBitmap = (function () {
     // this mostly supports ssr
+    console.log('global.OffscreenCanvas===============================================', global.OffscreenCanvas)
     if (!global.OffscreenCanvas) {
       return false
     }
@@ -981,12 +983,15 @@
 
     var scale = 1 / scalar
 
-    return {
-      type: 'bitmap',
-      // TODO these probably need to be transfered for workers
-      bitmap: canvas.transferToImageBitmap(),
-      matrix: [scale, 0, 0, scale, (-width * scale) / 2, (-height * scale) / 2],
-    }
+    return new Promise(function (resolve) {
+      transferToImageBitmap(canvas).then(function (bitmap) {
+        resolve({
+          type: 'bitmap',
+          bitmap,
+          matrix: [scale, 0, 0, scale, (-width * scale) / 2, (-height * scale) / 2],
+        })
+      })
+    })
   }
 
   module.exports = function () {

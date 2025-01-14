@@ -13,7 +13,9 @@ export const inviteList = async (
 }
 
 export const invitePort = async (params, isLoading) => {
-  const res = await ajax.post('invite/report', params, isLoading)
+  const res = await ajax.post('invite/report', params, isLoading, true, {
+    isHideErrorToast: true,
+  })
 
   return res
 }

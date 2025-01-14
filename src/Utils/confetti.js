@@ -14,15 +14,29 @@
     global.URL.createObjectURL
   )
 
+  function createCanvas(width,height) {
+    // 检查 OffscreenCanvas 是否在 window 对象上可用
+    if ('OffscreenCanvas' in global) {
+      // 如果可用，创建一个 OffscreenCanvas 实例
+      return new OffscreenCanvas(width, height);
+  } else {
+      // 如果不可用，创建一个普通的 Canvas 元素
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      return canvas;
+  }
+  }
+
   var canUsePaths =
     typeof Path2D === 'function' && typeof DOMMatrix === 'function'
   var canDrawBitmap = (function () {
     // this mostly supports ssr
-    if (!global.OffscreenCanvas) {
-      return false
-    }
+    // if (!global.OffscreenCanvas) {
+    //   return false
+    // }
 
-    var canvas = new OffscreenCanvas(1, 1)
+    var canvas = createCanvas(1, 1)
     var ctx = canvas.getContext('2d')
     ctx.fillRect(0, 0, 1, 1)
     var bitmap = canvas.transferToImageBitmap()
@@ -69,7 +83,7 @@
           return map.get(bitmap)
         }
 
-        var canvas = new OffscreenCanvas(bitmap.width, bitmap.height)
+        var canvas = createCanvas(bitmap.width, bitmap.height)
         var ctx = canvas.getContext('2d')
         ctx.drawImage(bitmap, 0, 0)
 
@@ -908,7 +922,7 @@
     var fontSize = 10 * scalar
     var font = '' + fontSize + 'px ' + fontFamily
 
-    var canvas = new OffscreenCanvas(fontSize, fontSize)
+    var canvas = createCanvas(fontSize, fontSize)
     var ctx = canvas.getContext('2d')
 
     ctx.font = font
@@ -926,7 +940,7 @@
     width += padding + padding
     height += padding + padding
 
-    canvas = new OffscreenCanvas(width, height)
+    canvas = createCanvas(width, height)
     ctx = canvas.getContext('2d')
     ctx.font = font
     ctx.lineWidth = lineWidth

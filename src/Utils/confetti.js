@@ -19,26 +19,47 @@
     if ('OffscreenCanvas' in global) {
       // 如果可用，创建一个 OffscreenCanvas 实例
       return new OffscreenCanvas(width, height);
-  } else {
-      // 如果不可用，创建一个普通的 Canvas 元素
-      const canvas = document.createElement('canvas');
-      canvas.width = width;
-      canvas.height = height;
-      return canvas;
+    } else {
+        // 如果不可用，创建一个普通的 Canvas 元素
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        return canvas;
+    }
   }
-  }
+
+  function transferToImageBitmap(canvas) {
+    if (canvas.transferToImageBitmap) {
+        // 如果 transferToImageBitmap 方法存在，使用它
+        return canvas.transferToImageBitmap();
+    } else {
+        // 如果不存在，回退到使用 toDataURL 和 Image 对象
+        return new Promise((resolve, reject) => {
+            try {
+                const image = new Image();
+                image.src = canvas.toDataURL();
+                image.onload = () => resolve(image);
+                image.onerror = reject;
+            } catch (error) {
+                reject(error);
+            }
+        });
+    }
+}
 
   var canUsePaths =
     typeof Path2D === 'function' && typeof DOMMatrix === 'function'
+
   var canDrawBitmap = (function () {
     // this mostly supports ssr
-    // if (!global.OffscreenCanvas) {
-    //   return false
-    // }
+    if (!global.OffscreenCanvas) {
+      return false
+    }
 
     var canvas = createCanvas(1, 1)
     var ctx = canvas.getContext('2d')
     ctx.fillRect(0, 0, 1, 1)
+
     var bitmap = canvas.transferToImageBitmap()
 
     try {

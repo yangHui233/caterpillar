@@ -11,8 +11,7 @@ import { init } from '@telegram-apps/sdk'
 import {
   mountSwipeBehavior,
   disableVerticalSwipes,
-  expandViewport,
-  mountViewport,
+  postEvent,
 } from '@telegram-apps/sdk'
 
 import './index.css'
@@ -27,13 +26,13 @@ React.platformDef = process.env.platformDef
 try {
   init()
 
+  setTimeout(() => {
+    postEvent('web_app_expand')
+  }, 500)
+
   // 禁止向下滑动应用程序来隐藏应用程序
   mountSwipeBehavior()
   disableVerticalSwipes()
-
-  mountViewport()
-
-  expandViewport()
 } catch (e) {}
 
 ReactDOM.render(

@@ -9,9 +9,10 @@ const NumberAnimation = (props) => {
   let { value, defaultSize } = props
 
   let fontSize = mul(defaultSize, PXREM) // 1rem = 75pxdefaultSize
+  let lineHeight = mul(defaultSize + 2, PXREM)
 
   const style = {
-    lineHeight: fontSize + UNIT,
+    lineHeight: lineHeight + UNIT,
     fontSize: fontSize + UNIT,
   }
 

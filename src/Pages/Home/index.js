@@ -137,7 +137,6 @@ const Index = (props) => {
         lineWidth: 3,
       })
       let { clientX, clientY } = event || {}
-      //  event.changedTouches[0] ||
 
       var screenFullWidth = document.documentElement.clientWidth
       var screenFullHeight = document.documentElement.clientHeight
@@ -310,6 +309,11 @@ const Index = (props) => {
     isUpDating.current = true
 
     let postNum = storeUtil.getClickNum()
+
+    // 一次只提交最多 MAX_CLICK 次点击
+    if (postNum > MAX_CLICK) {
+      postNum = MAX_CLICK
+    }
 
     if (postNum <= 0) {
       if (type === 'init') {

@@ -27,14 +27,16 @@ export const numSymbol = (opt, isZero = false) => {
   return isZero ? '0.00' : '0'
 }
 
-export const secondsToHoursMinutes = (seconds) => {
-  const hours = Math.floor(seconds / 3600) // 计算小时
-  const minutes = Math.floor((seconds % 3600) / 60) // 计算分钟
+export const secondsToHoursMinutes = (time) => {
+  const hours = Math.floor(time / 3600) // 计算小时
+  const minutes = Math.floor((time % 3600) / 60) // 计算分钟
+  const seconds = time % 60 // 计算剩余的秒数
 
   // 返回对象包含小时和分钟
   return {
     hours,
     minutes,
+    seconds,
   }
 }
 

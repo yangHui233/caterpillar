@@ -86,20 +86,29 @@ const MiningComp = (props) => {
 
         // 到达小周期节点，请求接口更新数据
         if (
-          sub(currentMiningTimeAfter, startTime) % stepNum === 0 &&
-          sub(currentMiningTimeAfter, startTime)
+          (sub(currentMiningTimeAfter, startTime) % stepNum === 0 &&
+            sub(currentMiningTimeAfter, startTime)) ||
+          sub(totalMiningEndTime, now) <= 0
         ) {
           // 获取接口数据后，移除定时器，并重新设置定时器
           try {
             await getMining()
             handleClearInterval()
-          } catch (err) {}
+            handleMining()
+          } catch (err) {
+            storeUtil.setMiningInfo({
+              ...storeUtil.getMiningInfo(),
+              now: currentMiningTimeAfter,
+            })
+            handleData()
+          }
+        } else {
+          storeUtil.setMiningInfo({
+            ...storeUtil.getMiningInfo(),
+            now: currentMiningTimeAfter,
+          })
+          handleData()
         }
-        storeUtil.setMiningInfo({
-          ...storeUtil.getMiningInfo(),
-          now: currentMiningTimeAfter,
-        })
-        handleData()
       }, 1000)
       return
     }
@@ -119,6 +128,9 @@ const MiningComp = (props) => {
         ...storeUtil.getUserInfo(),
         coins: coins,
       })
+    } catch (err) {}
+
+    try {
       // 重新请求获取挖矿数据
       await getMining()
     } catch (err) {}
@@ -139,6 +151,8 @@ const MiningComp = (props) => {
     // 剩余时间
     let leftTime = sub(totalMiningEndTime, now)
 
+    console.log('leftTime===', leftTime)
+
     // 已完成挖矿的情况
     if (leftTime <= 0) {
       setSubTime('')
@@ -158,6 +172,10 @@ const MiningComp = (props) => {
     setSubTime(
       `${subTime.hours > 0 ? `${subTime.hours}h` : ``} ${
         subTime.minutes > 0 ? `${subTime.minutes}m` : ''
+      } ${
+        !subTime.hours && !subTime.minutes && subTime.seconds > 0
+          ? `${subTime.seconds}s`
+          : ''
       }`
     )
   }

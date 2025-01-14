@@ -138,8 +138,8 @@ const Index = (props) => {
     let { clientX, clientY } = event || {}
     //  event.changedTouches[0] ||
 
-    var screenFullWidth = window.screen.width
-    var screenFullHeight = window.screen.height
+    var screenFullWidth = document.documentElement.clientWidth
+    var screenFullHeight = document.documentElement.clientHeight
 
     let x = div(clientX, screenFullWidth)
     let y = div(clientY, screenFullHeight)

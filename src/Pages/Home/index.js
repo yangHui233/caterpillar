@@ -407,47 +407,49 @@ const Index = (props) => {
         </div>
 
         <div className={styles.main_wrapper}>
-          <div className={styles.level_wrapper}>
-            <div className={styles.coin}>
-              <ScrollNumber
-                defaultSize={52}
-                number={numSymbol(add(coins, mul(coinBonus, clickNum)))}
-              />
+          <div className={styles.fix_wrapper}>
+            <div className={styles.level_wrapper}>
+              <div className={styles.coin}>
+                <ScrollNumber
+                  defaultSize={52}
+                  number={numSymbol(add(coins, mul(coinBonus, clickNum)))}
+                />
+              </div>
+
+              <div className={styles.level}>
+                {level >= maxLevel && currentFavor >= nextLevel.requiredFavor
+                  ? 'Max.Upgrade'
+                  : `level ${level || 0}/${maxLevel}`}
+              </div>
             </div>
 
-            <div className={styles.level}>
-              {level >= maxLevel && currentFavor >= nextLevel.requiredFavor
-                ? 'Max.Upgrade'
-                : `level ${level || 0}/${maxLevel}`}
-            </div>
-          </div>
-
-          <div
-            className={`${styles.dog_wrapper} ${
-              aniClickNum > ANI_MAX
-                ? styles.dog_ani4
-                : aniClickNum > 5
-                ? styles.dog_ani3
-                : aniClickNum > 3
-                ? styles.dog_ani2
-                : ''
-            }`}
-            onPointerDown={handleCLi}>
             <div
-              className={`${styles.dog}`}
-              style={{
-                backgroundImage:
-                  level > 0 && level <= maxLevel
-                    ? 'url(' +
-                      require('@/Theme/assets/' + level + '.png').default +
-                      ')'
-                    : 'none',
-              }}>
-              {aniClickNum > ANI_MAX ? (
-                <div className={styles.dog_heart}></div>
-              ) : (
-                ''
-              )}
+              className={`${styles.dog_wrapper} ${
+                aniClickNum > ANI_MAX
+                  ? styles.dog_ani4
+                  : aniClickNum > 5
+                  ? styles.dog_ani3
+                  : aniClickNum > 3
+                  ? styles.dog_ani2
+                  : ''
+              }`}
+              onPointerDown={handleCLi}>
+              <div
+                className={`${styles.dog}`}
+                style={{
+                  backgroundImage:
+                    level > 0 && level <= maxLevel
+                      ? 'url(' +
+                        require('@/Theme/assets/' + level + '.png').default +
+                        ')'
+                      : 'none',
+                }}>
+                {aniClickNum > ANI_MAX ? (
+                  <div className={styles.dog_heart}></div>
+                ) : (
+                  ''
+                )}
+              </div>
             </div>
           </div>
 

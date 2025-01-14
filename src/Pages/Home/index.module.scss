@@ -44,7 +44,8 @@
     justify-content: flex-end;
     flex: 1;
     position: relative;
-    padding-bottom: 230px;
+    padding-bottom: 40px;
+
     .calendar {
       position: fixed;
       right: 28px;
@@ -53,88 +54,97 @@
       background: $calendar;
       bottom: 750px;
     }
-    .level_wrapper {
-      .coin {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        vertical-align: middle;
-        color: #fffb00;
-        font-family: 'Kemco Pixel';
-        font-weight: 700;
-        @include fontBorder(8px);
-        &::before {
-          display: inline-block;
+
+    .fix_wrapper{
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 386px;
+      .level_wrapper {
+        .coin {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           vertical-align: middle;
-          background: $coin;
-          width: 74px;
-          height: 74px;
-          content: '';
-          margin-right: 18px;
-        }
-      }
-      .level {
-        color: #ffe100;
-        text-align: center;
-        font-family: 'SF Pixelate Bold Italic';
-        font-style: italic;
-        font-size: 36px;
-        padding-top: 22px;
-        @include fontBorder(6px);
-      }
-    }
-    .dog_wrapper {
-      width: 750px;
-      padding-top: 40px;
-      background-color: rgba($color: #000000, $alpha: 0);
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      transition: all 0.8s ease; /* 添加过渡效果 */
-      &.dog_ani4 {
-        padding-top: 190px;
-        .dog{
-          transform: scale(1.4);
-          position: relative;
-          animation: none;
-          .dog_heart{
-            position: absolute;
-            left: 30%;
-            transform: translateX(-50%);
-            top: -40px;
-            width: 750px;
-            height: 838px;
-            background: $heartAni;
+          color: #fffb00;
+          font-family: 'Kemco Pixel';
+          font-weight: 700;
+          @include fontBorder(8px);
+          &::before {
+            display: inline-block;
+            vertical-align: middle;
+            background: $coin;
+            width: 74px;
+            height: 74px;
+            content: '';
+            margin-right: 18px;
           }
         }
-      }
-      &.dog_ani3 {
-        padding-top: 150px;
-        .dog{
-          transform:scale(1.2);
-          animation: none;
+        .level {
+          color: #ffe100;
+          text-align: center;
+          font-family: 'SF Pixelate Bold Italic';
+          font-style: italic;
+          font-size: 36px;
+          padding-top: 22px;
+          @include fontBorder(6px);
         }
       }
-      &.dog_ani2 {
-        padding-top: 100px;
-        .dog{
-          transform: scale(1.1);
-          animation: none;
-        }
-      }
-      .dog {
-        // background: $dog;
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-        background-position: center;
-        width: 415px;
-        height: 454px;
-        transform:translateY(0) scale(1); /* 初始缩放比例 */
-        transform-origin: center bottom;
+      .dog_wrapper {
+        width: 750px;
+        padding-top: 40px;
+        background-color: rgba($color: #000000, $alpha: 0);
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
         transition: all 0.8s ease; /* 添加过渡效果 */
-        animation: scaleAni 1s infinite;
-        animation-delay: 0.5s;
+        &.dog_ani4 {
+          padding-top: 190px;
+          .dog{
+            transform: scale(1.4);
+            position: relative;
+            animation: none;
+            .dog_heart{
+              position: absolute;
+              left: 30%;
+              transform: translateX(-50%);
+              top: -40px;
+              width: 750px;
+              height: 838px;
+              background: $heartAni;
+            }
+          }
+        }
+        &.dog_ani3 {
+          padding-top: 150px;
+          .dog{
+            transform:scale(1.2);
+            animation: none;
+          }
+        }
+        &.dog_ani2 {
+          padding-top: 100px;
+          .dog{
+            transform: scale(1.1);
+            animation: none;
+          }
+        }
+        .dog {
+          // background: $dog;
+          background-size: 100% 100%;
+          background-repeat: no-repeat;
+          background-position: center;
+          width: 415px;
+          height: 454px;
+          transform:translateY(0) scale(1); /* 初始缩放比例 */
+          transform-origin: center bottom;
+          transition: all 0.8s ease; /* 添加过渡效果 */
+          animation: scaleAni 1s infinite;
+          animation-delay: 0.5s;
+        }
       }
+
     }
+
   }
 }

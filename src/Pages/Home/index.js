@@ -126,51 +126,53 @@ const Index = (props) => {
 
   // 处理点击动画
   const handleClickAni = async (event) => {
-    let scalar = 2.5
-    var pineapple = await confetti.shapeFromText({
-      text: '+' + coinBonus,
-      fontFamily: `Kemco Pixel`,
-      color: '#fff',
-      scalar,
-      strokeStyle: '#FF4D00',
-      lineWidth: 3,
-    })
-    let { clientX, clientY } = event || {}
-    //  event.changedTouches[0] ||
+    try {
+      let scalar = 2.5
+      var pineapple = await confetti.shapeFromText({
+        text: '+' + coinBonus,
+        fontFamily: `Kemco Pixel`,
+        color: '#fff',
+        scalar,
+        strokeStyle: '#FF4D00',
+        lineWidth: 3,
+      })
+      let { clientX, clientY } = event || {}
+      //  event.changedTouches[0] ||
 
-    var screenFullWidth = document.documentElement.clientWidth
-    var screenFullHeight = document.documentElement.clientHeight
+      var screenFullWidth = document.documentElement.clientWidth
+      var screenFullHeight = document.documentElement.clientHeight
 
-    let x = div(clientX, screenFullWidth)
-    let y = div(clientY, screenFullHeight)
+      let x = div(clientX, screenFullWidth)
+      let y = div(clientY, screenFullHeight)
 
-    confetti({
-      particleCount: 1,
-      ticks: 50,
-      angle: x > 0.5 ? 180 : -180,
-      origin: {
-        x,
-        y,
-      },
-      shapes: [pineapple],
-      gravity: -1,
-      startVelocity: 1,
-      flat: true,
-      scalar,
-      zIndex: 100,
-    })
+      confetti({
+        particleCount: 1,
+        ticks: 50,
+        angle: x > 0.5 ? 180 : -180,
+        origin: {
+          x,
+          y,
+        },
+        shapes: [pineapple],
+        gravity: -1,
+        startVelocity: 1,
+        flat: true,
+        scalar,
+        zIndex: 100,
+      })
 
-    const currentTime = new Date().getTime()
-    const timeDifference = currentTime - lastTouchTime.current
+      const currentTime = new Date().getTime()
+      const timeDifference = currentTime - lastTouchTime.current
 
-    if (timeDifference < 300) {
-      // 假设连续点击的间隔小于300毫秒视为连续点击
-      setAniClickNum(aniClickNum + 1)
-    } else {
-      setAniClickNum(0)
-    }
+      if (timeDifference < 300) {
+        // 假设连续点击的间隔小于300毫秒视为连续点击
+        setAniClickNum(aniClickNum + 1)
+      } else {
+        setAniClickNum(0)
+      }
 
-    lastTouchTime.current = currentTime
+      lastTouchTime.current = currentTime
+    } catch (err) {}
   }
 
   // 设置最后爆炸动效逻辑

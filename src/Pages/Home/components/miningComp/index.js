@@ -151,8 +151,6 @@ const MiningComp = (props) => {
     // 剩余时间
     let leftTime = sub(totalMiningEndTime, now)
 
-    console.log('leftTime===', leftTime)
-
     // 已完成挖矿的情况
     if (leftTime <= 0) {
       setSubTime('')

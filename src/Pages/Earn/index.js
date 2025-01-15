@@ -22,7 +22,7 @@ const Earn = (props) => {
   }, [])
 
   useEffect(() => {
-    let earnInfo = storeUtil.getEarnInfo()
+    let earnInfo = storeUtil.getEarnInfo() || []
 
     if (earnInfo && earnInfo.length > 0) {
       hideLoading()
@@ -36,7 +36,7 @@ const Earn = (props) => {
   }
 
   const handleItemCli = (item) => {
-    let { icon } = item
+    let { icon } = item || {}
 
     if (['youtube'].includes(icon)) {
       youToBeDialog({
@@ -62,18 +62,18 @@ const Earn = (props) => {
     <CommonWrapper type="earn">
       <div className={`${styles.wrapper}`}>
         <div className={styles.top_wrapper}></div>
-        {(earnInfo || []).map((item) => {
+        {(earnInfo || []).map((item = {}) => {
           return (
             <TabList
               key={item.id}
-              list={(item.tasks || []).map((item) => {
+              list={(item.tasks || []).map((info = {}) => {
                 return {
-                  ...item,
-                  title: item.description,
-                  icon: handleGetType(item.group.name),
+                  ...info,
+                  title: info.description,
+                  icon: handleGetType(info.group.name),
                   // type: '1',
-                  shareType: handleGetType(item.group.name),
-                  val: item.rewardCoins,
+                  shareType: handleGetType(info.group.name),
+                  val: info.rewardCoins,
                 }
               })}
               title={item.description}

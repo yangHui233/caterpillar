@@ -3,6 +3,8 @@
   align-items: center;
   justify-content: center;
   // margin: 93px auto 0;
+  position: relative;
+  z-index: 2;
 }
 .progress_start {
   animation: colorCycle 2s infinite;

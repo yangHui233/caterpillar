@@ -8,6 +8,7 @@ const StorkWrapper = ({
   fontWeight,
   textWidth,
   fontColorType,
+  textWidthPx,
 }) => {
   const svgRef = useRef(null)
   const [height, setHeight] = useState(0)
@@ -30,9 +31,9 @@ const StorkWrapper = ({
   return (
     <svg
       ref={svgRef}
-      class={style.text_wrapper}
+      class={`${style.text_wrapper} ${style['text_wrapper_' + textWidthPx]}`}
       height={height}
-      width={textWidth || width}>
+      width={textWidthPx ? 'auto' : textWidth || width}>
       <text
         class={`${style.num} ${style['text_' + fontSize]} ${
           style['text_' + fontColorType]

@@ -27,7 +27,8 @@ const NumberAnimation = (props) => {
         {isStork ? (
           <StorkWrapper
             text={value === ' ' ? '0' : value}
-            fontSize={defaultSize}></StorkWrapper>
+            fontSize={defaultSize}
+            textWidthPx={defaultSize}></StorkWrapper>
         ) : value === ' ' ? (
           '0'
         ) : (
@@ -46,7 +47,10 @@ const NumberAnimation = (props) => {
         className={`${styles['number-animation-wrap-hidden']}`}
         style={style}>
         {isStork ? (
-          <StorkWrapper text={0} fontSize={defaultSize}></StorkWrapper>
+          <StorkWrapper
+            text={0}
+            fontSize={defaultSize}
+            textWidthPx={defaultSize}></StorkWrapper>
         ) : (
           0
         )}
@@ -62,7 +66,8 @@ const NumberAnimation = (props) => {
               {isStork ? (
                 <StorkWrapper
                   text={index}
-                  fontSize={defaultSize}></StorkWrapper>
+                  fontSize={defaultSize}
+                  textWidthPx={defaultSize}></StorkWrapper>
               ) : (
                 index
               )}

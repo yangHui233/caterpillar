@@ -8,6 +8,7 @@ import Button from '@/Components/Button'
 import { completeTask, getTaskList } from '@/Helper/apis/earn'
 import { openLink } from '@telegram-apps/sdk'
 import { numSymbol } from '@/Utils/util'
+import StorkWrapper from '@/Components/StorkWrapper'
 
 const CODEERROR_MSG = "You've written an incorrect code"
 
@@ -102,7 +103,11 @@ const YouToBeDialog = (props = {}) => {
   return (
     <div className={style.wrapper}>
       <div className={`${style.icon}`}></div>
-      <div className={style.coin_wrapper}>{numSymbol(rewardCoins)}</div>
+      <div className={style.coin_wrapper}>
+        <StorkWrapper
+          text={numSymbol(rewardCoins)}
+          fontSize={36}></StorkWrapper>
+      </div>
       <div className={style.title}>Financial Stories That Teach BUY SELL</div>
       {!completed ? (
         <>
@@ -114,7 +119,11 @@ const YouToBeDialog = (props = {}) => {
                   <div className={style.hit_wrapper_title}>
                     Complete the task via link
                   </div>
-                  <div className={style.hit_wrapper_hit}>YOUTUBE SUBSCRIBE</div>
+                  <div className={style.hit_wrapper_hit}>
+                    <StorkWrapper
+                      text={'YOUTUBE SUBSCRIBE'}
+                      fontSize={28}></StorkWrapper>
+                  </div>
                 </div>
                 <div className={style.hit_wrapper_icon}></div>
               </div>
@@ -162,7 +171,9 @@ const YouToBeDialog = (props = {}) => {
       ) : (
         <div className={style.success}>
           <div className={style.success_txt} onClick={handleToJump}>
-            YOUTUBE SUBSCRIBE
+            <StorkWrapper
+              text={'YOUTUBE SUBSCRIBE'}
+              fontSize={32}></StorkWrapper>
           </div>
           <div className={style.success_icon}></div>
         </div>

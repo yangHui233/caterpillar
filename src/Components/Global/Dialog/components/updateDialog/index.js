@@ -4,6 +4,7 @@ import $ from '@/Components/Global'
 import style from './index.module.scss'
 import { numSymbol } from '@/Utils/util'
 import storeUtil from '@/Utils/store'
+import StorkWrapper from '@/Components/StorkWrapper'
 
 const SignDialog = (props = {}) => {
   const {
@@ -61,9 +62,12 @@ const SignDialog = (props = {}) => {
         You have leveled up and unlocked a new pup!
       </div>
       <div className={style.content}>
-        PRIZE:
+        <StorkWrapper text={'PRIZE:'} fontSize={36}></StorkWrapper>
+
         <div className={style.coin_wrapper}>
-          {numSymbol(nextLevel.levelUpCoins)}
+          <StorkWrapper
+            text={numSymbol(nextLevel.levelUpCoins)}
+            fontSize={36}></StorkWrapper>
         </div>
       </div>
       <div className={style.hit}>

@@ -17,9 +17,10 @@ import { UNUPDATE_CONFIG } from '@/Contanst/update'
 import { getUpgradeList, handleUpgrade } from '@/Helper/apis/boosters'
 import CommonWrapper from '@/Components/CommonWrapper'
 import { getUserInfo } from '@/Helper/apis/home'
+import StorkWrapper from '@/Components/StorkWrapper'
 
 const Boosters = (props) => {
-  let { upgradeInfo } = props
+  let { upgradeInfo = {} } = props
 
   useEffect(() => {
     storeUtil.setIsBuying(false)
@@ -32,7 +33,7 @@ const Boosters = (props) => {
     } else {
       hideLoading()
     }
-  }, [upgradeInfo])
+  }, [upgradeInfo.energyBonus])
 
   const handleItemCli = (item = {}) => {
     let { status } = item
@@ -136,14 +137,20 @@ const Boosters = (props) => {
           <div className={styles.card_title}>Your Coins Balance</div>
           <div className={styles.card_info}>
             <div className={styles.icon}></div>
-            <div className={styles.num}>{numSymbol(upgradeInfo.coins)} </div>
+            <div className={styles.num}>
+              <StorkWrapper
+                text={numSymbol(upgradeInfo?.coins)}
+                fontSize={44}
+                fontFamily={'Kemco Pixel'}></StorkWrapper>
+              {/* {numSymbol(upgradeInfo.coins)} */}
+            </div>
           </div>
         </div>
         <TabList
           list={BOOSTERS_CONFIG.list
             .map((item) => {
               let { fieldConfig = {} } = item || {}
-              let currentData = upgradeInfo[item.field]
+              let currentData = (upgradeInfo || {})[item.field]
               if (!currentData) return null
               let { isMax, currentLevel, upgradeCost } = currentData
               return {

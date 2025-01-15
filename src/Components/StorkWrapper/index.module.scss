@@ -1,9 +1,4 @@
 .text_wrapper{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    transform: translateX(-50%);
     .num{
         fill: #fffb00;
         font-family: 'Kemco Pixel';
@@ -13,10 +8,25 @@
         stroke-width: 8px;
         paint-order: stroke;
         stroke-linejoin: round;
-       
+        text-align: center;
+        margin: 0 auto;
         &.text_36{
             font-size: 36px;
-            stroke-width: 3px;
+            stroke-width: 6px;
+        }
+        &.text_32{
+            font-size: 32px;
+            stroke-width: 6px;
+        }
+        &.text_28{
+            font-size: 28px;
+            stroke-width: 4px;
+        }
+        &.text_52{
+            font-size: 52px;
+        }
+        &.text_44{
+            font-size: 44px;
         }
     }
 }

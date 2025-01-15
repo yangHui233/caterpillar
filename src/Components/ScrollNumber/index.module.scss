@@ -3,6 +3,13 @@
     display: flex;
     align-items: center;
 }
+.scroll_wrapper_stork{
+    padding-top: 10px;
+}
+.stork{
+    margin-left: -2px;
+    margin-right: -2px;
+}
 .number-wrap{
     letter-spacing: 1px;
     &.empty-wrapper{
@@ -15,10 +22,6 @@
     display: flex;
     align-items: center;
     letter-spacing: -1px;
-    &.number-animation-wrap-52{
-        padding: 0 4px 0 0;
-        letter-spacing: -4px;
-    }
     .number-animation {
         position: absolute;
         left: 50%;

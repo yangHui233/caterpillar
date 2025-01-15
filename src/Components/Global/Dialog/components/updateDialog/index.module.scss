@@ -67,14 +67,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #FFFB00;
     padding: 54px 0 27px;
-    font-family: "Kemco Pixel";
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    @include fontBorder();
+    // @include fontBorder();
     .coin_wrapper {
       @include coin_wrapper();
     }

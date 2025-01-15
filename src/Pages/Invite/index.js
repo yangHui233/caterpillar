@@ -9,6 +9,7 @@ import { numSymbol } from '@/Utils/util'
 import CommonWrapper from '@/Components/CommonWrapper'
 import storeUtil from '@/Utils/store'
 import { jumpUrl } from '@/Utils/common'
+import StorkWrapper from '@/Components/StorkWrapper'
 
 const Invite = (props = {}) => {
   let { inviteInfo = {} } = props
@@ -36,7 +37,9 @@ const Invite = (props = {}) => {
       <div className={styles.wrapper}>
         <div className={styles.top_wrapper}>
           <div className={styles.title}>lnvite frens!</div>
-          <div className={styles.nums}>{total} FRENS</div>
+          <div className={styles.nums}>
+            <StorkWrapper text={`${total} FRENS`} fontSize={36}></StorkWrapper>
+          </div>
           <div className={styles.hit}>
             You'll get <span>{numSymbol(inviteRewardCoins)}</span> Coins for
             every invite,

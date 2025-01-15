@@ -22,6 +22,7 @@ import CommonWrapper from '@/Components/CommonWrapper'
 import { invitePort } from '@/Helper/apis/invite'
 import { hapticFeedbackImpactOccurred } from '@telegram-apps/sdk'
 import $ from '@/Components/Global'
+import StorkWrapper from '@/Components/StorkWrapper'
 
 const ANI_MAX = 8
 
@@ -419,13 +420,20 @@ const Index = (props) => {
                 <ScrollNumber
                   defaultSize={52}
                   number={numSymbol(add(coins, mul(coinBonus, clickNum)))}
+                  isStork={true}
                 />
               </div>
 
               <div className={styles.level}>
-                {level >= maxLevel && currentFavor >= nextLevel.requiredFavor
-                  ? 'Max.Upgrade'
-                  : `level ${level || 0}/${maxLevel}`}
+                <StorkWrapper
+                  text={
+                    level >= maxLevel && currentFavor >= nextLevel.requiredFavor
+                      ? 'Max.Upgrade'
+                      : `level ${level || 0}/${maxLevel}`
+                  }
+                  fontSize={36}
+                  fontFamily={'SF Pixelate Bold Italic'}
+                  textWidth={'100%'}></StorkWrapper>
               </div>
             </div>
 

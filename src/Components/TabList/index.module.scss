@@ -3,14 +3,10 @@
   flex-direction: column;
   padding-top: 40px;
   .title {
-    color: #fffb00;
-    font-family: 'Kemco Pixel';
-    font-size: 28px;
-    font-weight: 700;
     padding-bottom: 20px;
     text-align: left;
     padding-left: 30px;
-    @include fontBorder(2px);
+    // @include fontBorder(2px);
   }
   .tab-list-wrapper {
     width: 690px;

@@ -8,6 +8,16 @@ class SDK extends React.Component {
         {Object.keys(dialog).map((key) => {
           return (
             <div
+              style={{
+                padding: '10px',
+                backgroundColor: 'red',
+                margin: '10px',
+                display: 'inline-block',
+                textAlign: 'center',
+                lineHeight: '100px',
+                fontSize: '20px',
+                color: '#fff',
+              }}
               onClick={() => {
                 dialog[key]()
               }}>

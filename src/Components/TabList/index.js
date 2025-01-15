@@ -1,6 +1,7 @@
 import React from 'react'
 import style from './index.module.scss'
 import { numSymbol, toPercent } from '@/Utils/util'
+import StorkWrapper from '@/Components/StorkWrapper'
 
 const TabList = (props) => {
   const {
@@ -13,7 +14,13 @@ const TabList = (props) => {
 
   return (
     <div className={`${style['tab-list']}`}>
-      {title ? <div className={style['title']}>{title}</div> : ''}
+      {title ? (
+        <div className={style['title']}>
+          <StorkWrapper text={title} fontSize={28}></StorkWrapper>
+        </div>
+      ) : (
+        ''
+      )}
 
       {props.children ? props.children : ''}
 

@@ -8,6 +8,7 @@ import Button from '@/Components/Button'
 import { completeTask, getTaskList } from '@/Helper/apis/earn'
 import { openTelegramLink, openLink } from '@telegram-apps/sdk'
 import { numSymbol } from '@/Utils/util'
+import StorkWrapper from '@/Components/StorkWrapper'
 
 const CONFIG = {
   x: {
@@ -76,7 +77,11 @@ const ShareDialog = (props = {}) => {
   return (
     <div className={style.wrapper}>
       <div className={`${style.icon} ${style[icon]}`}></div>
-      <div className={style.coin_wrapper}>{numSymbol(rewardCoins)}</div>
+      <div className={style.coin_wrapper}>
+        <StorkWrapper
+          text={numSymbol(rewardCoins)}
+          fontSize={36}></StorkWrapper>
+      </div>
       <div className={style.title}>{CONFIG[shareType].title}</div>
       <div className={style.join} onClick={handleJoin}>
         JOIN

@@ -66,10 +66,6 @@
           align-items: center;
           justify-content: center;
           vertical-align: middle;
-          color: #fffb00;
-          font-family: 'Kemco Pixel';
-          font-weight: 700;
-          @include fontBorder(8px);
           &::before {
             display: inline-block;
             vertical-align: middle;
@@ -87,7 +83,7 @@
           font-style: italic;
           font-size: 36px;
           padding-top: 22px;
-          @include fontBorder(6px);
+          // @include fontBorder(1px);
         }
       }
       .dog_wrapper {

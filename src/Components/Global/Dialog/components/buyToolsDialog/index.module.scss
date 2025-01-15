@@ -40,16 +40,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fffb00;
     text-align: right;
-    font-family: 'Kemco Pixel';
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 6px;
-    padding-bottom: 40px;
-    @include fontBorder();
+    margin-bottom: 40px;
     .up {
       background: $up;
       width: 26px;
@@ -74,7 +66,7 @@
     letter-spacing: -2px;
   }
   .coin_wrapper {
-    padding: 40px 0;
+    margin: 40px 0;
     @include coin_wrapper();
   }
 }

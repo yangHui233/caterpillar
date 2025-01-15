@@ -57,7 +57,7 @@
   }
 
   .coin_wrapper {
-    padding: 48px 0 43px;
+    margin: 48px 0 43px;
     @include coin_wrapper();
   }
   .btn {
@@ -69,32 +69,5 @@
 
   .received{
     margin-top: 40px;
-  }
-
-  .success {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 690px;
-    height: 120px;
-    border-radius: 20px;
-    border: 2px solid #c99700;
-
-    background: #fff;
-    .success_txt {
-      color: #fffb00;
-      font-family: 'Kemco Pixel';
-      font-size: 32px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      padding-right: 30px;
-      @include fontBorder();
-    }
-    .success_icon {
-      background: $link;
-      flex: 0 0 32px;
-      height: 32px;
-    }
   }
 }

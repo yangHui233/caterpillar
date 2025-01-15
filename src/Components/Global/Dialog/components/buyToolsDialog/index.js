@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import style from './index.module.scss'
 import { numSymbol, toPercent } from '@/Utils/util'
 import Button from '@/Components/Button'
+import StorkWrapper from '@/Components/StorkWrapper'
 
 const buyToolsDialog = (props = {}) => {
   const {
@@ -15,7 +16,7 @@ const buyToolsDialog = (props = {}) => {
     type,
     currentVal = '',
     nextVal = '',
-    upDateTemplete,
+    upDateTemplete = '',
   } = props
   return (
     <div className={style.wrapper}>
@@ -23,19 +24,28 @@ const buyToolsDialog = (props = {}) => {
       <div className={style.title}>{title}</div>
       {type === '2' ? (
         <div className={style['updatedWrapper']}>
-          {upDateTemplete.replace('X', toPercent(nextVal))}
+          <StorkWrapper
+            text={upDateTemplete.replace('X', toPercent(nextVal))}
+            fontSize={36}></StorkWrapper>
+
           <div className={style['up']}></div>
         </div>
       ) : (
         <div className={style['updatedWrapper']}>
-          {upDateTemplete.replace('X', currentVal)}
+          <StorkWrapper
+            text={upDateTemplete.replace('X', currentVal)}
+            fontSize={36}></StorkWrapper>
           <div className={style['next']}></div>
-          {upDateTemplete.replace('X', nextVal)}
+          <StorkWrapper
+            text={upDateTemplete.replace('X', nextVal)}
+            fontSize={36}></StorkWrapper>
         </div>
       )}
 
       <div className={style.hit}>{hit}</div>
-      <div className={style.coin_wrapper}>{numSymbol(coins)}</div>
+      <div className={style.coin_wrapper}>
+        <StorkWrapper text={numSymbol(coins)} fontSize={36}></StorkWrapper>
+      </div>
       <Button onClick={handleConfirm} isLoading={isBuying} txt="UPGRADE" />
     </div>
   )

@@ -78,7 +78,7 @@ const Index = (props) => {
       isEnegyNotEnough || currentFavor + favorBonus * clickNum >= requiredFavor
 
     if (isEnegyNotEnough) {
-      Toast.info('', 'Energy not enough')
+      // Toast.info('', 'Energy not enough')
     }
 
     if (isUnClick) return

@@ -15,17 +15,15 @@ const StorkWrapper = ({
   const [width, setWidth] = useState(0)
 
   useEffect(() => {
-    setTimeout(() => {
-      // 确保svgRef.current存在并且已经挂载到DOM上
-      if (svgRef.current) {
-        // 获取SVG内容的高度（这里假设你有一个合适的方法来获取高度）
-        const svgHeight = svgRef.current.getBBox().height + 4
-        const svgwidth = svgRef.current.getBBox().width + 4
-        // 设置SVG的高度
-        setHeight(svgHeight)
-        setWidth(svgwidth)
-      }
-    }, 100)
+    // 确保svgRef.current存在并且已经挂载到DOM上
+    if (svgRef.current) {
+      // 获取SVG内容的高度（这里假设你有一个合适的方法来获取高度）
+      const svgHeight = svgRef.current.getBBox().height + 4
+      const svgwidth = svgRef.current.getBBox().width + 4
+      // 设置SVG的高度
+      setHeight(svgHeight)
+      setWidth(svgwidth)
+    }
   }, [text, fontSize, fontFamily]) // 如果svgContent变化，重新计算高度
 
   return (

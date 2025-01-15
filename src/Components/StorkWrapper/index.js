@@ -7,6 +7,7 @@ const StorkWrapper = ({
   fontFamily,
   fontWeight,
   textWidth,
+  fontColorType,
 }) => {
   const svgRef = useRef(null)
   const [height, setHeight] = useState(0)
@@ -33,7 +34,9 @@ const StorkWrapper = ({
       height={height}
       width={textWidth || width}>
       <text
-        class={`${style.num} ${style['text_' + fontSize]}`}
+        class={`${style.num} ${style['text_' + fontSize]} ${
+          style['text_' + fontColorType]
+        }`}
         style={{
           fontFamily: fontFamily || 'Kemco Pixel',
           fontWeight: fontWeight || '700',

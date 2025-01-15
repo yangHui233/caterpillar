@@ -433,6 +433,7 @@ const Index = (props) => {
                   }
                   fontSize={36}
                   fontFamily={'SF Pixelate Bold Italic'}
+                  fontColorType={2}
                   textWidth={'100%'}></StorkWrapper>
               </div>
             </div>

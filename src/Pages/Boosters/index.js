@@ -38,7 +38,7 @@ const Boosters = (props) => {
   const handleItemCli = (item = {}) => {
     let { status } = item
     // 满级或者锁定状态提示无法升级
-    if (['full', 'lock'].includes(status)) {
+    if (['full', 'lock', 'lock_limit'].includes(status)) {
       Toast.info(status, UNUPDATE_CONFIG[status])
       return
     }
@@ -152,7 +152,13 @@ const Boosters = (props) => {
               let { fieldConfig = {} } = item || {}
               let currentData = (upgradeInfo || {})[item.field]
               if (!currentData) return null
-              let { isMax, currentLevel, upgradeCost } = currentData
+              let {
+                isMax,
+                currentLevel,
+                upgradeCost,
+                limitCount = 3,
+                currentCount = 2,
+              } = currentData
               return {
                 ...item,
                 val: currentLevel,
@@ -161,9 +167,13 @@ const Boosters = (props) => {
                   ? 'full'
                   : upgradeInfo.coins < upgradeCost
                   ? 'lock'
+                  : limitCount > 0 && currentCount <= 0
+                  ? 'lock_limit'
                   : '',
                 currentVal: getNestedProperty(currentData, fieldConfig.current),
                 nextVal: getNestedProperty(currentData, fieldConfig.next),
+                limitCount,
+                currentCount,
               }
             })
             .filter(Boolean)}

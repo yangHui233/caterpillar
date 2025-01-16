@@ -60,10 +60,18 @@
     text-align: center;
     font-family: 'SF Pixelate';
     font-size: 28px;
-    font-style: normal;
     font-weight: 700;
     line-height: 130%; /* 36.4px */
     letter-spacing: -2px;
+  }
+  .limit{
+    color: #142443;
+    text-align: center;
+    font-family: "SF Pixelate";
+    font-size: 24px;
+    letter-spacing: -2px;
+    margin-bottom: -20px;
+    padding-top: 15px;
   }
   .coin_wrapper {
     margin: 40px 0;

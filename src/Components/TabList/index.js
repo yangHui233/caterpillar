@@ -77,6 +77,13 @@ const TabList = (props) => {
                       item.completed ? style['tab-r-finish'] : ''
                     }`}></div>
                 )}
+                {item.status === 'lock_limit' ? (
+                  <div className={style.limit_label}>
+                    Available: {item.currentCount}/{item.limitCount}
+                  </div>
+                ) : (
+                  ''
+                )}
               </div>
             )
           })}

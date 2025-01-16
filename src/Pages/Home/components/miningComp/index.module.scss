@@ -3,7 +3,8 @@
   align-items: center;
   justify-content: center;
   // margin: 93px auto 0;
-  position: relative;
+  position: fixed;
+  bottom: 204px;
   z-index: 2;
 }
 .progress_start {

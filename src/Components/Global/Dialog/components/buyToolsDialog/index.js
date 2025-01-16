@@ -17,6 +17,8 @@ const buyToolsDialog = (props = {}) => {
     currentVal = '',
     nextVal = '',
     upDateTemplete = '',
+    currentCount,
+    limitCount,
   } = props
   return (
     <div className={style.wrapper}>
@@ -43,6 +45,13 @@ const buyToolsDialog = (props = {}) => {
       )}
 
       <div className={style.hit}>{hit}</div>
+      {limitCount > 0 ? (
+        <div className={style.limit}>
+          (Today’s Remaining Purchases: {currentCount}/{limitCount})
+        </div>
+      ) : (
+        ''
+      )}
       <div className={style.coin_wrapper}>
         <StorkWrapper text={numSymbol(coins)} fontSize={36}></StorkWrapper>
       </div>

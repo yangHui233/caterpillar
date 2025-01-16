@@ -22,15 +22,10 @@
     justify-content: space-between;
     margin: 0 auto;
     background: $balance;
-    padding-top: 22px;
+    padding-top: 18px;
     padding-bottom: 52px;
     .card_title {
-      color: #fff;
-      text-align: center;
-      font-family: 'SF Pixelate';
-      font-size: 28px;
-      font-weight: 700;
-      @include fontBorder(2px);
+     
     }
     .card_info {
       display: flex;

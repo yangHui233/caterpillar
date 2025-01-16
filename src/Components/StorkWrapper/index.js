@@ -29,11 +29,13 @@ const StorkWrapper = ({
   return (
     <svg
       ref={svgRef}
-      class={`${style.text_wrapper} ${style['text_wrapper_' + textWidthPx]}`}
+      className={`${style.text_wrapper} ${
+        style['text_wrapper_' + textWidthPx]
+      }`}
       height={height}
       width={textWidthPx ? 'auto' : textWidth || width}>
       <text
-        class={`${style.num} ${style['text_' + fontSize]} ${
+        className={`${style.num} ${style['text_' + fontSize]} ${
           style['text_' + fontColorType]
         }`}
         style={{
@@ -42,8 +44,8 @@ const StorkWrapper = ({
         }}
         x="50%"
         y={1.5}
-        alignment-baseline="text-before-edge"
-        text-anchor="middle">
+        alignmentBaseline="text-before-edge"
+        textAnchor="middle">
         {text}
       </text>
     </svg>

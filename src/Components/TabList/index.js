@@ -77,9 +77,9 @@ const TabList = (props) => {
                       item.completed ? style['tab-r-finish'] : ''
                     }`}></div>
                 )}
-                {item.status === 'lock_limit' ? (
+                {item.buyFavorLimit > 0 ? (
                   <div className={style.limit_label}>
-                    Available: {item.currentCount}/{item.limitCount}
+                    Available: {item.buyFavorCount}/{item.buyFavorLimit}
                   </div>
                 ) : (
                   ''

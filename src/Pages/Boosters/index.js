@@ -134,7 +134,13 @@ const Boosters = (props) => {
       <div className={`${styles.wrapper}`}>
         <div className={styles.ani}></div>
         <div className={styles.card}>
-          <div className={styles.card_title}>Your Coins Balance</div>
+          <div className={styles.card_title}>
+            <StorkWrapper
+              text={'Your Coins Balance'}
+              fontSize={28}
+              fontFamily={'SF Pixelate'}
+              fontColorType="3"></StorkWrapper>
+          </div>
           <div className={styles.card_info}>
             <div className={styles.icon}></div>
             <div className={styles.num}>
@@ -156,8 +162,8 @@ const Boosters = (props) => {
                 isMax,
                 currentLevel,
                 upgradeCost,
-                limitCount = 3,
-                currentCount = 2,
+                buyFavorLimit = 0,
+                buyFavorCount = 0,
               } = currentData
               return {
                 ...item,
@@ -167,13 +173,13 @@ const Boosters = (props) => {
                   ? 'full'
                   : upgradeInfo.coins < upgradeCost
                   ? 'lock'
-                  : limitCount > 0 && currentCount <= 0
+                  : buyFavorLimit > 0 && buyFavorCount <= 0
                   ? 'lock_limit'
                   : '',
                 currentVal: getNestedProperty(currentData, fieldConfig.current),
                 nextVal: getNestedProperty(currentData, fieldConfig.next),
-                limitCount,
-                currentCount,
+                buyFavorLimit,
+                buyFavorCount,
               }
             })
             .filter(Boolean)}

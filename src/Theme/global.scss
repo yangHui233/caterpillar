@@ -207,10 +207,3 @@ body>iframe[style*="2147483647"]:not([id="webpack-dev-server-client-overlay"]) {
     transform: translateY(0);
   }
 }
-
-@supports (paint-order: stroke) {
-  /* 如果浏览器支持paint-order，则定义一个类 */
-  .paint-order-supported {
-      content: "paint-order supported";
-  }
-}

@@ -68,7 +68,6 @@ const Index = (props) => {
 
   // 用户点击，生成的能量 金币 和好感度相关变化
   const handleCLi = (event) => {
-    console.log('event', event)
     let { energyBonusLevelConf } = storeUtil.getUserInfo()
     let { currentEnergy } = storeUtil.getEnergyInfo()
     let { favorBonus, energyCost } = energyBonusLevelConf || {}
@@ -228,6 +227,44 @@ const Index = (props) => {
     }
   }, [isShowLoading])
 
+  const interValFun = () => {
+    setIsIntervaling(false)
+    let {
+      currentEnergy = 0,
+      rate,
+      energyCost,
+      energyCap,
+    } = storeUtil.getEnergyInfo()
+    currentEnergy = currentEnergy || 0
+    let clickNum = storeUtil.getClickNum()
+    let clickConsume = mul(clickNum, energyCost)
+    let currentEnergyCap = add(energyCap, clickConsume)
+    if (isEmpty(currentEnergy) || isEmpty(rate)) {
+      handleClearInterval()
+      return
+    }
+    let addNum = add(currentEnergy, rate)
+
+    let currentEnergyAfter =
+      sub(addNum, clickConsume) >= currentEnergyCap
+        ? sub(currentEnergyCap, clickConsume)
+        : addNum
+
+    // let currentEnergyAfter =
+    //   addNum >= sub(energyCap, clickConsume)
+    //     ? sub(energyCap, clickConsume)
+    //     : addNum
+
+    storeUtil.setEnergyInfo({
+      ...storeUtil.getEnergyInfo(),
+      currentEnergy: currentEnergyAfter,
+    })
+
+    if (currentEnergyAfter === sub(currentEnergyCap, clickConsume)) {
+      handleClearInterval()
+    }
+  }
+
   // 能量自动增长逻辑
   const handleInterval = () => {
     if (isIntervaling) {
@@ -235,33 +272,9 @@ const Index = (props) => {
     }
     setIsIntervaling(true)
     handleClearInterval()
-    interVal.current = setInterval(() => {
-      setIsIntervaling(false)
-      let {
-        currentEnergy = 0,
-        rate,
-        energyCost,
-        energyCap,
-      } = storeUtil.getEnergyInfo()
-      currentEnergy = currentEnergy || 0
-      let clickNum = storeUtil.getClickNum()
-      let clickConsume = mul(clickNum, energyCost)
-      let currentEnergyCap = add(energyCap, clickConsume)
-      if (isEmpty(currentEnergy) || isEmpty(rate)) {
-        handleClearInterval()
-        return
-      }
-      let addNum = add(currentEnergy, rate)
-      let currentEnergyAfter =
-        addNum >= currentEnergyCap ? sub(energyCap, clickConsume) : addNum
 
-      storeUtil.setEnergyInfo({
-        ...storeUtil.getEnergyInfo(),
-        currentEnergy: currentEnergyAfter,
-      })
-      if (currentEnergyAfter === sub(energyCap, clickConsume)) {
-        handleClearInterval()
-      }
+    interVal.current = setInterval(() => {
+      interValFun()
     }, 1000)
   }
 
@@ -373,13 +386,18 @@ const Index = (props) => {
         currentFavor,
       })
 
-      let { rate } = storeUtil.getEnergyInfo()
+      let { rate, energyCost } = storeUtil.getEnergyInfo()
+
+      // 获取到的能量值需+rate，因为接口调用需要时间
+      let energy =
+        add(rate, currentEnergy) >=
+        sub(energyCap, mul(currentClickNum, energyCost))
+          ? sub(energyCap, mul(currentClickNum, energyCost))
+          : add(rate, currentEnergy)
+
       storeUtil.setEnergyInfo({
         ...storeUtil.getEnergyInfo(),
-        currentEnergy:
-          add(rate, currentEnergy) >= energyCap
-            ? energyCap
-            : add(rate, currentEnergy),
+        currentEnergy: energy,
         energyCap,
       })
 

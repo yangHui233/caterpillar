@@ -145,21 +145,18 @@
       }
     }
 
-    /* 屏幕高度小于500px的样式 */
     @media (max-height: 499px) {
       &.tab-list-wrapper2 {
         max-height: 304px!important;
       }
     }
 
-    /* 屏幕高度在500px到700px之间的样式 */
     @media (min-height: 500px) and (max-height: 699px) {
       &.tab-list-wrapper2 {
         max-height: 480px!important;
       }
     }
 
-    /* 屏幕高度大于700px的样式 */
     @media (min-height: 700px) {
       &.tab-list-wrapper2 {
         max-height: 584px!important;

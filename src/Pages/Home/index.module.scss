@@ -93,7 +93,7 @@
         display: flex;
         align-items: flex-end;
         justify-content: center;
-        transition: all 0.8s ease; /* 添加过渡效果 */
+        transition: all 0.8s ease; 
         &.dog_ani4 {
           padding-top: 190px;
           .dog{
@@ -132,9 +132,9 @@
           background-position: center;
           width: 415px;
           height: 454px;
-          transform:translateY(0) scale(1); /* 初始缩放比例 */
+          transform:translateY(0) scale(1);
           transform-origin: center bottom;
-          transition: all 0.8s ease; /* 添加过渡效果 */
+          transition: all 0.8s ease; 
           animation: scaleAni 1s infinite;
           animation-delay: 0.5s;
         }

@@ -17,7 +17,7 @@ const buyToolsDialog = (props = {}) => {
     currentVal = '',
     nextVal = '',
     upDateTemplete = '',
-    buyFavorCount,
+    buyFavorCurrentLeft,
     buyFavorLimit,
   } = props
   return (
@@ -47,7 +47,7 @@ const buyToolsDialog = (props = {}) => {
       <div className={style.hit}>{hit}</div>
       {buyFavorLimit > 0 ? (
         <div className={style.limit}>
-          (Today’s Remaining Purchases: {buyFavorCount}/{buyFavorLimit})
+          (Today’s Remaining Purchases: {buyFavorCurrentLeft}/{buyFavorLimit})
         </div>
       ) : (
         ''

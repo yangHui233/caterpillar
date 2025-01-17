@@ -79,7 +79,7 @@ const TabList = (props) => {
                 )}
                 {item.buyFavorLimit > 0 ? (
                   <div className={style.limit_label}>
-                    Available: {item.buyFavorCount}/{item.buyFavorLimit}
+                    Available: {item.buyFavorCurrentLeft}/{item.buyFavorLimit}
                   </div>
                 ) : (
                   ''

@@ -165,6 +165,8 @@ const Boosters = (props) => {
                 buyFavorLimit = 0,
                 buyFavorCount = 0,
               } = currentData
+              let buyFavorCurrentLeft =
+                buyFavorLimit > 0 ? buyFavorLimit - buyFavorCount : 0
               return {
                 ...item,
                 val: currentLevel,
@@ -173,13 +175,13 @@ const Boosters = (props) => {
                   ? 'full'
                   : upgradeInfo.coins < upgradeCost
                   ? 'lock'
-                  : buyFavorLimit > 0 && buyFavorCount <= 0
+                  : buyFavorLimit > 0 && buyFavorCurrentLeft <= 0
                   ? 'lock_limit'
                   : '',
                 currentVal: getNestedProperty(currentData, fieldConfig.current),
                 nextVal: getNestedProperty(currentData, fieldConfig.next),
                 buyFavorLimit,
-                buyFavorCount,
+                buyFavorCurrentLeft,
               }
             })
             .filter(Boolean)}

@@ -36,7 +36,9 @@ export const startMining = async (params, isLoading) => {
 }
 
 export const upDateClick = async (params, isLoading) => {
-  return await ajax.post('user/click', params, isLoading)
+  return await ajax.post('user/click', params, isLoading, false, {
+    isHideErrorToast: true,
+  })
 }
 
 export const signin = async (params, isLoading) => {

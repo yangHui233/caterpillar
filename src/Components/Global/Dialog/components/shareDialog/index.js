@@ -94,7 +94,9 @@ const ShareDialog = (props = {}) => {
             </div>
           ) : null}
           <Button
-            className={`${style.btn} ${startFlag ? style.start : ''}`}
+            className={`${style.btn} ${
+              !isFinished && startFlag ? style.start : ''
+            }`}
             onClick={handleConfirm}
             isLoading={isLoading}
             disabled={!isFinished}

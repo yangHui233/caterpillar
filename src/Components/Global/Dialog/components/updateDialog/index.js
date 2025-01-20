@@ -5,6 +5,7 @@ import style from './index.module.scss'
 import { numSymbol } from '@/Utils/util'
 import storeUtil from '@/Utils/store'
 import StorkWrapper from '@/Components/StorkWrapper'
+import { MAX_LEVEL } from '@/Contanst/baseConfig'
 
 const SignDialog = (props = {}) => {
   const {
@@ -31,7 +32,7 @@ const SignDialog = (props = {}) => {
             className={style.update_item_icon}
             style={{
               backgroundImage:
-                level > 0 && level <= 30
+                level > 0 && level <= MAX_LEVEL
                   ? 'url(' +
                     require('@/Theme/assets/update/before/' + level + '.png')
                       .default +
@@ -46,7 +47,7 @@ const SignDialog = (props = {}) => {
             className={style.update_item_icon}
             style={{
               backgroundImage:
-                nextLevel.level > 0 && nextLevel.level <= 30
+                nextLevel.level > 0 && nextLevel.level <= MAX_LEVEL
                   ? 'url(' +
                     require('@/Theme/assets/update/after/' +
                       nextLevel.level +

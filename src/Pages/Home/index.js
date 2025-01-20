@@ -16,7 +16,7 @@ import Toast from '@/Components/Toast'
 import { login } from '@/Helper/apis/login'
 import { getMining, getUserInfo, upDateClick } from '@/Helper/apis/home'
 import { add, div, mul, sub } from '@/Utils/math'
-import { MAX_CLICK } from '@/Contanst/baseConfig'
+import { MAX_CLICK, MAX_LEVEL } from '@/Contanst/baseConfig'
 import confetti from '@/Utils/confetti'
 import CommonWrapper from '@/Components/CommonWrapper'
 import { invitePort } from '@/Helper/apis/invite'
@@ -45,7 +45,6 @@ const Index = (props) => {
   const isUpDating = useRef(false)
 
   let {
-    maxLevel = 30,
     level = 1,
     coins = 0,
     nextLevel = {},
@@ -445,9 +444,10 @@ const Index = (props) => {
               <div className={styles.level}>
                 <StorkWrapper
                   text={
-                    level >= maxLevel && currentFavor >= nextLevel.requiredFavor
+                    level >= MAX_LEVEL &&
+                    currentFavor >= nextLevel.requiredFavor
                       ? 'Max.Upgrade'
-                      : `level ${level || 0}/${maxLevel}`
+                      : `level ${level || 0}/${MAX_LEVEL}`
                   }
                   fontSize={36}
                   fontFamily={'SF Pixelate Bold Italic'}
@@ -471,7 +471,7 @@ const Index = (props) => {
                 className={`${styles.dog}`}
                 style={{
                   backgroundImage:
-                    level > 0 && level <= maxLevel
+                    level > 0 && level <= MAX_LEVEL
                       ? 'url(' +
                         require('@/Theme/assets/' + level + '.png').default +
                         ')'
@@ -490,6 +490,38 @@ const Index = (props) => {
 
           <MiningComp />
         </div>
+      </div>
+
+      <div style={{ display: 'none', width: 0, height: 0 }}>
+        {level > 0 && level <= MAX_LEVEL ? (
+          <>
+            <img src={require(`@/Theme/assets/${level}.png`).default} alt="" />
+            <img
+              src={require(`@/Theme/assets/update/before/${level}.png`).default}
+              alt=""
+            />
+          </>
+        ) : (
+          ''
+        )}
+
+        {nextLevel && nextLevel.level && nextLevel.level <= MAX_LEVEL ? (
+          <>
+            <img
+              src={require(`@/Theme/assets/${nextLevel.level}.png`).default}
+              alt=""
+            />
+            <img
+              src={
+                require(`@/Theme/assets/update/after/${nextLevel.level}.png`)
+                  .default
+              }
+              alt=""
+            />
+          </>
+        ) : (
+          ''
+        )}
       </div>
     </CommonWrapper>
   )

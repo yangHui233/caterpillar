@@ -16,7 +16,7 @@ import {
 
 import './index.css'
 
-if (process.env.NODE_ENV !== 'production' || true) {
+if (process.env.NODE_ENV !== 'production') {
   let Vconsole = require('vconsole')
   new Vconsole()
 }

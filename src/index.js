@@ -7,7 +7,7 @@ import history from '@/Router/history'
 import { store } from '@/Store'
 import { ErrorBoundary } from '@/Components/ErrorBoundary'
 import '@/Theme/lib.js'
-import { init } from '@telegram-apps/sdk'
+import { init, restoreInitData } from '@telegram-apps/sdk'
 import {
   mountSwipeBehavior,
   disableVerticalSwipes,
@@ -24,6 +24,8 @@ if (process.env.NODE_ENV !== 'production' || true) {
 React.platformDef = process.env.platformDef
 
 try {
+  restoreInitData()
+
   init()
 
   setTimeout(() => {

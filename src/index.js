@@ -24,7 +24,7 @@ if (process.env.NODE_ENV !== 'production' || true) {
 React.platformDef = process.env.platformDef
 
 try {
-  init()
+  // init()
 
   setTimeout(() => {
     postEvent('web_app_expand')

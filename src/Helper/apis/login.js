@@ -4,6 +4,12 @@ import { retrieveLaunchParams } from '@telegram-apps/sdk'
 
 export const login = (params, isLoading) => {
   try {
+    window.Telegram.WebApp.clearCache()
+  } catch (err) {
+    console.log(err, 'err======')
+  }
+
+  try {
     const initialDataRaw = retrieveLaunchParams()
     const { initDataRaw, initData, startParam } = initialDataRaw
     console.log(

@@ -29,7 +29,12 @@ const Invite = (props = {}) => {
       'Invite link copied to clipboard. Send it to frens and receive coin rewards.'
     )
     let userId = storeUtil.getUserInfo().userId
-    copy('t.me/mat_dog_test_bot/dogtest2?startapp=' + userId)
+    copy(
+      't.me/mat_dog_test_bot/dogtest2?startapp=share' +
+        new Date().getTime() +
+        '_' +
+        userId
+    )
   }
 
   return (

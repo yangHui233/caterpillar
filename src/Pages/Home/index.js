@@ -116,8 +116,11 @@ const Index = (props) => {
 
         // 上报邀请
         let { startParam, userId } = storeUtil.getUserInfo()
-        if (startParam && startParam != userId) {
-          invitePort({ inviterTgId: storeUtil.getUserInfo().startParam })
+        if (startParam) {
+          let inviterTgId = startParam.split('_')[1]
+          if (inviterTgId && inviterTgId != userId) {
+            invitePort({ inviterTgId })
+          }
         }
       }
     } catch (err) {}

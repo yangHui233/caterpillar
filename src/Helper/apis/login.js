@@ -1,15 +1,14 @@
 import ajax from '@/Helper/ajax.js'
 import storeUtil from '@/Utils/store'
-import { retrieveLaunchParams, initDataStartParam } from '@telegram-apps/sdk'
+import { retrieveLaunchParams } from '@telegram-apps/sdk'
 
 export const login = (params, isLoading) => {
   try {
     const initialDataRaw = retrieveLaunchParams()
     const { initDataRaw, initData, startParam } = initialDataRaw
     console.log(
-      initialDataRaw,
-      initDataStartParam(),
-      'initialDataRaw===========!!!!'
+      `initialDataRaw====: ${initialDataRaw}`,
+      'initialDataRaw===============!!!!'
     )
     storeUtil.setUserInfo({
       ...(storeUtil.getUserInfo() || {}),

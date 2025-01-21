@@ -10,8 +10,7 @@ try {
   const initialDataRaw = retrieveLaunchParams()
   const { initData } = initialDataRaw
   idPre = initData.user.id
-  console.log('当前登录用户信息', idPre, initData, initData.user)
-  sessionStorage.setItem('currentUserId', idPre)
+  console.log('当前登录用户信息===', idPre, initData, initData.user)
 } catch (err) {}
 
 const persistConfig = {

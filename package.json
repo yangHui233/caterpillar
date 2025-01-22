@@ -7,7 +7,7 @@
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.3",
     "@reduxjs/toolkit": "^2.5.0",
     "@svgr/webpack": "5.5.0",
-    "@telegram-apps/sdk": "^2.10.0",
+    "@telegram-apps/sdk": "^2.11.3",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",

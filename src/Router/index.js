@@ -3,11 +3,16 @@ import { Route, Router, Switch, Redirect } from 'react-router-dom'
 import history from '@/Router/history'
 import routers from './routers'
 import Footer from '@/Components/Footer'
+import storeUtil from '@/Utils/store'
 
 const NoMatch = () => <div>router not found</div>
 // const PUBLIC_URL = process.env.PUBLIC_URL
 
 export default class App extends React.Component {
+  componentWillMount() {
+    if (!storeUtil.getToken() && history.location.pathname !== '/Home')
+      history.replace('/Home')
+  }
   render() {
     return (
       <Router history={history}>

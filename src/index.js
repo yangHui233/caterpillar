@@ -28,7 +28,10 @@ try {
 
   setTimeout(() => {
     postEvent('web_app_expand')
-  }, 500)
+    postEvent('web_app_setup_closing_behavior', {
+      need_confirmation: true,
+    })
+  }, 200)
 
   // 禁止向下滑动应用程序来隐藏应用程序
   mountSwipeBehavior()

@@ -33,7 +33,7 @@ export const login = (rawData, params, isLoading) => {
   }
   // params.debug = true
   ;(async () => {
-    const res = ajax.post('login', params, isLoading)
+    const res = await ajax.post('login', params, isLoading)
     console.log(`login.req${JSON.stringify(params)}.res${JSON.stringify(res)}`)
   })()
   return null

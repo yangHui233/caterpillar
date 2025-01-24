@@ -175,6 +175,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.25.1",
+    "prettier": "^2.8.8",
     "prettier-eslint": "^13.0.0",
     "sass-resources-loader": "^2.0.1",
     "ts-loader": "8.2.0",

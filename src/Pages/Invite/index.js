@@ -10,6 +10,7 @@ import CommonWrapper from '@/Components/CommonWrapper'
 import storeUtil from '@/Utils/store'
 import { jumpUrl } from '@/Utils/common'
 import StorkWrapper from '@/Components/StorkWrapper'
+// import { shareURL } from '@telegram-apps/sdk'
 
 const Invite = (props = {}) => {
   let { inviteInfo = {} } = props
@@ -29,8 +30,11 @@ const Invite = (props = {}) => {
       'Invite link copied to clipboard. Send it to frens and receive coin rewards.'
     )
     let userId = storeUtil.getUserInfo().userId
+    // if (shareURL.isAvailable()) {
+    //   shareURL('https://t.me/heyqbnk', 'Check out this cool group!')
+    // }
     copy(
-      't.me/mat_dog_test_bot/dogtest2?startapp=share' +
+      'https://t.me/thepup_bot/pupu?startapp=share' +
         new Date().getTime() +
         '_' +
         userId

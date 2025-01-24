@@ -6,7 +6,6 @@ export const login = (params, isLoading) => {
   try {
     sessionStorage.clear()
     localStorage.clear()
-    window.Telegram.WebApp.clearCache()
   } catch (err) {
     console.log(err, 'err======')
   }
@@ -15,10 +14,8 @@ export const login = (params, isLoading) => {
     const initialDataRaw = retrieveLaunchParams()
     const { initDataRaw, initData, startParam } = initialDataRaw
     console.log(
-      initialDataRaw,
-      initDataRaw,
+      `========`,
       `initialDataRaw====: ${JSON.stringify(initialDataRaw)}`,
-      `initialDataRaw====: ${initialDataRaw}`,
       `initDataRaw====: ${JSON.stringify(initDataRaw)}`,
       `initData====: ${JSON.stringify(initData)}`,
       `startParam====: ${JSON.stringify(startParam)}`,

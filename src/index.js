@@ -1,3 +1,10 @@
+import {
+  retrieveLaunchParams,
+  init,
+  mountSwipeBehavior,
+  disableVerticalSwipes,
+  postEvent,
+} from '@telegram-apps/sdk'
 import React from 'react'
 import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom'
@@ -7,16 +14,7 @@ import history from '@/Router/history'
 import { store } from '@/Store'
 import { ErrorBoundary } from '@/Components/ErrorBoundary'
 import '@/Theme/lib.js'
-import {
-  init,
-  mountSwipeBehavior,
-  disableVerticalSwipes,
-  postEvent,
-  retrieveLaunchParams,
-} from '@telegram-apps/sdk'
-
 import './index.css'
-// import { login } from './Helper/apis/login'
 import storeUtil from './Utils/store'
 
 if (process.env.NODE_ENV !== 'production' || true) {

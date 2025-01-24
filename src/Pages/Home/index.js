@@ -105,7 +105,7 @@ const Index = (props) => {
         await handleUpdateClick('init')
         return
       }
-      const res = await login(storeUtil.getInitData(), {
+      const res = await login({
         initData: '',
       })
 

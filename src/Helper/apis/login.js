@@ -4,6 +4,8 @@ import { retrieveLaunchParams } from '@telegram-apps/sdk'
 
 export const login = (params, isLoading) => {
   try {
+    sessionStorage.clear()
+    localStorage.clear()
     window.Telegram.WebApp.clearCache()
   } catch (err) {
     console.log(err, 'err======')

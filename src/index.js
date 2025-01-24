@@ -28,13 +28,11 @@ React.platformDef = process.env.platformDef
 
 try {
   const initDataRaw = retrieveLaunchParams()
-  ;(async () => {
-    const res = await login(initDataRaw, {
-      initData: '',
-    })
-    const { token } = res
-    storeUtil.setToken(token)
-  })()
+  const res = login(initDataRaw, {
+    initData: '',
+  })
+  const { token } = res
+  storeUtil.setToken(token)
 
   init()
 

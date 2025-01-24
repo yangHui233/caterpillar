@@ -11,6 +11,8 @@ export const login = (params, isLoading) => {
   }
 
   try {
+    let startParam2 = window.Telegram.WebApp.initDataUnsafe
+    console.log(`startParam:${JSON.stringify(startParam2)}`)
     // const initialDataRaw = retrieveLaunchParams()
     const { initDataRaw, initData } = retrieveLaunchParams()
     const startParam = 111

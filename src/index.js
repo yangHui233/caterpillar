@@ -17,10 +17,10 @@ import '@/Theme/lib.js'
 import './index.css'
 import storeUtil from './Utils/store'
 
-if (process.env.NODE_ENV !== 'production' || true) {
-  let Vconsole = require('vconsole')
-  new Vconsole()
-}
+// if (process.env.NODE_ENV !== 'production' || true) {
+//   let Vconsole = require('vconsole')
+//   new Vconsole()
+// }
 
 React.platformDef = process.env.platformDef
 

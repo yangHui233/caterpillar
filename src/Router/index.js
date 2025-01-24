@@ -9,10 +9,11 @@ const NoMatch = () => <div>router not found</div>
 // const PUBLIC_URL = process.env.PUBLIC_URL
 
 export default class App extends React.Component {
-  componentWillMount() {
-    if (!storeUtil.getToken() && history.location.pathname !== '/Home')
-      history.replace('/Home')
-  }
+  // componentWillMount() {
+  //   console.log('app will mount=====', storeUtil.getToken())
+  //   if (!storeUtil.getToken() && history.location.pathname !== '/Home')
+  //     history.replace('/Home')
+  // }
   render() {
     return (
       <Router history={history}>

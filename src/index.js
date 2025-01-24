@@ -16,6 +16,8 @@ import {
 } from '@telegram-apps/sdk'
 
 import './index.css'
+import { login } from './Helper/apis/login'
+import storeUtil from './Utils/store'
 
 if (process.env.NODE_ENV !== 'production' || true) {
   let Vconsole = require('vconsole')
@@ -25,8 +27,15 @@ if (process.env.NODE_ENV !== 'production' || true) {
 React.platformDef = process.env.platformDef
 
 try {
-  const { initDataRaw } = retrieveLaunchParams()
-  console.log(`xxx${initDataRaw}`)
+  const initDataRaw = retrieveLaunchParams()
+  ;(async () => {
+    const res = await login(initDataRaw, {
+      initData: '',
+    })
+    const { token } = res
+    storeUtil.setToken(token)
+  })()
+
   init()
 
   setTimeout(() => {

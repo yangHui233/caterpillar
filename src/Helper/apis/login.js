@@ -1,8 +1,7 @@
 import ajax from '@/Helper/ajax.js'
 import storeUtil from '@/Utils/store'
-import { retrieveLaunchParams } from '@telegram-apps/sdk'
 
-export const login = (params, isLoading) => {
+export const login = (rawData, params, isLoading) => {
   try {
     sessionStorage.clear()
     localStorage.clear()
@@ -11,11 +10,7 @@ export const login = (params, isLoading) => {
   }
 
   try {
-    let startParam2 = window.Telegram.WebApp.initDataUnsafe
-    console.log(`startParam:${JSON.stringify(startParam2)}`)
-    // const initialDataRaw = retrieveLaunchParams()
-    const { initDataRaw, initData } = retrieveLaunchParams()
-    const startParam = 111
+    const { initDataRaw, initData, startParam } = rawData
     console.log(
       `========`,
       `initDataRaw====: ${JSON.stringify(initDataRaw)}`,

@@ -27,7 +27,7 @@ if (process.env.NODE_ENV !== 'production' || true) {
 React.platformDef = process.env.platformDef
 
 try {
-  console.log("refresh")
+  console.log('refresh')
   storeUtil.setInitData(retrieveLaunchParams())
   // const res = login(initDataRaw, {
   //   initData: '',

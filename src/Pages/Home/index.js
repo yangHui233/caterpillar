@@ -115,13 +115,13 @@ const Index = (props) => {
         handleUpdateClick('init')
 
         // 上报邀请
-        let { startParam, userId } = storeUtil.getUserInfo()
-        if (startParam) {
-          let inviterTgId = startParam.split('_')[1]
-          if (inviterTgId && inviterTgId != userId) {
-            invitePort({ inviterTgId })
-          }
-        }
+        // let { startParam, userId } = storeUtil.getUserInfo()
+        // if (startParam) {
+        //   let inviterTgId = startParam.split('_')[1]
+        //   if (inviterTgId && inviterTgId != userId) {
+        //     invitePort({ inviterTgId })
+        //   }
+        // }
       }
     } catch (err) {}
   }

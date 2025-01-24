@@ -84,7 +84,7 @@ const storeUtil = {
     store.dispatch(setInitData(val))
   },
   getInitData() {
-    return store.getState().behavior.initData
+    return store.getState().user.initData
   },
 }
 

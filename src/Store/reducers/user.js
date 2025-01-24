@@ -47,6 +47,11 @@ const user = (
         ...state,
         inviteInfo: action.inviteInfo,
       }
+    case 'SET_INIT_DATA':
+      return {
+        ...state,
+        initData: action.initData,
+      }
     default:
       return state
   }

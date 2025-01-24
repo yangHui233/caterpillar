@@ -11,11 +11,11 @@ export const login = (params, isLoading) => {
   }
 
   try {
-    const initialDataRaw = retrieveLaunchParams()
-    const { initDataRaw, initData, startParam } = initialDataRaw
+    // const initialDataRaw = retrieveLaunchParams()
+    const { initDataRaw, initData } = retrieveLaunchParams();
+    const startParam = 111
     console.log(
       `========`,
-      `initialDataRaw====: ${JSON.stringify(initialDataRaw)}`,
       `initDataRaw====: ${JSON.stringify(initDataRaw)}`,
       `initData====: ${JSON.stringify(initData)}`,
       `startParam====: ${JSON.stringify(startParam)}`,

@@ -100,29 +100,36 @@ const Index = (props) => {
   // 用户登陆
   const handleLogin = async () => {
     try {
-      if (storeUtil.getToken()) {
-        // 先更新用户点击
-        await handleUpdateClick('init')
-        return
-      }
+      console.log("login start");
+      
       const res = await login({
         initData: '',
       })
+      console.log("login end")
+      return 
+      // if (storeUtil.getToken()) {
+      //   // 先更新用户点击
+      //   await handleUpdateClick('init')
+      //   return
+      // }
+      // const res = await login({
+      //   initData: '',
+      // })
 
-      const { token } = res
-      if (token) {
-        storeUtil.setToken(token)
-        handleUpdateClick('init')
+      // const { token } = res
+      // if (token) {
+      //   storeUtil.setToken(token)
+      //   handleUpdateClick('init')
 
-        // 上报邀请
-        // let { startParam, userId } = storeUtil.getUserInfo()
-        // if (startParam) {
-        //   let inviterTgId = startParam.split('_')[1]
-        //   if (inviterTgId && inviterTgId != userId) {
-        //     invitePort({ inviterTgId })
-        //   }
-        // }
-      }
+      //   // 上报邀请
+      //   let { startParam, userId } = storeUtil.getUserInfo()
+      //   if (startParam) {
+      //     let inviterTgId = startParam.split('_')[1]
+      //     if (inviterTgId && inviterTgId != userId) {
+      //       invitePort({ inviterTgId })
+      //     }
+      //   }
+      // }
     } catch (err) {}
   }
 

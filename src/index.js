@@ -16,7 +16,7 @@ import {
 } from '@telegram-apps/sdk'
 
 import './index.css'
-import { login } from './Helper/apis/login'
+// import { login } from './Helper/apis/login'
 import storeUtil from './Utils/store'
 
 if (process.env.NODE_ENV !== 'production' || true) {
@@ -27,12 +27,12 @@ if (process.env.NODE_ENV !== 'production' || true) {
 React.platformDef = process.env.platformDef
 
 try {
-  const initDataRaw = retrieveLaunchParams()
-  const res = login(initDataRaw, {
-    initData: '',
-  })
-  const { token } = res
-  storeUtil.setToken(token)
+  storeUtil.setInitData(retrieveLaunchParams())
+  // const res = login(initDataRaw, {
+  //   initData: '',
+  // })
+  // const { token } = res
+  // storeUtil.setToken(token)
 
   init()
 

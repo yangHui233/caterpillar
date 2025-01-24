@@ -13,7 +13,7 @@ import {
   signInDialog,
 } from '@/Components/Global/export'
 import Toast from '@/Components/Toast'
-// import { login } from '@/Helper/apis/login'
+import { login } from '@/Helper/apis/login'
 import { getMining, getUserInfo, upDateClick } from '@/Helper/apis/home'
 import { add, div, mul, sub } from '@/Utils/math'
 import { MAX_CLICK, MAX_LEVEL } from '@/Contanst/baseConfig'
@@ -101,7 +101,20 @@ const Index = (props) => {
   const handleLogin = async () => {
     try {
       if (storeUtil.getToken()) {
+        // 先更新用户点击
         await handleUpdateClick('init')
+        return
+      }
+      const res = await login(storeUtil.getInitData(), {
+        initData: '',
+      })
+
+      const { token } = res
+      if (token) {
+        storeUtil.setToken(token)
+        handleUpdateClick('init')
+
+        // 上报邀请
         let { startParam, userId } = storeUtil.getUserInfo()
         if (startParam) {
           let inviterTgId = startParam.split('_')[1]
@@ -109,9 +122,7 @@ const Index = (props) => {
             invitePort({ inviterTgId })
           }
         }
-        return
       }
-      console.log('login.error')
     } catch (err) {}
   }
 

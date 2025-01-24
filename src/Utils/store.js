@@ -11,6 +11,7 @@ import {
   setEarnInfo,
   setInviteInfo,
   setIsUpdateLoading,
+  setInitData,
 } from '@/Store/action'
 const storeUtil = {
   setToken(val) {
@@ -78,6 +79,12 @@ const storeUtil = {
   },
   getIsUpdateLoading() {
     return store.getState().behavior.isUpdateLoading
+  },
+  setInitData(val) {
+    store.dispatch(setInitData(val))
+  },
+  getInitData() {
+    return store.getState().behavior.initData
   },
 }
 

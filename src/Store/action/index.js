@@ -91,3 +91,10 @@ export const setIsUpdateLoading = (isUpdateLoading = false) => {
     isUpdateLoading,
   }
 }
+
+export const setInitData = (initData) => {
+  return {
+    type: 'SET_INIT_DATA',
+    initData,
+  }
+}

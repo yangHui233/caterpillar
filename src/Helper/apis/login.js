@@ -34,6 +34,6 @@ export const login = (rawData, params, isLoading) => {
   // params.debug = true
 
   const res = ajax.post('login', params, isLoading)
-  console.log(`login.res${JSON.stringify(res)}`)
+  console.log(`login.req${JSON.stringify(params)}.res${JSON.stringify(res)}`)
   return res
 }

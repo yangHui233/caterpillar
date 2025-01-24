@@ -28,7 +28,9 @@ React.platformDef = process.env.platformDef
 
 try {
   console.log('refresh')
-  storeUtil.setInitData(retrieveLaunchParams())
+  const initDataRaw = retrieveLaunchParams()
+  console.log(`initDataRaw:${JSON.stringify(initDataRaw)}`)
+  storeUtil.setInitData(initDataRaw)
   // const res = login(initDataRaw, {
   //   initData: '',
   // })

@@ -12,7 +12,7 @@ export const login = (params, isLoading) => {
 
   try {
     // const initialDataRaw = retrieveLaunchParams()
-    const { initDataRaw, initData } = retrieveLaunchParams();
+    const { initDataRaw, initData } = retrieveLaunchParams()
     const startParam = 111
     console.log(
       `========`,

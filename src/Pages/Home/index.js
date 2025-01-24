@@ -100,13 +100,12 @@ const Index = (props) => {
   // 用户登陆
   const handleLogin = async () => {
     try {
-      console.log("login start");
-      
-      const res = await login({
+      console.log('login.start')
+      await login({
         initData: '',
       })
-      console.log("login end")
-      return 
+      console.log('login.end')
+      return
       // if (storeUtil.getToken()) {
       //   // 先更新用户点击
       //   await handleUpdateClick('init')

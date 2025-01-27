@@ -90,7 +90,7 @@ const ShareDialog = (props = {}) => {
         <>
           {!isFinished && startFlag ? (
             <div className={style.loading}>
-              Wait 1 minuter for moderation check toclaim the prize
+              Please wait a minute while we checking the qualification
             </div>
           ) : null}
           <Button

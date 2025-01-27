@@ -19,7 +19,7 @@ const CONFIG = {
   },
 }
 
-const DELAYTIME = 60
+const DELAYTIME = 5
 
 const ShareDialog = (props = {}) => {
   const { rewardCoins, shareType = 'tg', icon, id } = props
